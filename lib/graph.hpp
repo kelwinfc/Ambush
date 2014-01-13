@@ -5,6 +5,12 @@
 #include <string>
 #include <cassert>
 
+#include "rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
+#include "rapidjson/prettywriter.h"
+#include "rapidjson/filestream.h"
+#include "rapidjson/stringbuffer.h"
+
 #include "utils.hpp"
 
 using namespace std;
@@ -12,16 +18,15 @@ using namespace std;
 class graph {
     
     private:
+        string name;
         vector< vector< pair<int, float> > > suc;
         vector< vector< pair<int, float> > > pred;
         bool is_directed;
     
     public:
-        
         graph(bool directed=false);
         
-        //TODO define a json format to describe a graph
-        graph(string& filename);
+        graph(char* filename);
         
         int add_vertex();
         
