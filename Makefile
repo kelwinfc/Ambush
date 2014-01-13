@@ -1,12 +1,12 @@
 GCC=g++
 GCC_FLAGS=-Ilib -Wall -O3
 
-FILES=utils graph
+FILES=utils graph behaviour agent
 EXECUTABLES=tests
 
 DEP_utils=
 DEP_graph=utils
-DEP_behaviour=utils graph
+DEP_behaviour=agent utils graph
 DEP_agent=utils behaviour
 DEP_tests=utils agent behaviour graph
 

@@ -11,46 +11,73 @@ using namespace std;
 
 class agent;
 
-//TODO define the basic functions to define a behaviour
 class behaviour {
     
     public:
-        behaviour();
+        behaviour(){}
         
         virtual int next_step(agent* a){ return -1; }
 };
 
-class noop {
+class noop : public behaviour {
     
     public:
         noop();
         virtual int next_step(agent* a);
 };
 
-class ambush {
+// TODO
+class ambush : public behaviour {
     
+    public:
+        ambush(){}
+        
+        virtual int next_step(agent* a){ return -1; }
 };
 
-class priority_ambush {
+// TODO
+class priority_ambush : public behaviour {
     
+    public:
+        priority_ambush(){}
+        
+        virtual int next_step(agent* a){ return -1; }
 };
 
-class r_ambush {
+// TODO
+class r_ambush : public behaviour {
     
+    public:
+        r_ambush();
+        
+        virtual int next_step(agent* a){ return -1; }
 };
 
-class self_adaptive_r_ambush {
+// TODO
+class self_adaptive_r_ambush : public behaviour {
     
+    public:
+        self_adaptive_r_ambush(){}
+        
+        virtual int next_step(agent* a){ return -1; }
 };
 
 // Experimentos de Kelwin
-class partial_observavility_ambush {
+class partial_observavility_ambush : public behaviour {
     
+    public:
+        partial_observavility_ambush(){}
+        
+        virtual int next_step(agent* a){ return -1; }
 };
 
 // Tesis de Lezama
-class capacity_ambush {
+class capacity_ambush : public behaviour {
     
+    public:
+        capacity_ambush(){}
+        
+        virtual int next_step(agent* a){ return -1; }
 };
 
 #endif

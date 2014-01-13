@@ -8,6 +8,8 @@
 
 using namespace std;
 
+class behaviour;
+
 class agent {
     private:
         int index;
@@ -15,6 +17,9 @@ class agent {
         vector<int> path;
         agent* target;
         behaviour* b;
+        
+        float speed;
+        float capacity;
     
     public:
         agent(int index, behaviour* b = 0, int current_position = -1);
