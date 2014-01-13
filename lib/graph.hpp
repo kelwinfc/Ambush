@@ -29,7 +29,7 @@ class graph {
         
         int num_vertex();
         
-        vector< pair<int, float> >* get_sucessors( int v );
+        vector< pair<int, float> >* get_successors( int v );
         vector< pair<int, float> >* get_predecessors( int w );
 };
 

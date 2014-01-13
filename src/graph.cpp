@@ -34,7 +34,7 @@ int graph::num_vertex(){
     return this->suc.size();
 }
 
-vector< pair<int, float> >* graph::get_sucessors( int v )
+vector< pair<int, float> >* graph::get_successors( int v )
 {
     assert( 0 <= v && (unsigned int)v < this->suc.size() );
     return &this->suc[v];

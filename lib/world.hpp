@@ -2,6 +2,7 @@
 #define __AMBUSH_WORLD
 
 #include <vector>
+#include <set>
 
 #include "behaviour.hpp"
 #include "agent.hpp"
@@ -16,9 +17,12 @@ class world {
     private:
         vector<agent*> agents;
         graph* g;
-    
+        
     public:
         world();
+        
+        //TODO define a json format to describe a problem instance
+        world(string& filename);
         
         void add_agent(agent* a);
         float ambush_rate(agent* target);

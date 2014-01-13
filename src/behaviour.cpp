@@ -107,7 +107,7 @@ void ambush::get_plan(agent* a, vector<int>& path)
         }
         
         /* Explore the neighbors of the current node */
-        vector< pair<int, float> >* suc = g->get_sucessors(v);
+        vector< pair<int, float> >* suc = g->get_successors(v);
         for ( uint i = 0; i < suc->size(); i++ ){
             int w = suc->at(i).first;
             
