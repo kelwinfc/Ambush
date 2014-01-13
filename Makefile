@@ -1,14 +1,15 @@
 GCC=g++
 GCC_FLAGS=-Ilib -Wall -O3
 
-FILES=utils graph behaviour agent
+FILES=utils graph behaviour agent world
 EXECUTABLES=tests
 
 DEP_utils=
 DEP_graph=utils
-DEP_behaviour=agent utils graph
-DEP_agent=utils behaviour
-DEP_tests=utils agent behaviour graph
+DEP_world=utils agent graph behaviour
+DEP_behaviour=agent utils graph world
+DEP_agent=utils behaviour world
+DEP_tests=utils agent behaviour graph world
 
 all: $(EXECUTABLES)
 
@@ -23,6 +24,7 @@ bin/utils.o: $(DEP_utils:%=src/%.cpp) $(DEP_utils:%=lib/%.hpp)
 bin/graph.o: $(DEP_graph:%=src/%.cpp) $(DEP_graph:%=lib/%.hpp)
 bin/behaviour.o: $(DEP_behaviour:%=src/%.cpp) $(DEP_behaviour:%=lib/%.hpp)
 bin/agent.o: $(DEP_agent:%=src/%.cpp) $(DEP_agent:%=lib/%.hpp)
+bin/world.o: $(DEP_world:%=src/%.cpp) $(DEP_world:%=lib/%.hpp)
 
 bin/tests.o: $(DEP_tests:%=src/%.cpp) $(DEP_tests:%=lib/%.hpp)
 

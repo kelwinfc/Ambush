@@ -2,7 +2,10 @@
 
 int main(int argc, char* argv[])
 {
+    world w;
     noop np;
-    agent a(1, &np, 0);
+    ambush amb(&w);
+    graph g;
+    agent a(1, &g, &w, &amb, 0);
     return 0;
 }

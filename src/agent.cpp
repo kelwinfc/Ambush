@@ -1,21 +1,17 @@
 #include "agent.hpp"
 
-int index;
-int current_position;
-vector<int> path;
-agent* target;
-behaviour* b;
-
-agent::agent(int index, behaviour* b, int current_position)
+agent::agent(int index, graph* g, world* w, behaviour* b, int current_v)
 {
-    this->index            = index;
-    this->b                = b;
-    this->current_position = current_position;
+    this->index = index;
+    this->g     = g;
+    this->w     = w;
+    this->b     = b;
+    this->v     = current_v;
 }
 
-void agent::set_current_position(int p)
+void agent::set_current_vertex(int v)
 {
-    this->current_position = p;
+    this->v = v;
 }
 
 void agent::set_path(vector<int>& path)
@@ -33,9 +29,9 @@ void agent::set_behaviour(behaviour* b)
     this->b = b;
 }
 
-int agent::get_current_position()
+int agent::get_current_vertex()
 {
-    return this->current_position;
+    return this->v;
 }
 
 vector<int>* agent::get_path()
@@ -51,4 +47,9 @@ agent* agent::get_target()
 behaviour* agent::get_behaviour()
 {
     return this->b;
+}
+
+graph* agent::get_graph()
+{
+    return this->g;
 }
