@@ -106,14 +106,14 @@ void ambush::get_plan(agent* a, vector<int>& path)
             break;
         }
         
-        /* Explore the neighbours of the current node */
+        /* Explore the neighbors of the current node */
         vector< pair<int, float> >* suc = g->get_sucessors(v);
         for ( uint i = 0; i < suc->size(); i++ ){
             int w = suc->at(i).first;
             
             /* The new distance involves the distance from the source to the
              * current vertex (v), the cost from v to its neighbor (w) and
-             * the increment function of the node sucessor
+             * the increment function of the node successor
              */
             int nd = d + suc->at(i).second * increment[w] * increment[w];
             
