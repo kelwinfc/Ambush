@@ -27,4 +27,30 @@ class noop {
         virtual int next_step(agent* a);
 };
 
+class ambush {
+    
+};
+
+class priority_ambush {
+    
+};
+
+class r_ambush {
+    
+};
+
+class self_adaptive_r_ambush {
+    
+};
+
+// Experimentos de Kelwin
+class partial_observavility_ambush {
+    
+};
+
+// Tesis de Lezama
+class capacity_ambush {
+    
+};
+
 #endif
