@@ -1,5 +1,5 @@
-#ifndef __GRAPH
-#define __GRAPH
+#ifndef __AMBUSH_GRAPH
+#define __AMBUSH_GRAPH
 
 #include <vector>
 #include <string>

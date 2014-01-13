@@ -2,6 +2,7 @@
 
 #include "utils.hpp"
 #include "graph.hpp"
+#include "agent.hpp"
 
 using namespace std;
 
