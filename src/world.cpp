@@ -1,8 +1,9 @@
 #include "world.hpp"
+#include <iostream>
 
-world::world()
+world::world(graph* g)
 {
-    this->g = 0;
+    this->g = g;
 }
         
 void world::add_agent(agent* a)
@@ -14,6 +15,7 @@ float world::ambush_rate(agent* target)
 {
     vector< pair<int, float> >* pred = 
         this->g->get_predecessors(target->get_current_vertex());
+    
     vector< agent* >::iterator it;
     set<int> activated_pred;
     
@@ -27,7 +29,12 @@ float world::ambush_rate(agent* target)
         }
     }
     
-    return activated_pred.size() / min(pred->size(), this->agents.size());
+    int den = min(pred->size(), this->agents.size());
+    if ( den == 0 ){
+        return 1.0;
+    }
+    
+    return (float) activated_pred.size() / (float) den;
 }
 
 void world::compute_paths(agent* target)

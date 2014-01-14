@@ -41,7 +41,7 @@ graph::graph(char* filename)
             }
             
             const rapidjson::Value& src_json  = next_edge["src"];
-            const rapidjson::Value& dst_json  = next_edge["src"];
+            const rapidjson::Value& dst_json  = next_edge["dst"];
             const rapidjson::Value& cost_json = next_edge["cost"];
             
             if ( src_json.IsInt() && dst_json.IsInt() && cost_json.IsNumber() )

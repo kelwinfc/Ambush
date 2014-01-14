@@ -1,4 +1,5 @@
 #include "behaviour.hpp"
+#include <iostream>
 
 int behaviour::next_step(agent* a)
 {
@@ -41,13 +42,12 @@ void ambush::get_plan(agent* a, vector<int>& path)
                                  * through v
                                  */
     graph* g = a->get_graph();
-    
     num_agents = this->w->num_agents();
     num_vertex = g->num_vertex();
     
-    
     increment.resize( num_vertex );
     min_dist.resize( num_vertex );
+    parent.resize( num_vertex);
     
     for ( int i = 0; i < num_vertex; i++ ){
         increment[i] = 1.0;
@@ -103,14 +103,15 @@ void ambush::get_plan(agent* a, vector<int>& path)
         parent[v] = next.second.second;
         
         if ( v == target ){
+            
             break;
         }
         
         /* Explore the neighbors of the current node */
         vector< pair<int, float> >* suc = g->get_successors(v);
+        
         for ( uint i = 0; i < suc->size(); i++ ){
             int w = suc->at(i).first;
-            
             /* The new distance involves the distance from the source to the
              * current vertex (v), the cost from v to its neighbor (w) and
              * the increment function of the node successor
@@ -133,6 +134,7 @@ void ambush::get_plan(agent* a, vector<int>& path)
             path.push_back(v);
             v = parent[v];
         } while ( v != parent[v] );
+        path.push_back(v);
         
         reverse( path.begin(), path.end() );
     }

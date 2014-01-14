@@ -19,7 +19,7 @@ class world {
         graph* g;
         
     public:
-        world();
+        world(graph* g);
         
         //TODO define a json format to describe a problem instance
         world(string& filename);

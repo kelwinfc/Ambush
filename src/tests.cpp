@@ -2,10 +2,21 @@
 
 int main(int argc, char* argv[])
 {
-    world w;
-    noop np;
+    graph g((char*)"test/graphs/g2.json");
+    world w(&g);
     ambush amb(&w);
-    graph g((char*)"test/graphs/g1.json");
-    agent a(1, &g, &w, &amb, 0);
+    noop np;
+    
+    int n = 3;
+    agent target(n, &g, &w, &np, 5);
+    vector<agent*> agents;
+    for ( int i=0; i<n; i++ ){
+        agent* a = new agent(i, &g, &w, &amb, 0);
+        agents.push_back(a);
+        agents[i]->set_target(&target);
+        w.add_agent(agents[i]);
+    }
+    
+    cout << w.ambush_rate(&target) << endl;
     return 0;
 }
