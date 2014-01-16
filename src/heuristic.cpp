@@ -6,10 +6,9 @@ heuristic::heuristic()
     this->g = 0;
 }
 
-heuristic::heuristic(world* w, graph* g)
+heuristic::heuristic(world* w)
 {
     this->w = w;
-    this->g = g;
 }
 
 float heuristic::h(int v, int t)
@@ -17,10 +16,9 @@ float heuristic::h(int v, int t)
     return 0.0;
 }
 
-h_zero::h_zero(world* w, graph* g)
+h_zero::h_zero(world* w)
 {
     this->w = w;
-    this->g = g;
 }
         
 float h_zero::h(int v, int t)
@@ -28,7 +26,7 @@ float h_zero::h(int v, int t)
     return 0.0;
 }
 
-h_euclidean::h_euclidean(world* w, graph* g)
+h_euclidean::h_euclidean(world* w)
 {
     this->w = w;
     this->g = g;

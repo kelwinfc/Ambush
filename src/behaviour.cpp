@@ -23,18 +23,19 @@ void noop::get_plan(agent* a, vector<int>& path)
     path.clear();
 }
 
-ambush::ambush(world* w)
+ambush::ambush(world* w, heuristic* h)
 {
     this->w = w;
+    this->h = h;
+    
+    if ( !h ){
+        this->h = new h_zero(w);
+    }
 }
 
-/*
- * TODO: modify this in order to incorpore the heuristic cost
- *       Use the astar_node defined in utils.hpp
- */
 void ambush::get_plan(agent* a, vector<int>& path)
 {
-    priority_queue< pair<float, pair<int, int> > > q;
+    priority_queue< astar_node > q;
     int target, num_vertex, num_agents;
     vector<float> increment;    // Increment cost associated to each vertex
     vector<float> min_dist;     /* Shortest path from the current position of
@@ -80,22 +81,21 @@ void ambush::get_plan(agent* a, vector<int>& path)
     
     /* Initialize the visited nodes */
     target = a->get_target()->get_current_vertex();
-    q.push( make_pair(0.0,
-                      make_pair(a->get_current_vertex(),
-                                a->get_current_vertex())
-                     )
-          );
+    
+    astar_node initial_node;
+    initial_node.v = a->get_current_vertex();
+    initial_node.p = a->get_current_vertex();
+    initial_node.f = initial_node.g = 0.0;
+    
+    q.push(initial_node);
     min_dist[ a->get_current_vertex() ] = 0.0;
     
     while( !q.empty() ){
-        pair<float, pair<int, int> > next = q.top();
+        astar_node next = q.top();
         q.pop();
         
-        int d = -next.first; /* C++ implementation of priority_queue is a
-                              * max-heap so it is needed to store the opposite
-                              * cost in order to maintain the right order
-                              */
-        int v = next.second.first;
+        int d = next.g;
+        int v = next.v;
         
         /* If the current expansion is worse than the best found */
         if ( min_dist[v] != -1 && min_dist[v] < d ){
@@ -104,7 +104,7 @@ void ambush::get_plan(agent* a, vector<int>& path)
         
         /* Update the information of the current node */
         min_dist[v] = d;
-        parent[v] = next.second.second;
+        parent[v] = next.p;
         
         if ( v == target ){
             
@@ -123,7 +123,12 @@ void ambush::get_plan(agent* a, vector<int>& path)
             int nd = d + suc->at(i).second * increment[w] * increment[w];
             
             if ( min_dist[w] == -1 || nd < min_dist[w] ){
-                q.push( make_pair( -nd, make_pair(w, v) ) );
+                astar_node neighbor_node;
+                neighbor_node.v = w;
+                neighbor_node.p = v;
+                neighbor_node.f = nd + this->h->h(w, target);
+                neighbor_node.g = nd;
+                q.push( neighbor_node );
                 min_dist[w] = nd;
             }
         }

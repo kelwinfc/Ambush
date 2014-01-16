@@ -23,21 +23,21 @@ class heuristic {
     
     public:
         heuristic();
-        heuristic(world* w, graph* g);
+        heuristic(world* w);
         
         virtual float h(int v, int t);
 };
 
 class h_zero : public heuristic {
     public:
-        h_zero(world* w, graph* g);
+        h_zero(world* w);
         
         virtual float h(int v, int t);
 };
 
 class h_euclidean : public heuristic {
     public:
-        h_euclidean(world* w, graph* g);
+        h_euclidean(world* w);
         
         virtual float h(int v, int t);
 };
