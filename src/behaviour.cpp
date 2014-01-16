@@ -28,6 +28,10 @@ ambush::ambush(world* w)
     this->w = w;
 }
 
+/*
+ * TODO: modify this in order to incorpore the heuristic cost
+ *       Use the astar_node defined in utils.hpp
+ */
 void ambush::get_plan(agent* a, vector<int>& path)
 {
     priority_queue< pair<float, pair<int, int> > > q;
