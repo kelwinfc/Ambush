@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
     ambush amb(&w);
     noop np;
     
-    int n = 3;
+    int n = 4;
     agent target(n, &g, &w, &np, 5);
     vector<agent*> agents;
     for ( int i=0; i<n; i++ ){

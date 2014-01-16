@@ -2,7 +2,14 @@
     "name" : "Toy",
     "num_nodes" :5,
     "directed":false,
-    "edges":[{"src":0,"dst":1,"cost":1},
+    "nodes":[
+                [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ],
+                [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ],
+                [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ],
+                [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ],
+                [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ]
+            ],
+    "edges":[{"src":0,"dst":1,"cost":1.0},
              {"src":0,"dst":2,"cost":1.0},
              {"src":1,"dst":3,"cost":1.0},
              {"src":2,"dst":3,"cost":1.0},

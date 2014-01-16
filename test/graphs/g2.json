@@ -2,6 +2,7 @@
     "name" : "Toy",
     "num_nodes" :6,
     "directed":false,
+    "nodes":[ [], [], [], [], [], [] ],
     "edges":[{"src":0,"dst":1,"cost":1.0},
              {"src":0,"dst":2,"cost":1.0},
              {"src":1,"dst":3,"cost":1.0},

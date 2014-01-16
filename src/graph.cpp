@@ -30,6 +30,29 @@ graph::graph(char* filename)
         this->add_vertex();
     }
     
+    args.resize(this->num_vertex());
+    
+    const rapidjson::Value& nodes = document["nodes"];
+    if(nodes.IsArray()){
+        for (rapidjson::SizeType i = 0; i < nodes.Size(); i++){
+            
+            const rapidjson::Value& next_node = nodes[i];
+            
+            if ( !next_node.IsArray() ){
+                continue;
+            }
+            for (rapidjson::SizeType j = 0; j < next_node.Size(); j++){
+                const rapidjson::Value& next_arg = next_node[j];
+                const rapidjson::Value& name = next_arg["arg"];
+                const rapidjson::Value& value = next_arg["value"];
+                
+                if ( name.IsString() && value.IsNumber() ){
+                    args[i][name.GetString()] = value.GetDouble();
+                }
+            }
+        }
+    }
+    
     const rapidjson::Value& edges = document["edges"];
     if(edges.IsArray()){
         for (rapidjson::SizeType i = 0; i < edges.Size(); i++){
