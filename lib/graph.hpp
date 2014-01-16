@@ -2,6 +2,7 @@
 #define __AMBUSH_GRAPH
 
 #include <vector>
+#include <map>
 #include <string>
 #include <cassert>
 
@@ -22,6 +23,7 @@ class graph {
         vector< vector< pair<int, float> > > suc;
         vector< vector< pair<int, float> > > pred;
         bool is_directed;
+        vector< map<string, float> > args;
     
     public:
         graph(bool directed=false);
@@ -36,6 +38,8 @@ class graph {
         
         vector< pair<int, float> >* get_successors( int v );
         vector< pair<int, float> >* get_predecessors( int w );
+        
+        float get_arg(int v, string arg);
 };
 
 #endif

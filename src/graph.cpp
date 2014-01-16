@@ -98,3 +98,8 @@ vector< pair<int, float> >* graph::get_predecessors( int w )
     assert( 0 <= w && (unsigned int)w < this->pred.size() );
     return &this->pred[w];
 }
+
+float graph::get_arg(int v, string arg)
+{
+    return this->args[v][arg];
+}
