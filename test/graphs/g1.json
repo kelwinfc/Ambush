@@ -1,6 +1,6 @@
 {
     "name" : "Toy",
-    "num_nodes" :5,
+    "num_nodes" : 5,
     "directed":false,
     "nodes":[
                 [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ],
