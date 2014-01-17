@@ -23,20 +23,23 @@ void noop::get_plan(agent* a, vector<int>& path)
     path.clear();
 }
 
-ambush::ambush(world* w, heuristic* h)
+increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
+                                                  vector<float>&),
+                                   world* w, heuristic* h)
 {
     this->w = w;
     this->h = h;
+    this->increment_function = incr_f;
     
     if ( !h ){
         this->h = new h_zero(w);
     }
 }
 
-void ambush::get_plan(agent* a, vector<int>& path)
+void increment_a_star::get_plan(agent* a, vector<int>& path)
 {
     priority_queue< astar_node > q;
-    int target, num_vertex, num_agents;
+    int target, num_vertex;
     vector<float> increment;    // Increment cost associated to each vertex
     vector<float> min_dist;     /* Shortest path from the current position of
                                  * the agent to the target through a given
@@ -47,7 +50,6 @@ void ambush::get_plan(agent* a, vector<int>& path)
                                  * through v
                                  */
     graph* g = a->get_graph();
-    num_agents = this->w->num_agents();
     num_vertex = g->num_vertex();
     
     increment.resize( num_vertex );
@@ -60,25 +62,9 @@ void ambush::get_plan(agent* a, vector<int>& path)
         parent[i]    = -1;
     }
     
-    /* Compute the Increment function of each vertex in the graph
-     * This is a non-amortized version of A*mbush. The increment function could
-     * be precomputed.
-     */
-    {
-        vector<agent*>* agents = this->w->get_agents();
-        path.clear();
-        a->set_path(path);
-        
-        for ( int i = 0; i < num_agents; i++ ){
-            vector<int>* next_path = agents->at(i)->get_path();
-            vector<int>::iterator it;
-            
-            for ( it = next_path->begin(); it != next_path->end(); ++it ){
-                increment[*it] += 1.0;
-            }
-        }
+    if ( this->increment_function != 0 ){
+        this->increment_function(w, a, increment);
     }
-    
     /* Initialize the visited nodes */
     target = a->get_target()->get_current_vertex();
     
@@ -96,7 +82,6 @@ void ambush::get_plan(agent* a, vector<int>& path)
         
         int d = next.g;
         int v = next.v;
-        
         /* If the current expansion is worse than the best found */
         if ( min_dist[v] != -1 && min_dist[v] < d ){
             continue;
@@ -107,7 +92,6 @@ void ambush::get_plan(agent* a, vector<int>& path)
         parent[v] = next.p;
         
         if ( v == target ){
-            
             break;
         }
         
@@ -121,7 +105,6 @@ void ambush::get_plan(agent* a, vector<int>& path)
              * the increment function of the node successor
              */
             int nd = d + suc->at(i).second * increment[w] * increment[w];
-            
             if ( min_dist[w] == -1 || nd < min_dist[w] ){
                 astar_node neighbor_node;
                 neighbor_node.v = w;
@@ -147,4 +130,70 @@ void ambush::get_plan(agent* a, vector<int>& path)
         
         reverse( path.begin(), path.end() );
     }
+}
+
+a_star::a_star(world* w, heuristic* h)
+{
+    this->w = w;
+    this->h = h;
+    
+    if ( !h ){
+        this->h = new h_zero(w);
+    }
+}
+
+/* Compute the Increment function of each vertex in the graph
+ * This is a non-amortized version of A*mbush. The increment function could
+ * be precomputed.
+ */
+void astar_increment_function(world* w, agent* a, vector<float>& increment)
+{
+    vector<float>::iterator it;
+    for ( it = increment.begin(); it != increment.end(); ++it ){
+        *it = 1.0;
+    }
+}
+
+void a_star::get_plan(agent* a, vector<int>& path)
+{
+    this->increment_function = &astar_increment_function;
+    increment_a_star::get_plan(a, path);
+}
+
+ambush::ambush(world* w, heuristic* h)
+{
+    this->w = w;
+    this->h = h;
+    
+    if ( !h ){
+        this->h = new h_zero(w);
+    }
+}
+
+/* Compute the Increment function of each vertex in the graph
+ * This is a non-amortized version of A*mbush. The increment function could
+ * be precomputed.
+ */
+void ambush_increment_function(world* w, agent* a, vector<float>& increment)
+{
+    vector<agent*>* agents = w->get_agents();
+    int num_agents = agents->size();
+    vector<int> path;
+    
+    a->set_path(path);
+    
+    for ( int i = 0; i < num_agents; i++ ){
+        vector<int>* next_path = agents->at(i)->get_path();
+        vector<int>::iterator it;
+        
+        for ( it = next_path->begin(); it != next_path->end(); ++it ){
+            increment[*it] += 1.0;
+        }
+    }
+}
+
+void ambush::get_plan(agent* a, vector<int>& path)
+{
+    this->increment_function = &ambush_increment_function;
+    increment_a_star::get_plan(a, path);
 }

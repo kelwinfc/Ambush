@@ -38,10 +38,31 @@ class noop : public behaviour {
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-class ambush : public behaviour {
+class increment_a_star : public behaviour {
     
-    private:
+    protected:
         heuristic* h;
+        void (*increment_function)(world*, agent*, vector<float>&);
+    
+    public:
+        increment_a_star(){ this->h = 0; this->increment_function = 0; }
+        
+        increment_a_star(void (*increment_function)(world*, agent*,
+                                                    vector<float>&),
+                         world* w = 0, heuristic* h = 0);
+        
+        virtual void get_plan(agent* a, vector<int>& path);
+};
+
+class a_star : public increment_a_star {
+    
+    public:
+        a_star(world* w = 0, heuristic* h = 0);
+        
+        virtual void get_plan(agent* a, vector<int>& path);
+};
+
+class ambush : public increment_a_star {
     
     public:
         ambush(world* w = 0, heuristic* h = 0);
