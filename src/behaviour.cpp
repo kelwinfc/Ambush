@@ -142,10 +142,6 @@ a_star::a_star(world* w, heuristic* h)
     }
 }
 
-/* Compute the Increment function of each vertex in the graph
- * This is a non-amortized version of A*mbush. The increment function could
- * be precomputed.
- */
 void astar_increment_function(world* w, agent* a, vector<float>& increment)
 {
     vector<float>::iterator it;
