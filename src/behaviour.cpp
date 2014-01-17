@@ -57,7 +57,9 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
     parent.resize( num_vertex);
     
     for ( int i = 0; i < num_vertex; i++ ){
-        increment[i] = 1.0;
+        increment[i] = 1.0; /* It is assumed by the increment functions that
+                             * this vector is initialized with ones.
+                             */
         min_dist[i]  = -1.0;
         parent[i]    = -1;
     }
@@ -142,17 +144,9 @@ a_star::a_star(world* w, heuristic* h)
     }
 }
 
-void astar_increment_function(world* w, agent* a, vector<float>& increment)
-{
-    vector<float>::iterator it;
-    for ( it = increment.begin(); it != increment.end(); ++it ){
-        *it = 1.0;
-    }
-}
-
 void a_star::get_plan(agent* a, vector<int>& path)
 {
-    this->increment_function = &astar_increment_function;
+    this->increment_function = 0;
     increment_a_star::get_plan(a, path);
 }
 
