@@ -2,8 +2,9 @@
 #define __AMBUSH_BEHAVIOUR
 
 #include <vector>
-#include <algorithm>
 #include <queue>
+#include <stack>
+#include <algorithm>
 
 #include "graph.hpp"
 #include "utils.hpp"
@@ -34,6 +35,14 @@ class noop : public behaviour {
     
     public:
         noop(world* w = 0);
+        
+        virtual void get_plan(agent* a, vector<int>& path);
+};
+
+class randomized_dfs : public behaviour {
+    
+    public:
+        randomized_dfs(world* w = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };

@@ -23,6 +23,82 @@ void noop::get_plan(agent* a, vector<int>& path)
     path.clear();
 }
 
+randomized_dfs::randomized_dfs(world* w)
+{
+    this->w = 0;
+}
+        
+void randomized_dfs::get_plan(agent* a, vector<int>& path)
+{
+    stack< astar_node > s;
+    int target, num_vertex;
+    vector<int> parent; /* The predecessor of each node v in the traversed path
+                         * from the source to the target going through v
+                         */
+    graph* g = a->get_graph();
+    num_vertex = g->num_vertex();
+    
+    parent.resize( num_vertex);
+    for ( int i = 0; i < num_vertex; i++ ){
+        parent[i]    = -1;
+    }
+    
+    target = a->get_target()->get_current_vertex();
+    
+    astar_node initial_node;
+    initial_node.v = a->get_current_vertex();
+    initial_node.p = a->get_current_vertex();
+    
+    s.push(initial_node);
+    
+    while( !s.empty() ){
+        astar_node next = s.top();
+        s.pop();
+        
+        int v = next.v;
+        
+        if ( parent[v] != -1 ){
+            continue;
+        }
+        
+        parent[v] = next.p;
+        
+        if ( v == target ){
+            break;
+        }
+        
+        /* Explore the neighbors of the current node */
+        vector< pair<int, float> >* suc_aux = g->get_successors(v);
+        vector< pair<int, float> > suc = *suc_aux;
+        random_shuffle( suc.begin(), suc.end());
+        
+        for ( uint i = 0; i < suc.size(); i++ ){
+            int w = suc[i].first;
+            
+            if ( parent[w] == -1 ){
+                astar_node neighbor_node;
+                neighbor_node.v = w;
+                neighbor_node.p = v;
+                s.push( neighbor_node );
+            }
+        }
+    }
+    
+    if ( parent[target] != -1 ){
+        /* Reconstruct the path. Note that it is recovered backwards so it is
+         * needed to reverse it at the end.
+         */
+        int v = target;
+        do {
+            path.push_back(v);
+            v = parent[v];
+        } while ( v != parent[v] );
+        path.push_back(v);
+        
+        reverse( path.begin(), path.end() );
+    }
+}
+        
 increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
                                                   vector<float>&),
                                    world* w, heuristic* h)

@@ -4,29 +4,34 @@ int main(int argc, char* argv[])
 {
     graph g((char*)"test/graphs/g2.json");
     world w(&g);
+    noop np;
     ambush amb(&w);
     a_star ast(&w);
-    
-    noop np;
+    randomized_dfs dfs(&w);
     
     int n = 4;
     agent target(n, &g, &w, &np, 5);
     
-    vector<agent*> astar_agents;
+    vector<agent*> agents;
     for ( int i=0; i<n; i++ ){
-        agent* a = new agent(i, &g, &w, &ast, 0);
-        astar_agents.push_back(a);
-        astar_agents[i]->set_target(&target);
-        w.add_agent(astar_agents[i]);
+        agent* a = new agent(i, &g, &w, &np, 0);
+        agents.push_back(a);
+        agents[i]->set_target(&target);
+        w.add_agent(agents[i]);
+    }
+    
+    for ( int i=0; i<n; i++ ){
+        agents[i]->set_behaviour(&dfs);
     }
     cout << w.ambush_rate(&target) << endl;
     
-    vector<agent*> ambush_agents;
     for ( int i=0; i<n; i++ ){
-        agent* a = new agent(i, &g, &w, &amb, 0);
-        ambush_agents.push_back(a);
-        ambush_agents[i]->set_target(&target);
-        w.add_agent(ambush_agents[i]);
+        agents[i]->set_behaviour(&ast);
+    }
+    cout << w.ambush_rate(&target) << endl;
+    
+    for ( int i=0; i<n; i++ ){
+        agents[i]->set_behaviour(&amb);
     }
     cout << w.ambush_rate(&target) << endl;
     
