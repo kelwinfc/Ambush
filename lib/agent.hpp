@@ -24,16 +24,22 @@ class agent {
         
         float speed;
         float capacity;
+        
+        bool b_has_path;
     
     public:
         agent(int index, graph* g, world* w, behaviour* b,
               int current_v = -1);
+        agent(const agent& a);
         
         void set_current_vertex(int v);
         void set_path(vector<int>& path);
         void set_target(agent* a);
         void set_behaviour(behaviour* b);
+        void clear_path();
+        bool has_path();
         
+        int          get_index() const;
         int          get_current_vertex();
         vector<int>* get_path();
         agent*       get_target();

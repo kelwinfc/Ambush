@@ -3,14 +3,20 @@
 
 int behaviour::next_step(agent* a)
 {
-    vector<int> path;
-    this->get_plan(a, path);
+    vector<int>* p_path;
     
-    if ( path.empty() ){
+    if ( !a->has_path() ){
+        vector<int> path;
+        this->get_plan(a, path);
+    }
+    
+    p_path = a->get_path();
+    
+    if ( p_path->empty() ){
         return a->get_current_vertex();
     }
     
-    return path[0];
+    return p_path->at(0);
 }
 
 noop::noop(world* w)
@@ -105,7 +111,7 @@ increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
 {
     this->w = w;
     this->h = h;
-    this->increment_function = incr_f;
+    this->I = incr_f;
     
     if ( !h ){
         this->h = new h_zero(w);
@@ -127,10 +133,13 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
                                  */
     graph* g = a->get_graph();
     num_vertex = g->num_vertex();
-    
     increment.resize( num_vertex );
     min_dist.resize( num_vertex );
     parent.resize( num_vertex);
+    
+    if ( !this->h ){
+        this->h = new h_zero(w);
+    }
     
     for ( int i = 0; i < num_vertex; i++ ){
         increment[i] = 1.0; /* It is assumed by the increment functions that
@@ -140,9 +149,10 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
         parent[i]    = -1;
     }
     
-    if ( this->increment_function != 0 ){
-        this->increment_function(w, a, increment);
+    if ( this->I != 0 ){
+        this->I(w, a, increment);
     }
+    
     /* Initialize the visited nodes */
     target = a->get_target()->get_current_vertex();
     
@@ -153,7 +163,6 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
     
     q.push(initial_node);
     min_dist[ a->get_current_vertex() ] = 0.0;
-    
     while( !q.empty() ){
         astar_node next = q.top();
         q.pop();
@@ -222,7 +231,7 @@ a_star::a_star(world* w, heuristic* h)
 
 void a_star::get_plan(agent* a, vector<int>& path)
 {
-    this->increment_function = 0;
+    this->I = 0;
     increment_a_star::get_plan(a, path);
 }
 
@@ -244,10 +253,8 @@ void ambush_increment_function(world* w, agent* a, vector<float>& increment)
 {
     vector<agent*>* agents = w->get_agents();
     int num_agents = agents->size();
-    vector<int> path;
     
-    a->set_path(path);
-    
+    a->clear_path();
     for ( int i = 0; i < num_agents; i++ ){
         vector<int>* next_path = agents->at(i)->get_path();
         vector<int>::iterator it;
@@ -260,6 +267,46 @@ void ambush_increment_function(world* w, agent* a, vector<float>& increment)
 
 void ambush::get_plan(agent* a, vector<int>& path)
 {
-    this->increment_function = &ambush_increment_function;
+    this->I = &ambush_increment_function;
     increment_a_star::get_plan(a, path);
+}
+
+bool index_priority(agent* a, agent* b){
+    return a->get_index() < b->get_index();
+}
+
+priority_ambush::priority_ambush(world* w,
+                                 bool (*priority_function)(agent*, agent*),
+                                 heuristic* h)
+{
+    this->w = w;
+    this->P = priority_function;
+    this->h = h;
+    
+    if ( !h ){
+        this->h = new h_zero(w);
+    }
+}
+
+void priority_ambush::get_plan(agent* a, vector<int>& path)
+{
+    this->I = &ambush_increment_function;
+    
+    vector<agent*>* agents_aux = this->w->get_agents();
+    vector<agent*>::iterator it;
+    vector<agent*> agents;
+    for ( it = agents_aux->begin(); it != agents_aux->end(); ++it ){
+        agents.push_back(*it);
+    }
+    sort(agents.begin(), agents.end(), this->P);
+    
+    for ( it = agents.begin(); it != agents.end(); ++it ){
+        agent* a = *it;
+        if ( !a->has_path() ){
+            vector<int> p;
+            increment_a_star::get_plan(a, p);
+            a->set_path(p);
+        }
+    }
+    path = *a->get_path();
 }

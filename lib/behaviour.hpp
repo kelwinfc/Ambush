@@ -34,7 +34,7 @@ class behaviour {
 class noop : public behaviour {
     
     public:
-        noop(world* w = 0);
+        noop(world* w);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -42,7 +42,7 @@ class noop : public behaviour {
 class randomized_dfs : public behaviour {
     
     public:
-        randomized_dfs(world* w = 0);
+        randomized_dfs(world* w);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -51,14 +51,14 @@ class increment_a_star : public behaviour {
     
     protected:
         heuristic* h;
-        void (*increment_function)(world*, agent*, vector<float>&);
+        void (*I)(world*, agent*, vector<float>&);
     
     public:
-        increment_a_star(){ this->h = 0; this->increment_function = 0; }
+        increment_a_star(){ this->h = 0; this->I = 0; }
         
         increment_a_star(void (*increment_function)(world*, agent*,
                                                     vector<float>&),
-                         world* w = 0, heuristic* h = 0);
+                         world* w, heuristic* h = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -66,7 +66,7 @@ class increment_a_star : public behaviour {
 class a_star : public increment_a_star {
     
     public:
-        a_star(world* w = 0, heuristic* h = 0);
+        a_star(world* w, heuristic* h = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -74,19 +74,23 @@ class a_star : public increment_a_star {
 class ambush : public increment_a_star {
     
     public:
-        ambush(world* w = 0, heuristic* h = 0);
+        ambush(world* w, heuristic* h = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-// TODO
-class priority_ambush : public behaviour {
+bool index_priority(agent* a, agent* b);
+
+class priority_ambush : public increment_a_star {
     
     private:
-        heuristic* h;
+        bool (*P)(agent*, agent*);
     
     public:
-        priority_ambush(world* w = 0, heuristic* h = 0){}
+        priority_ambush(world* w,
+                        bool (*priority_function)(agent*, agent*) = 
+                                                    &index_priority,
+                        heuristic* h = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -98,7 +102,7 @@ class r_ambush : public behaviour {
         heuristic* h;
     
     public:
-        r_ambush(world* w = 0, heuristic* h = 0);
+        r_ambush(world* w, heuristic* h = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -110,7 +114,7 @@ class self_adaptive_r_ambush : public behaviour {
         heuristic* h;
     
     public:
-        self_adaptive_r_ambush(world* w = 0, heuristic* h = 0){}
+        self_adaptive_r_ambush(world* w, heuristic* h = 0){}
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -122,7 +126,7 @@ class partial_observability_ambush : public behaviour {
         heuristic* h;
     
     public:
-        partial_observavility_ambush(world* w = 0, heuristic* h = 0){}
+        partial_observability_ambush(world* w, heuristic* h = 0){}
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -134,7 +138,7 @@ class capacity_ambush : public behaviour {
         heuristic* h;
     
     public:
-        capacity_ambush(world* w = 0, heuristic* h = 0){}
+        capacity_ambush(world* w, heuristic* h = 0){}
         
         virtual void get_plan(agent* a, vector<int>& path);
 };

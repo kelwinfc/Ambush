@@ -26,6 +26,7 @@ class world {
         
         void add_agent(agent* a);
         float ambush_rate(agent* target);
+        void clear_paths();
         void compute_paths(agent* target);
         int num_agents();
         

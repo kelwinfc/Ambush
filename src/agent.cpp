@@ -2,11 +2,27 @@
 
 agent::agent(int index, graph* g, world* w, behaviour* b, int current_v)
 {
-    this->index = index;
-    this->g     = g;
-    this->w     = w;
-    this->b     = b;
-    this->v     = current_v;
+    this->index      = index;
+    this->g          = g;
+    this->w          = w;
+    this->b          = b;
+    this->v          = current_v;
+    this->b_has_path = false;
+}
+
+agent::agent(const agent& a)
+{
+    this->index      = a.index;
+    this->g          = a.g;
+    this->w          = a.w;
+    this->b          = a.b;
+    this->v          = a.v;
+    this->b_has_path = a.b_has_path;
+}
+
+int agent::get_index() const
+{
+    return this->index;
 }
 
 void agent::set_current_vertex(int v)
@@ -16,7 +32,8 @@ void agent::set_current_vertex(int v)
 
 void agent::set_path(vector<int>& path)
 {
-    this->path = path;
+    this->path       = path;
+    this->b_has_path = true;
 }
 
 void agent::set_target(agent* a)
@@ -52,4 +69,15 @@ behaviour* agent::get_behaviour()
 graph* agent::get_graph()
 {
     return this->g;
+}
+
+void agent::clear_path()
+{
+    this->path.clear();
+    this->b_has_path = false;
+}
+
+bool agent::has_path()
+{
+    return this->b_has_path;
 }

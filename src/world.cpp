@@ -11,6 +11,15 @@ void world::add_agent(agent* a)
     this->agents.push_back(a);
 }
 
+void world::clear_paths()
+{
+    vector< agent* >::iterator it;
+    for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
+        agent* a = *it;
+        a->clear_path();
+    }
+}
+
 float world::ambush_rate(agent* target)
 {
     vector< pair<int, float> >* pred = 
@@ -19,6 +28,7 @@ float world::ambush_rate(agent* target)
     vector< agent* >::iterator it;
     set<int> activated_pred;
     
+    this->clear_paths();
     this->compute_paths(target);
     
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
@@ -43,7 +53,6 @@ void world::compute_paths(agent* target)
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
         agent* a = *it;
         vector<int> path;
-        a->set_path(path);
         a->get_behaviour()->get_plan(a, path);
         a->set_path(path);
     }
