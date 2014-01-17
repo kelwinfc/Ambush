@@ -40,6 +40,8 @@ class graph {
         vector< pair<int, float> >* get_predecessors( int w );
         
         float get_arg(int v, string arg);
+        
+        float path_cost(vector<int>& path);
 };
 
 #endif

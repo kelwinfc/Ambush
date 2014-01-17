@@ -28,9 +28,6 @@ float world::ambush_rate(agent* target)
     vector< agent* >::iterator it;
     set<int> activated_pred;
     
-    this->clear_paths();
-    this->compute_paths(target);
-    
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
         agent* a = *it;
         vector<int>* path = a->get_path();
@@ -47,14 +44,43 @@ float world::ambush_rate(agent* target)
     return (float) activated_pred.size() / (float) den;
 }
 
+float world::increment_rate(agent* target)
+{
+    vector<float> shortest_paths;
+    vector<float> chosen_path;
+    vector< agent* >::iterator it;
+    float avg_increment = 0.0;
+    
+    for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
+        agent* a = *it;
+        graph* g = a->get_graph();
+        vector<int> path;
+        
+        a_star astar(this, 0);
+        astar.get_plan(a, path);
+        
+        shortest_paths.push_back(g->path_cost(path));
+        chosen_path.push_back(g->path_cost(*a->get_path()));
+    }
+    
+    for ( uint i=0; i<shortest_paths.size(); i++ ){
+        avg_increment += chosen_path[i] * 100.0 / (shortest_paths[i] + 1e-6);
+    }
+    
+    return avg_increment / this->agents.size();
+}
+
 void world::compute_paths(agent* target)
 {
     vector<agent*>::iterator it;
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
         agent* a = *it;
-        vector<int> path;
-        a->get_behaviour()->get_plan(a, path);
-        a->set_path(path);
+        
+        if ( !a->has_path() ){
+            vector<int> path;
+            a->get_behaviour()->get_plan(a, path);
+            a->set_path(path);
+        }
     }
 }
 

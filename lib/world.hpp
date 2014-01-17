@@ -25,12 +25,13 @@ class world {
         world(string& filename);
         
         void add_agent(agent* a);
-        float ambush_rate(agent* target);
         void clear_paths();
-        void compute_paths(agent* target);
         int num_agents();
-        
         vector<agent*>* get_agents();
+        
+        void compute_paths(agent* target);
+        float ambush_rate(agent* target);
+        float increment_rate(agent* target);
 };
 
 #endif

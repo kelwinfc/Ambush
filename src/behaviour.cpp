@@ -296,7 +296,7 @@ void priority_ambush::get_plan(agent* a, vector<int>& path)
     vector<agent*>::iterator it;
     vector<agent*> agents;
     for ( it = agents_aux->begin(); it != agents_aux->end(); ++it ){
-        if ( !a->has_path ){
+        if ( !a->has_path() ){
             agents.push_back(*it);
         }
     }
