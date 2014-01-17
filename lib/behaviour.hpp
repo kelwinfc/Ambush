@@ -116,7 +116,7 @@ class self_adaptive_r_ambush : public behaviour {
 };
 
 // Experimentos de Kelwin
-class partial_observavility_ambush : public behaviour {
+class partial_observability_ambush : public behaviour {
     
     private:
         heuristic* h;
