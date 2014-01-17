@@ -132,18 +132,16 @@ float graph::path_cost(vector<int>& path)
     float ret = 0.0;
     uint n = path.size();
     for ( uint i=1; i<n; i++ ){
-        
         int v = path[i-1];
         int w = path[i];
         float cost = 0.0;
-        for ( uint j=0; j<suc[v].size(); i++ ){
-            int next = suc[i][j].first;
+        for ( uint j=0; j<suc[v].size(); j++ ){
+            int next = suc[v][j].first;
             if ( next == w ){
-                cost = suc[i][j].second;
+                cost = suc[v][j].second;
                 break;
             }
         }
-        
         ret += cost;
     }
     

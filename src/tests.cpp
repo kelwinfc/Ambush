@@ -24,22 +24,38 @@ int main(int argc, char* argv[])
     for ( int i=0; i<n; i++ ){
         agents[i]->set_behaviour(&dfs);
     }
-    cout << "DFS: " << w.ambush_rate(&target) << endl;
+    w.clear_paths();
+    w.compute_paths(&target);
+    cout << "DFS: " << w.ambush_rate(&target)
+         << ", " << w.increment_rate(&target) << "%"
+         << endl;
     
     for ( int i=0; i<n; i++ ){
         agents[i]->set_behaviour(&ast);
     }
-    cout << "A*: " << w.ambush_rate(&target) << endl;
+    w.clear_paths();
+    w.compute_paths(&target);
+    cout << "A*: " << w.ambush_rate(&target)
+         << ", " << w.increment_rate(&target) << "%"
+         << endl;
     
     for ( int i=0; i<n; i++ ){
         agents[i]->set_behaviour(&amb);
     }
-    cout << "A*mbush: " << w.ambush_rate(&target) << endl;
+    w.clear_paths();
+    w.compute_paths(&target);
+    cout << "A*mbush: " << w.ambush_rate(&target)
+         << ", " << w.increment_rate(&target) << "%"
+         << endl;
     
     for ( int i=0; i<n; i++ ){
         agents[i]->set_behaviour(&pamb);
     }
-    cout << "P-A*mbush: " << w.ambush_rate(&target) << endl;
+    w.clear_paths();
+    w.compute_paths(&target);
+    cout << "P-A*mbush: " << w.ambush_rate(&target)
+         << ", " << w.increment_rate(&target) << "%"
+         << endl;
     
     return 0;
 }

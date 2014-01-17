@@ -60,14 +60,19 @@ float world::increment_rate(agent* target)
         astar.get_plan(a, path);
         
         shortest_paths.push_back(g->path_cost(path));
-        chosen_path.push_back(g->path_cost(*a->get_path()));
+        
+        vector<int>* chosen = a->get_path();
+        chosen_path.push_back(g->path_cost(*chosen));
     }
     
     for ( uint i=0; i<shortest_paths.size(); i++ ){
-        avg_increment += chosen_path[i] * 100.0 / (shortest_paths[i] + 1e-6);
+        if ( shortest_paths[i] < 1e-6 ){
+            continue;
+        }
+        avg_increment += chosen_path[i] * 100.0 / shortest_paths[i];
     }
     
-    return avg_increment / this->agents.size();
+    return avg_increment / this->agents.size() - 100.0;
 }
 
 void world::compute_paths(agent* target)
