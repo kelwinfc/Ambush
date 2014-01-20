@@ -10,6 +10,7 @@
 #include "utils.hpp"
 #include "agent.hpp"
 #include "world.hpp"
+#include "node_selector.hpp"
 #include "heuristic.hpp"
 
 using namespace std;
@@ -17,6 +18,7 @@ using namespace std;
 class agent;
 class world;
 class heuristic;
+class node_selector;
 
 class behaviour {
     protected:
@@ -83,7 +85,7 @@ bool index_priority(agent* a, agent* b);
 
 class priority_ambush : public increment_a_star {
     
-    private:
+    protected:
         bool (*P)(agent*, agent*);
     
     public:
@@ -95,26 +97,27 @@ class priority_ambush : public increment_a_star {
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-// TODO
-class r_ambush : public behaviour {
+class self_adaptive_r_ambush : public increment_a_star {
     
-    private:
-        heuristic* h;
+    protected:
+        node_selector* selector;
     
     public:
-        r_ambush(world* w, heuristic* h = 0);
+        self_adaptive_r_ambush();
+        self_adaptive_r_ambush(world* w, node_selector* ns=0,
+                               heuristic* h = 0);
         
+        // TODO
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-// TODO
-class self_adaptive_r_ambush : public behaviour {
+class r_ambush : public self_adaptive_r_ambush {
     
-    private:
-        heuristic* h;
+    protected:
+        float r;
     
     public:
-        self_adaptive_r_ambush(world* w, heuristic* h = 0){}
+        r_ambush(world* w, float r, heuristic* h = 0);
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -122,7 +125,7 @@ class self_adaptive_r_ambush : public behaviour {
 // Experimentos de Kelwin
 class partial_observability_ambush : public behaviour {
     
-    private:
+    protected:
         heuristic* h;
     
     public:
@@ -134,7 +137,7 @@ class partial_observability_ambush : public behaviour {
 // Tesis de Lezama
 class capacity_ambush : public behaviour {
     
-    private:
+    protected:
         heuristic* h;
     
     public:

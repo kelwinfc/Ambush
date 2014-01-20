@@ -41,6 +41,7 @@ class graph {
         
         float get_arg(int v, string arg);
         
+        float edge_cost(int v, int w);
         float path_cost(vector<int>& path);
 };
 

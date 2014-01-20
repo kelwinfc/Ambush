@@ -312,3 +312,54 @@ void priority_ambush::get_plan(agent* a, vector<int>& path)
     }
     path = *a->get_path();
 }
+
+self_adaptive_r_ambush::self_adaptive_r_ambush()
+{
+    this->w        = 0;
+    this->selector = new noop_node_selector();
+    this->h        = 0;
+}
+
+self_adaptive_r_ambush::self_adaptive_r_ambush(world* w, node_selector* ns,
+                                               heuristic* h )
+{
+    this->w        = w;
+    this->selector = ns;
+    this->h        = h;
+    
+    if ( !h ){
+        this->h = new h_zero(w);
+    }
+    
+    if ( !ns ){
+        this->selector = new noop_node_selector(w);
+    }
+        
+}
+
+void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
+{
+    vector<int> min_path;
+    a_star astar(this->w, this->h);
+    astar.get_plan(a, min_path);
+    
+    //TODO
+}
+
+r_ambush::r_ambush(world* w, float r, heuristic* h)
+{
+    this->w = w;
+    this->h = h;
+    this->r = r;
+    
+    if ( !h ){
+        this->h = new h_zero(w);
+    }
+    
+    this->selector = new r_node_selector(this->w, this->r);
+}
+
+void r_ambush::get_plan(agent* a, vector<int>& path)
+{
+    self_adaptive_r_ambush::get_plan(a, path);
+}
