@@ -337,13 +337,23 @@ self_adaptive_r_ambush::self_adaptive_r_ambush(world* w, node_selector* ns,
         
 }
 
+//TODO
 void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
 {
     vector<int> min_path;
+    vector<bool> chosen_nodes;
+    
     a_star astar(this->w, this->h);
     astar.get_plan(a, min_path);
     
-    //TODO
+    this->selector->select(a->get_graph(), min_path, chosen_nodes);
+    
+    uint n=min_path.size();
+    for ( uint i=0; i<n; i++ ){
+        if ( chosen_nodes[i] ){
+            
+        }
+    }
 }
 
 r_ambush::r_ambush(world* w, float r, heuristic* h)
