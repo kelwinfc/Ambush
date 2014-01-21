@@ -117,6 +117,7 @@ class self_adaptive_r_ambush : public increment_a_star {
     
     protected:
         float uniformity_metric(int target);
+        void get_pred_in_paths(set<int>& nodes, int target);
 };
 
 class r_ambush : public self_adaptive_r_ambush {

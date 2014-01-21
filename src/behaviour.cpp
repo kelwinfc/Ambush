@@ -108,7 +108,6 @@ void randomized_dfs::get_plan(agent* a, vector<int>& path)
 increment_a_star::increment_a_star(){
     this->h = 0;
     this->I = 0;
-    this->delete_h = true;
 }
 
 increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
@@ -228,7 +227,9 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
             path.push_back(v);
             v = parent[v];
         } while ( v != parent[v] );
-        path.push_back(v);
+        
+        if ( a->get_current_vertex() != target )
+            path.push_back(v);
         
         reverse( path.begin(), path.end() );
     }
@@ -367,26 +368,91 @@ self_adaptive_r_ambush::~self_adaptive_r_ambush()
     }
 }
 
-//TODO
 void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
 {
     vector<int> min_path;
     vector<bool> chosen_nodes;
-    
+    ambush amb(this->w, this->h);
     a_star astar(this->w, this->h);
+    set<int> nodes_in_path;
+    int tmp_current_vertex = a->get_current_vertex();
+    int target = a->get_target()->get_current_vertex();
+    
+    int increase_ambush = false;
+    float best_uniformity = 0.0;
+    vector<int> best_path;
+    
     astar.get_plan(a, min_path);
-    
     this->selector->select(a->get_graph(), min_path, chosen_nodes);
+    this->get_pred_in_paths(nodes_in_path, target);
     
-    uint n=min_path.size();
-    for ( uint i=0; i<n; i++ ){
+    a->set_path(min_path);
+    best_uniformity = this->uniformity_metric(target);
+    best_path = min_path;
+    a->clear_path();
+    int n=(int)min_path.size();
+    for ( int i=n-1; i>=0; i-- ){
         if ( chosen_nodes[i] ){
             
+            vector<int> ambush_path;
+            vector<int> path;
+            
+            a->set_current_vertex(min_path[i]);
+            amb.get_plan(a, ambush_path);
+            
+            concatenate_paths(min_path, ambush_path, i, path);
+            int new_previous = target;
+            if ( path.size() > 1 ){
+                new_previous = path[ path.size() - 2 ];
+            }
+            
+            a->set_path(path);
+            float uniformity = this->uniformity_metric(target);
+            a->clear_path();
+            
+            if ( !increase_ambush && 
+                 nodes_in_path.find(new_previous) == nodes_in_path.end() )
+            {
+                /* The ambush rate is increased and therefore this is first
+                 * point that reachs a better ambush
+                 */
+                best_path = path;
+                best_uniformity = uniformity;
+                increase_ambush = true;
+            } else if ( uniformity > best_uniformity ){
+                
+                /* If the Ambush rate is not increased, select the cutting
+                 * point that generates the best distribution of the agents
+                 */
+                best_path = path;
+                best_uniformity = uniformity;
+            }
+            
+            a->set_current_vertex(tmp_current_vertex);
+        }
+    }
+    path = best_path;
+}
+
+void self_adaptive_r_ambush::get_pred_in_paths(set<int>& nodes, int target)
+{
+    nodes.clear();
+    
+    vector<agent*>* agents = this->w->get_agents();
+    vector<agent*>::iterator it_agents;
+    for ( it_agents = agents->begin(); it_agents != agents->end(); ++it_agents )
+    {
+        agent* a = *it_agents;
+        if ( a->has_path() ){
+            vector<int>* path = a->get_path();
+            if ( path->size() > 1 && path->back() == target ){
+                int prev = path->at( path->size() - 2 );
+                nodes.insert(prev);
+            }
         }
     }
 }
 
-//TODO
 float self_adaptive_r_ambush::uniformity_metric(int target)
 {
     float ret = 0.0;
@@ -407,8 +473,8 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
         if ( a->has_path() ){
             
             vector<int>* path = a->get_path();
-            if ( path->size() > 0 && path->back() == target ){
-                int prev = path->at( path->size() - 1 );
+            if ( path->size() > 1 && path->back() == target ){
+                int prev = path->at( path->size() - 2 );
                 if ( num.find(prev) == num.end() ){
                     num[prev] = 1;
                 } else {

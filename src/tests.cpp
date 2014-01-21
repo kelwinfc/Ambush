@@ -9,6 +9,7 @@ int main(int argc, char* argv[])
     a_star ast(&w);
     ambush amb(&w);
     priority_ambush pamb(&w);
+    self_adaptive_r_ambush sar(&w);
     
     int n = 4;
     agent target(n, &g, &w, &np, 5);
@@ -54,6 +55,16 @@ int main(int argc, char* argv[])
     w.clear_paths();
     w.compute_paths(&target);
     cout << "P-A*mbush: " << w.ambush_rate(&target)
+         << ", " << w.increment_rate(&target) << "%"
+         << endl;
+    
+    for ( int i=0; i<n; i++ ){
+        agents[i]->set_behaviour(&sar);
+    }
+    w.clear_paths();
+    w.compute_paths(&target);
+    
+    cout << "SAR-A*mbush: " << w.ambush_rate(&target)
          << ", " << w.increment_rate(&target) << "%"
          << endl;
     
