@@ -398,6 +398,7 @@ r_ambush::r_ambush(world* w, float r, heuristic* h)
     }
     
     this->selector = new r_node_selector(this->w, this->r);
+    this->delete_selector = true;
 }
 
 void r_ambush::get_plan(agent* a, vector<int>& path)
