@@ -32,6 +32,8 @@ class world {
         void compute_paths(agent* target);
         float ambush_rate(agent* target);
         float increment_rate(agent* target);
+        
+        graph* get_graph();
 };
 
 #endif

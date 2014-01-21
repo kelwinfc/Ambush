@@ -98,3 +98,8 @@ int world::num_agents()
 {
     return this->agents.size();
 }
+
+graph* world::get_graph()
+{
+    return this->g;
+}

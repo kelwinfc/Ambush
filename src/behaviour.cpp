@@ -386,6 +386,53 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
     }
 }
 
+//TODO
+float self_adaptive_r_ambush::uniformity_metric(int target)
+{
+    float ret = 0.0;
+    
+    uint n = 0;
+    map<int, int> num;
+    
+    graph* g = this->w->get_graph();
+    vector< pair<int, float> >* pred_t = g->get_predecessors(target);
+    vector< pair<int, float> >::iterator it_pred;
+    float num_pred_t = (float)pred_t->size();
+    
+    vector<agent*>* agents = this->w->get_agents();
+    vector<agent*>::iterator it_agents;
+    for ( it_agents = agents->begin(); it_agents != agents->end(); ++it_agents )
+    {
+        agent* a = *it_agents;
+        if ( a->has_path() ){
+            
+            vector<int>* path = a->get_path();
+            if ( path->size() > 0 && path->back() == target ){
+                int prev = path->at( path->size() - 1 );
+                if ( num.find(prev) == num.end() ){
+                    num[prev] = 1;
+                } else {
+                    num[prev]++;
+                }
+            }
+            
+            n++;
+        }
+    }
+    
+    for ( it_pred = pred_t->begin(); it_pred != pred_t->end(); ++it_pred ){
+        int i = it_pred->first;
+        
+        int diff = num[i] - (int)ceil((float)n / num_pred_t);
+        
+        if ( diff > 0 ){
+            ret += diff;
+        }
+    }
+    
+    return 1.0 - ret / ( n - (int)floor((float)n / num_pred_t )+ 1e-6);
+}
+
 r_ambush::r_ambush(world* w, float r, heuristic* h)
 {
     this->w = w;

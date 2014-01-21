@@ -114,6 +114,9 @@ class self_adaptive_r_ambush : public increment_a_star {
         
         // TODO
         virtual void get_plan(agent* a, vector<int>& path);
+    
+    protected:
+        float uniformity_metric(int target);
 };
 
 class r_ambush : public self_adaptive_r_ambush {
