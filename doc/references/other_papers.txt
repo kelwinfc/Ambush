@@ -1,0 +1,12 @@
+* M. Shafie Abd Latiff, Marc Cavazza, Ian Palmer:
+  Co-ordination of Multi-agents Path Planning using Synchronous
+  Near-Admissibility A* (SNA*) Algorithm. GAME-ON 2001: 76-
+
+* W.G. van Toll, A.F. Cook IV, R. Geraerts. Real-Time Density-Based Crowd
+  Simulation.  Computer Animation and Virtual Worlds, 23 (1) :59-69, 2012
+
+* "Workshop on Multiagent Pathfinding" at AAAI 2012
+
+* Look at: cooperative path strategies, RTS/Turn-based strategy
+
+* Mark Overmars
