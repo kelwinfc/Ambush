@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     }
     
     for ( int i=0; i<n; i++ ){
-        agents[i]->set_behaviour(&dfs);
+        agents[i]->set_behavior(&dfs);
     }
     w.clear_paths();
     w.compute_paths(&target);
@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
          << endl;
     
     for ( int i=0; i<n; i++ ){
-        agents[i]->set_behaviour(&ast);
+        agents[i]->set_behavior(&ast);
     }
     w.clear_paths();
     w.compute_paths(&target);
@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
          << endl;
     
     for ( int i=0; i<n; i++ ){
-        agents[i]->set_behaviour(&amb);
+        agents[i]->set_behavior(&amb);
     }
     w.clear_paths();
     w.compute_paths(&target);
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
          << endl;
     
     for ( int i=0; i<n; i++ ){
-        agents[i]->set_behaviour(&pamb);
+        agents[i]->set_behavior(&pamb);
     }
     w.clear_paths();
     w.compute_paths(&target);
@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
          << endl;
     
     for ( int i=0; i<n; i++ ){
-        agents[i]->set_behaviour(&sar);
+        agents[i]->set_behavior(&sar);
     }
     w.clear_paths();
     w.compute_paths(&target);

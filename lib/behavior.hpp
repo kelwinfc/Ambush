@@ -1,5 +1,5 @@
-#ifndef __AMBUSH_BEHAVIOUR
-#define __AMBUSH_BEHAVIOUR
+#ifndef __AMBUSH_BEHAVIOR
+#define __AMBUSH_BEHAVIOR
 
 #include <vector>
 #include <queue>
@@ -21,20 +21,20 @@ class world;
 class heuristic;
 class node_selector;
 
-class behaviour {
+class behavior {
     protected:
         world* w;
     
     public:
-        behaviour(){ this->w = 0; }
-        behaviour(world* w){ this->w = w; }
+        behavior(){ this->w = 0; }
+        behavior(world* w){ this->w = w; }
         
         int next_step(agent* a);
         
         virtual void get_plan(agent* a, vector<int>& path){}
 };
 
-class noop : public behaviour {
+class noop : public behavior {
     
     public:
         noop(world* w);
@@ -42,7 +42,7 @@ class noop : public behaviour {
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-class randomized_dfs : public behaviour {
+class randomized_dfs : public behavior {
     
     public:
         randomized_dfs(world* w);
@@ -50,7 +50,7 @@ class randomized_dfs : public behaviour {
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-class increment_a_star : public behaviour {
+class increment_a_star : public behavior {
     
     protected:
         heuristic* h;
@@ -112,7 +112,6 @@ class self_adaptive_r_ambush : public increment_a_star {
                                heuristic* h = 0);
         ~self_adaptive_r_ambush();
         
-        // TODO
         virtual void get_plan(agent* a, vector<int>& path);
     
     protected:

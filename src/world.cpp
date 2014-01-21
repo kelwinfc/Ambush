@@ -83,7 +83,7 @@ void world::compute_paths(agent* target)
         
         if ( !a->has_path() ){
             vector<int> path;
-            a->get_behaviour()->get_plan(a, path);
+            a->get_behavior()->get_plan(a, path);
             a->set_path(path);
         }
     }

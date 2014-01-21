@@ -4,7 +4,7 @@
 #include <vector>
 #include <set>
 
-#include "behaviour.hpp"
+#include "behavior.hpp"
 #include "agent.hpp"
 #include "utils.hpp"
 

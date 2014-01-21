@@ -5,7 +5,7 @@
 
 #include "utils.hpp"
 #include "graph.hpp"
-#include "behaviour.hpp"
+#include "behavior.hpp"
 #include "agent.hpp"
 #include "world.hpp"
 

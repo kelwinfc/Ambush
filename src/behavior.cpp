@@ -1,7 +1,7 @@
-#include "behaviour.hpp"
+#include "behavior.hpp"
 #include <iostream>
 
-int behaviour::next_step(agent* a)
+int behavior::next_step(agent* a)
 {
     vector<int>* p_path;
     

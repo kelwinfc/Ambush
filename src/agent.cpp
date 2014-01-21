@@ -1,6 +1,6 @@
 #include "agent.hpp"
 
-agent::agent(int index, graph* g, world* w, behaviour* b, int current_v)
+agent::agent(int index, graph* g, world* w, behavior* b, int current_v)
 {
     this->index      = index;
     this->g          = g;
@@ -41,7 +41,7 @@ void agent::set_target(agent* a)
     this->target = a;
 }
 
-void agent::set_behaviour(behaviour* b)
+void agent::set_behavior(behavior* b)
 {
     this->b = b;
 }
@@ -61,7 +61,7 @@ agent* agent::get_target()
     return this->target;
 }
 
-behaviour* agent::get_behaviour()
+behavior* agent::get_behavior()
 {
     return this->b;
 }
