@@ -1,0 +1,41 @@
+\section{Conclusions}
+
+With a raise in the computational cost that has little significance,
+$A^*mbush$ generates an evident upgrade in the ambush behaviour.
+Likewise, $P$-$A^*mbush$ shows a superior behaviour over the traditional
+$A^*mbush$, because it successfully increases the path diversity.
+
+
+As it can be appreciated in the results, even in the worst case scenario, 
+the $A^*mbush$ family never produces a result that is worse than the one made
+by $A^*$. On the same line, $P$-$A^*mbush$ does not show in any
+case a downgrade when compared with $A^*mbush$. 
+
+$SAR$-$A^*mbush$ always shows the smallest incremental distance. And the
+best ambush rates when the maps are large. Although, due it's computational
+cost, the use of $P$-$A^*mbush$ could be more desirable when the
+ processing resources are limited.
+
+When paths are diverse, the agents performing any of the $A^*mbush$ 
+methods become more naturally distributed over the map. 
+Not having all the elements rounded up in a small space
+can be advantageous when agents change from
+one state of behaviour to another. For example, if the conduct changes 
+from pursue to flee, the ambush based algorithms not only allow a
+better behaviour, but also, they maintain the agents further away from each
+other, which is a better disposition when it comes to strategies of scape.
+
+In contrast with the pre-established conducts that are generally implemented 
+for acting up in specific situations or moments of each game, the
+proposed algorithms enhance the diversity of ambush situations that
+can be produced as a tactical move from the agents. 
+
+$P$-$A^*mbush$ generates an upgrade to the way the intelligence 
+in the agent's behaviour is perceived and $SAR$-$A^*mbush$ delivers an
+even better looking one. This way, not only the paths become 
+more variate, but the conduct of the agents looks better.
+It makes the elements in the game act in a way that looks more
+natural and perform an ambush strategy that is more effective.
+
+For more results and experiments visit  http://www.gia.usb.ve/~kelwin/ambush/.
+  

@@ -1,0 +1,25 @@
+\begin{minipage}{0.3\textwidth}
+\section*{SAR-A*mbush}
+
+\begin{itemize}
+\item Using the same distance R for the fixed radius in
+different maps, would produce good results in some of them
+and bad ones in others. This means the user would have to
+\textbf{manually fix} the measure of R.
+
+\item We propose SAR-A$^∗$mbush as a variation of
+R-A$^∗$ambush.
+
+\item Initially, this method makes each agent calculate the
+path with A$^∗$. Then, a \textbf{set of points} from that route is chosen.
+This will be the set of the possible radius R.
+
+\item The algorithm will select the \textbf{minimum radius} that
+generates the \textbf{greatest} $\Phi$, starting
+from the smallest R.
+
+\item In case of a \textbf{tie in the maximum ambush} value, it would go
+for the path that achieves the \textbf{best distribution} of the agents.
+
+\end{itemize}
+\end{minipage}

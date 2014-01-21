@@ -1,0 +1,24 @@
+\begin{minipage}{0.3\textwidth}
+
+\section*{Formal Problem Definition}
+\begin{itemize}
+\item Let $G = (V,E)$ be a \textbf{graph} (directed or undirected).
+
+\item Let $A$ be a \textbf{set of agents} that want to reach a point
+$t \in V$. Every agent $i \in A$, is located in a node of the
+graph. Let $pos(i)$ be the position of the agent $i$.
+
+\item A function over $i$ is defined for  determining the
+\textbf{cost} of the displacement of the agents  through the graph
+$\lambda_i : E \longrightarrow \mathbb{R}^{\geq 0}$.
+
+\item Let $path(i)$ having $i \in A$, be the \textbf{path} that the 
+agent $i$ is taking to reach node $t$.
+
+\item The \textbf{degree of ambush} towards the node $t$ is defined as:\\
+
+$\Phi(t) = \dfrac{|\{ i : path(j) = <pos(j),\ \ldots,\ i,\ t>, j \in A\}|}
+{\min(|\{ <i,t> : <i,t> \in E \} |,|A|) }$
+
+\end{itemize}
+\end{minipage}

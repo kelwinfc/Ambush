@@ -1,0 +1,31 @@
+\section{Introduction}
+% No \PARstart
+Generating agents with intelligent looking behaviour
+has been a constant challenge in the area of Artificial
+Intelligence for Videogames~\cite{book1}. Among this
+conducts, the user expects to appreciate agents than can
+perform tactical movements and group strategies. These
+tend to be complex in their implementation and usually
+result in preestabished moves that can be easily identified
+by the user, after several runs of the game. Having agents
+execute pathfinding towards a common point, is a problem
+that frequently appears in this area. The goal point is
+ussually given by a location in the game map  (potencially
+the opponent's position). A well known and used scheme to
+attack this problem is the generation of the minimal path
+towards the objective~\cite{art2,book4}. This path is
+generated using the game map.  When the algorithm is executed,
+it is very likely for the paths to be confluent. Thus,
+route diversity and map exploration is avoided.
+  
+When the minimal path strategy is applied for chasing
+the enemy, many escape paths are left open. Therefore,
+it is of special interest to generate mechanisms of route
+diversification that can produce ambush behaviours.
+
+The techniques explained in this paper are very adaptable
+to other various contexts where,  leaving the ambush aside,
+it is important to produce path diversity, with the purpose of 
+avoiding saturation in certain sectors of the underlying graph. 
+Examples of the latter are traffic managers, digital or physical
+package routing~\cite{art4}, robotics, among many others.

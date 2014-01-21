@@ -1,0 +1,35 @@
+\section{Related Works}
+
+A similar problem to the one exposed in this paper is
+given by \textit{Space-Time A$^*$} \cite{art3}. In this article, 
+a variation of \astar is proposed. It works with an undirected
+graph, induced from a grid shaped map. The cost function is common
+for all agents and constant between every node pair. 
+
+The main goal of the mentioned paper is to avoid having two 
+different agents in the same node at a given instant of time.
+For this variation of $A^*$, an expansion in the number of dimensions
+of \astar	 is proposed: besides the positions of the agents, the elapsed
+time is also taken into account. Thus, \textit{Space-Time A$^*$} has a 
+considerable increment in the time and memory costs, because the size
+of the search space has grown. 
+
+Even though the algorithms have different purposes, \ambush\
+shows a clear advantage above (\textit{Space-Time
+ A$^*$}) in various different aspects.
+
+In the first place, \ambush\ solves a more general problem 
+using a smaller computational complexity. It allows directed 
+graphs of variable costs. Also, it can work with agents that
+ use different graphs between them.
+
+In addition, if agents move at different speeds,
+\textit{Space-Time A$^*$} generates a very dense search
+space when the relative speed between elements is high. On the
+other hand, this matter doesn't have an effect over the 
+performance of \ambush.
+
+If homogeneous costs are assigned to every edge and the increment
+on the occupied nodes or edges is made infinite, then the problem that
+\ambush\ solves is reduced to the problem proposed for \textit{Space-Time
+A$^*$}.

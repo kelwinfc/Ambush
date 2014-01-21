@@ -1,0 +1,31 @@
+\section{A*}
+
+The \astar algorithm \cite{art2,book4,book3} is a variation
+of Dijkstra's algorithm \cite{book1} that computes 
+paths of minimal cost.
+It is an informed search algorithm \cite{book4}, based on 
+the following elements:
+
+\begin{itemize}
+\item $g$: Represents the accumulated cost from the initial node to the actual node $v$.
+\item $\hat{h}$: Is an estimate of the cost from the actual node $v$ to the goal.
+\item $\hat{f} = g + \hat{h}$: An estimate of the cost from the initial node to the goal, having $v$ in the path..
+\end{itemize}
+
+For the sake of securing optimality, the $\hat{h}$ heuristic 
+must be admissible, that is, it shouldn't overestimate any 
+cost against the optimal solution.
+This algorithm works in a greedy fashion, expanding the next unexplored 
+node with the smallest estimated cost $\hat{f}$ at the moment. 
+This procedure is repeated until the goal is reached. 
+
+% fin de la nueva def y luego viene lo del orden del algoritmo
+
+The estimated running time of $A^*$ is
+$\bigO(|V|log(|V|) + |V|*h + |E|)$.
+Having $h$ as the cost of computing function
+$\hat{h}$. This cost is derived, assuming an
+efficient implementation of the priority queue
+such as a Fibonacci heap \cite{book1} and that
+the heuristic of each node is only computed
+once.

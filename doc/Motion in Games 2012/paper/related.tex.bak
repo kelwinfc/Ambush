@@ -1,0 +1,36 @@
+\section{Related Works}
+A similar problem to the one exposed in this paper is
+given by \textit{Space-Time A$^*$} \cite{art3}. In this article, 
+a variation of \astar is proposed. It works with an undirected
+graph, induced from a grid shaped map. The cost function is common
+for all agents and constant between every node pair. 
+
+The main goal of the mentioned paper is to avoid having two 
+different agents in the same node at a given instant of time.
+For this variation of $A^*$, an expansion in the number of dimensions
+of \astar	 is proposed: besides the positions of the agents, the elapsed
+time is also taken into account. Thus, \textit{Space-Time A$^*$} has a 
+considerable increment in the time and memory costs, because the size
+of the search space has grown. 
+
+Other ways of achieving ambush are explained in \cite{art5}. 
+This work takes the problem of an agent that has to choose
+a path across a rectangle, treated as a grid, and a second 
+agent that will have to choose a sub-set of the rectangle trying
+to block the path of the first one. The approach in this paper
+is to create a matrix of probabilities that evaluates all the
+possible combinations of paths and ambush sets, and then
+choose the best strategy for both agents through the minimax
+algorithm.
+
+\cite{art6} and \cite{art7} approach the previous problem with
+sets of continuous nature. In the first work, discrete versions of 
+the game model are proposed. Afterwards they are
+used to find optimal solutions that satisfy the original
+continuous model. The work in \cite{art7} proposes various sets
+of solutions for conditions that were not considered in \cite{art6}.
+
+Previous works show exponential search spaces, deriving
+in high computational costs. The $A^*mbush$ family is proposed
+as an ecfetive method with lower computational order, that can
+be used in more general conditions.

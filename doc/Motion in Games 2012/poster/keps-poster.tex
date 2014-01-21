@@ -1,0 +1,412 @@
+\documentclass[portrait]{sciposter}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[english]{babel}
+\usepackage{fancyvrb}   % for the Verbatim environment
+%\usepackage{fancybullets}
+%\usepackage{other packages you may want to use}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{url}
+
+\usepackage{tabularx}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\definecolor{BoxCol}{RGB}{102,153,255}
+% uncomment for grey background to \section boxes 
+% for use with default option boxedsections
+
+%\definecolor{BoxCol}{rgb}{0.9,0.9,1}
+% uncomment for light blue background to \section boxes 
+% for use with default option boxedsections
+
+%\definecolor{SectionCol}{rgb}{0,0,0.5}
+% uncomment for dark blue \section text 
+\newcommand{\Omit}[1]{}
+\newcommand{\tup}[1]{\langle #1 \rangle}
+\newcommand{\A}{\ensuremath{\mathcal{A}}}
+\newcommand{\FT}{\ensuremath{\mathfrak{F}}}
+\renewcommand{\L}{\ensuremath{\mathcal{L}}}
+\newcommand{\Q}{\ensuremath{\mathcal{Q}}}
+\renewcommand{\O}{\ensuremath{\mathcal{O}}}
+
+\newcommand{\SUC}{\text{SUC}}
+\newcommand{\BIT}{\text{BIT}}
+\newcommand{\PLUS}{\text{PLUS}}
+\newcommand{\TIMES}{\text{TIMES}}
+\newcommand{\Inj}{\text{Inj}}
+\newcommand{\Fun}{\text{Fun}}
+\newcommand{\PFun}{\text{PFun}}
+
+\newcommand{\TC}{\text{TC}}
+\newcommand{\PH}{\ensuremath{\text{PH}}}
+\newcommand{\SO}{\ensuremath{\text{SO}}}
+\newcommand{\SOE}{\ensuremath{\text{SO}\exists}}
+\newcommand{\SOA}{\ensuremath{\text{SO}\forall}}
+\newcommand{\SOEA}{\ensuremath{\text{SO}\exists\forall}}
+\newcommand{\SOAEA}{\ensuremath{\text{SO}\forall\exists\forall}}
+
+\newcommand{\FOL}{\text{FOL}}
+\newcommand{\SOL}{\text{SOL}}
+\newcommand{\struc}{\text{STRUC}}
+\renewcommand{\mod}{\text{MOD}}
+\renewcommand{\models}{\vDash}
+\newcommand{\nmodels}{\nvDash}
+
+\newcommand{\domred}{\mathfrak{D}}
+\newcommand{\insred}{\mathfrak{I}}
+\newcommand{\domain}{\mathsf{dom}}
+\newcommand{\instance}{\mathsf{ins}}
+\newcommand{\ground}{\mathfrak{G}}
+\newcommand{\pwin}{mkspw}
+
+\newcommand{\prove}{{\texttt{\footnotesize prove}}}
+\newcommand{\fttt}[1]{{\texttt{\footnotesize #1}}}
+
+\newcommand{\SAT}{\textsc{Sat}}
+\newcommand{\CLIQUE}{\textsc{Clique}}
+\newcommand{\DHP}{\textsc{DHP}}
+\newcommand{\TDM}{\textsc{3DM}}
+\newcommand{\TCOL}{\textsc{3Col}}
+\newcommand{\KCOL}{\ensuremath{k\textsc{Col}}}
+
+\title{A$^*$mbush family: A$^*$ Variations for Ambush 
+Behavior and Path Diversity Generation}
+
+% Note: only give author names, not institute
+\author{Kelwin Fern\'andez, Glebys Gonz\'alez and Carolina Chang}
+ 
+% insert correct institute name
+                    
+\institute{Universidad Sim\'on Bol\'ivar\\
+           Caracas, Venezuela}
+
+%\email{kelwin@gia.usb.ve}  % shows author email address below institute
+
+%\date is unused by the current \maketitle
+
+% The following commands can be used to alter the default logo settings
+%\leftlogo[0.9]{chenille}{  % defines logo to left of title (with scale factor)
+%\rightlogo[0.52]{otherlogo}  % same but on right
+% NOTE: the logo image files chenille.png, resp. otherlogo.png must be 
+%       present in the same directory as this LaTeX source, either
+%       in the .png format, or in any other supported format
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{SaveVerbatim}{SAT}
+(define (domain SAT)
+  (:constants zero max)
+  (:predicates
+    (holds_and_2 ?x ?y) (holds_and_6 ?x0 ?x1)
+    (holds_exists_8 ?x0) (holds_forall_9 ?x0)
+    (holds_or_7 ?x0 ?x1) (holds_goal)
+    (N ?x ?y) (P ?x ?y) (T ?x) (not-T ?x)
+    (suc ?x ?y)
+  )
+  (:action set_T_true
+    :parameters (?x)
+    :precondition (and (guess) (not-T ?x))
+    :effect (and (T ?x) (not (not-T ?x))))
+
+  (:action prove_forall_9_1
+    :precondition (and (proof)
+                       (holds_exists_8 zero))
+    :effect (holds_forall_9 zero))
+
+  (:action prove_forall_9_2
+    :parameters (?y1 ?y2)
+    :precondition (and (proof)
+                       (suc ?y1 ?y2)
+                       (holds_forall_9 ?y1)
+                       (holds_exists_8 ?y2))
+    :effect (holds_forall_9 ?y2))
+
+  (:action prove_exists_8
+    :parameters (?y ?x)
+    :precondition (and (proof)
+                       (holds_or_7 ?y ?x))
+    :effect (holds_exists_8 ?y))
+
+  (:action prove_or_7_0
+    :parameters (?y ?x)
+    :precondition (and (proof)
+                       (holds_and_2 ?y ?x))
+    :effect (holds_or_7 ?y ?x))
+
+  (:action prove_or_7_1
+    :parameters (?y ?x)
+    :precondition (and (proof)
+                       (holds_and_6 ?y ?x))
+    :effect (holds_or_7 ?y ?x))
+
+  (:action prove_and_2
+    :parameters (?y ?x)
+    :precondition (and (proof)
+                       (P ?x ?y) (T ?x))
+    :effect (holds_and_2 ?y ?x))
+
+  (:action prove_and_6
+    :parameters (?y ?x)
+    :precondition (and (proof)
+                       (N ?x ?y) (not-T ?x))
+    :effect (holds_and_6 ?y ?x))
+
+  (:action prove-goal
+    :precondition (holds_forall_9 max)
+    :effect (holds_goal))
+
+  (:action begin-proof
+    :precondition (guess)
+    :effect (and (proof) (not (guess)))) )
+\end{SaveVerbatim}
+
+%*** facultative: where the poster was presented (appears as a left footer):
+\conference{Knowledge Engineering for Planning and Scheduling Workshop \\
+    International Conference on Automated Planning and Scheduling,
+              University of Freiburg, June 12, 2011}
+
+%*** print the poster header defined above: title, authors, affiliations:
+\maketitle
+
+%*** multi-columns environement, change {3} --> {2} if only 2 colums desired:
+\begin{multicols}{2}
+
+%*** text of the Abstract:
+%  \begin{abstract}
+%
+%    \PARstart{Y}{our} abstract, if you wish: put here your abstract to 
+%    have it shown under an unnumbered section called {\bf Abstract}.
+%
+%  \end{abstract}
+
+\section*{\large{Motivation}}
+\begin{large}
+\begin{itemize}
+    \item STRIPS is PSPACE-complete, \textbf{no known algorithm}
+       that \textbf{automatically} generates a STRIPS problem from an arbitrary
+      PSPACE problem. 
+    \item General Problem Solver for PSPACE problems:
+    \begin{itemize}
+        \item Described in a high-level declarative language
+        \item Taking advantage of current and future planning technology
+    \end{itemize}
+    \item Design \textbf{benchmark problems for planning} to evaluate
+        heuristics and algorithms.
+\end{itemize}
+\end{large}
+
+\section*{\large{Idea}}
+\begin{large}
+    First step to build such a tool: translating \textbf{NP problems}
+          encoded as \SOE\ sentences into planning. The output planning task
+          should be \textbf{no more difficult} to solve than the original
+          problem.\\
+\end{large}
+
+%\includegraphics[width=14in,height=2in]{diagram.pdf}
+\end{multicols}
+
+\section*{\large{Case study: SAT}}
+
+\begin{figure}[ht]
+\begin{minipage}{0.666\linewidth}
+\begin{multicols}{2}
+\subsection*{Predefined relations (signature)}
+\begin{large}
+\begin{itemize}
+\item $P(x, y)$: The variable $x$ appears \textbf{positive} in clause $y$.
+\item $N(x, y)$: The variable $x$ appears \textbf{negative} in clause $y$.
+\end{itemize}
+
+\subsection*{Existentially quantified relations}
+\begin{itemize}
+\item $T(x)$: The variable $x$ is set to $true$.
+\end{itemize}
+\end{large}
+
+\subsection*{Formula}
+\begin{large}
+\begin{itemize}
+    \item Find which variables should be assigned to {\color{red}{\textbf{true}}} in order
+        to satisfy a CNF formula.
+    \item In {\color{blue} \textbf{every}} clause {\color{magenta}\textbf{at least one}}
+        variable is satisfied. A variable $x$ is \emph{satisfied} 
+        inside a clause $y$ if its truth
+        value $T$ is coherent with its sign, i.e. if it appears as
+        positive, $T(x)$ should be true, if it appears as negative,
+        $T(x)$ should be false.
+\end{itemize}
+
+
+\[ ({\color{red}\exists T^1})({\color{blue}\forall y})({\color{magenta}\exists x})[(P(x,y)\land T(x))\lor(N(x,y)\land\neg T(x))] \]
+\end{large}
+
+\subsection*{Finite structures (example)}
+\begin{large}
+\begin{itemize}
+    \item Objects are numbered from \texttt{zero} to \texttt{max}
+    \item A structure holds the information required to specify a \textbf{problem instance}
+\end{itemize}
+
+\[\underbrace{(x_0\lor\neg x_1\lor x_2)}_{\text{clause 0}} \land
+\underbrace{(\neg x_0 \lor \neg x_2)}_{\text{clause 1}} \land 
+\underbrace{(\neg x_0 \lor x_1)}_{\text{clause 2}} \]
+\begin{Large}{\[\Downarrow\]}\end{Large}
+\begin{verbatim}
+    (?P zero zero) (?N obj1 zero) 
+    (?N zero obj1) (?N max obj1)
+    (?N zero max)  (?P obj1 max)
+    (?P max zero)
+\end{verbatim}
+\end{large}
+
+\end{multicols}
+\section*{\large{Reduction}}
+\begin{large}
+\begin{itemize}
+    \item If the first-order structure (\textbf{instance}) satisfies the property 
+          expressed by the \SOE\ formula (\textbf{domain}), the plan is a step-by-step
+          proof of this fact
+    \item Actions to guess the truth value of the second-order relations
+    \item Actions to prove the logical operators
+    \item Guess truth values first, then attempt to build the proof
+\end{itemize}
+\end{large}
+
+
+\section*{\large{Experiments}}
+
+We modeled, translated and attempted to solve several NP-complete problems using
+our tool and state-of-the-art planners.
+\begin{multicols}{2}
+\subsubsection*{Experimental results}
+\begin{itemize}
+    \item The time limit was 30 minutes, and the memory limit was 1 GB
+    \item The M and Mp planners by Jussi Rintanen performed best
+    \item 1,614 instances out of 1,920 were solved
+\end{itemize}
+
+
+\begin{table}[t]
+\centering
+\scalebox{.90}{
+\small
+\begin{tabularx}{1.1\columnwidth}{@{}XRRRR@{}}
+              &    $N^*$/$N$ & \#pos. & \#neg. & avg.\ time \\
+\midrule
+\multicolumn{5}{@{}l}{\textbf{SAT}}\\
+\midrule
+%                                                             % sample standard deviation
+uf20          &        40/40 &     40 &      0 &       1.7 \\ % 2.0
+uf50          &        40/40 &     40 &      0 &     146.7 \\ % 202.3
+uf75          &        15/40 &     15 &      0 &     362.1 \\ % 568.6
+uuf50         &        40/40 &      0 &     40 &     548.5 \\ % 260.2
+uuf75         &         1/40 &      0 &      1 &   1,746.4 \\ % 0.0
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Clique}}\\
+\midrule
+25-3          &        40/40 &     30 &     10 &     111.9 \\ % 53.9
+25-4          &        40/40 &     18 &     22 &     231.0 \\ % 236.7
+25-5          &        39/40 &     10 &     29 &     387.5 \\ % 396.6
+25-6          &        36/40 &      8 &     28 &     394.1 \\ % 321.1
+\midrule
+\multicolumn{5}{@{}l}{\textbf{Hamiltonian Path}}\\
+\midrule
+%5             &        40/40 &     12 &     28 &       0.0 \\ % 0.0
+30            &        22/40 &     20 &      2 &     629.1 \\ % 242.2
+\midrule
+\multicolumn{5}{@{}l}{\textbf{3-dimensional Matching}}\\
+\midrule
+%5             &        40/40 &     19 &     21 &       0.0 \\ % 0.0
+20            &        13/40 &     13 &      0 &   1,191.0 \\ % 42.1 (avg/std) is over 3 instances !!!
+25            &         0/40 &      0 &      0 &       --- \\ % ---
+\midrule
+\multicolumn{5}{@{}l}{\textbf{3-colorability}}\\
+\midrule
+%5             &        40/40 &     37 &      3 &       0.0 \\ % 0.0
+50            &        40/40 &      1 &     39 &     196.7 \\ % 119.2
+\midrule
+\multicolumn{5}{@{}l}{\textbf{k-Colorability}}\\
+\midrule
+%5-2           &        40/40 &     20 &     20 &       0.0 \\ % 0.0
+%5-3           &        40/40 &     37 &      3 &       0.0 \\ % 0.0
+%5-4           &        40/40 &     39 &      1 &       0.0 \\ % 0.0
+20-2          &        40/40 &      3 &     37 &     254.9 \\ % 68.2
+20-3          &        40/40 &     12 &     28 &     395.9 \\ % 221.8
+20-4          &        40/40 &     20 &     20 &     497.3 \\ % 178.0
+25-2          &         0/40 &      0 &      0 &       --- \\ % ---
+25-3          &         0/40 &      0 &      0 &       --- \\ % ---
+25-4          &         0/40 &      0 &      0 &       --- \\ % ---
+\midrule
+Total         &  1,614/1,920 &    706 &    908 &     180.9 \\ % a rellenar al final
+\end{tabularx}}
+\end{table}
+
+\subsubsection*{Chromatic numbers }
+Using the k-colorability domain provided by the tool, we
+determined the chromatic number $\chi$ of random graphs.
+
+\begin{table}[t]
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabularx}{1.16\columnwidth}{@{}lrRRRRRRR@{}}
+       &       & \multicolumn{7}{c}{$k$-colorability} \\
+\cmidrule(l){3-9}
+instance       & $\chi$ &     1 &     2 &     3 &     4 &     5 &     6 &     7 \\
+\midrule
+10-0.75-1      &      5 &     2 &     2 &     6 &   101 &\bf  3 &       &       \\
+10-0.75-2      &      5 &     1 &     2 &     2 &     6 &\bf  4 &       &       \\
+10-0.85        &      7 &     2 &     2 &     3 &     6 &     4 & 1,265 &\bf  4 \\
+15-0.25        &      2 &    27 &\bf 62 &       &       &       &       &       \\
+15-0.60        &      5 &    27 &    29 &    54 &   118 &\bf 72 &       &       \\
+15-0.70        &      6 &    28 &    28 &    33 &    47 &   329 &\bf 67 &       \\
+20-0.10        &      3 &   214 &   350 &\bf705 &       &       &       &       \\ % last number strange
+20-0.25        &      4 &   211 &   272 & 1,261 &\bf837 &       &       &       \\
+\midrule
+\end{tabularx}}
+\end{table}
+
+\section*{\large{Discussion}}
+\begin{itemize}
+    \item New way of expressing decision problems to solve them using planning technology
+    \item Automatic, efficient reductions from declaratively-expressed PSPACE problems into STRIPS?
+    \item Computation of of transitive closures for predicates definable in second-order logic
+    \item Target other complexity classes first? \SOEA\
+\end{itemize}
+
+\end{multicols}
+
+\end{minipage}
+\hspace{2cm}
+\begin{minipage}{0.333\linewidth}
+\vspace{-1.5cm}
+\subsection*{Domain translation}
+\UseVerbatim{SAT}
+\subsection*{Solution (example)}
+\[ S = \{T(x_0), T(x_1)\} \]
+\end{minipage}
+\end{figure}
+
+
+%\begin{Large}
+%\begin{Verbatim}[commandchars=\\\{\}]
+%(so-exists ({\color{red}\textbf{?T}} 1)
+%  ({\color{blue}forall} (?y) ({\color{magenta}exists} (?x)
+%    (or
+%      (and (?P ?x ?y)
+%           (?T ?x))
+%      (and (?N ?x ?y)
+%           (not (?T ?x)))))))    
+%\end{Verbatim}
+%\end{Large}
+
+\end{document}
+

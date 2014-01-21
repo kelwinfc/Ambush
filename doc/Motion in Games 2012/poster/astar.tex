@@ -1,0 +1,23 @@
+\begin{minipage}{0.3\textwidth}
+\section*{A*}
+
+It is an informed search algorithm that computes
+\textbf{paths of minimal cost}, based on 
+the following elements:
+
+\begin{itemize}
+\item $g$: Represents the \textbf{accumulated cost} from
+the initial node to the current node $v$.
+\item $\hat{h}$: Is an \textbf{estimate of the cost} from
+the current node $v$ to the goal.
+\item $\hat{f} = g + \hat{h}$: Is an estimate of the cost from
+the initial node to the goal, having $v$ in the path.
+\end{itemize}
+
+\bigskip
+This algorithm works in a \textbf{greedy fashion},
+expanding the next unexplored  node with the smallest
+estimated cost $\hat{f}$ at the moment. 
+This procedure is repeated until the goal is reached.
+
+\end{minipage}

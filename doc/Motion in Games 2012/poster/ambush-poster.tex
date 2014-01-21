@@ -1,0 +1,108 @@
+\documentclass[portrait]{sciposter}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage[english]{babel}
+\usepackage{fancyvrb}   % for the Verbatim environment
+%\usepackage{fancybullets}
+%\usepackage{other packages you may want to use}
+
+\usepackage{amsthm}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{url}
+
+\usepackage{tabularx}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+\definecolor{BoxCol}{RGB}{102,153,255}
+% uncomment for grey background to \section boxes 
+% for use with default option boxedsections
+
+%\definecolor{BoxCol}{rgb}{0.9,0.9,1}
+% uncomment for light blue background to \section boxes 
+% for use with default option boxedsections
+
+%\definecolor{SectionCol}{rgb}{0,0,0.5}
+% uncomment for dark blue \section text 
+
+\newcommand{\bigO}{\mathcal{O}}
+
+\title{\begin{Huge}
+A$^*$mbush family: A$^*$ Variations for Ambush 
+Behavior and Path Diversity Generation
+\end{Huge}}
+
+% Note: only give author names, not institute
+\author{Kelwin Fern\'andez, Glebys Gonz\'alez and Carolina Chang}
+ 
+% insert correct institute name
+                    
+\institute{Universidad Sim\'on Bol\'ivar.
+           Caracas, Venezuela}
+
+%\email{kelwin@gia.usb.ve}  % shows author email address below institute
+
+%\date is unused by the current \maketitle
+
+% The following commands can be used to alter the default logo settings
+%\leftlogo[0.9]{chenille}{  % defines logo to left of title (with scale factor)
+%\rightlogo[0.52]{otherlogo}  % same but on right
+% NOTE: the logo image files chenille.png, resp. otherlogo.png must be 
+%       present in the same directory as this LaTeX source, either
+%       in the .png format, or in any other supported format
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%*** print the poster header defined above: title, authors, affiliations:
+\maketitle
+
+%*** facultative: where the poster was presented (appears as a left footer):
+\conference{Motion in Games, Rennes, France, November, 2012}
+
+\begin{multicols}{2}
+\input{motivation}
+\end{multicols}
+
+\section*{A$^*$mbush: The Initial Variation}
+
+\begin{multicols}{3}
+\input{definition}
+\input{astar}
+\input{ambush}
+\end{multicols}
+
+\bigskip
+\begin{center}
+\includegraphics[width=0.25\textwidth]{figures/g2.png}
+\hspace*{0.25cm}
+\includegraphics[width=0.25\textwidth]{figures/astar_contrast.jpg}
+\hspace*{0.25cm}
+\includegraphics[width=0.25\textwidth]{figures/ambush_contrast.jpg}
+\end{center}
+
+\section*{A$^*$mbush Variations}
+
+\begin{multicols}{3}
+\input{pambush}
+\input{rambush}
+\input{sarambush}
+\end{multicols}
+
+\section*{Experiments}
+\begin{multicols}{2}
+\input{t1}
+\input{t3}
+
+\section*{Computational Complexity ($\bigO$)}
+
+\begin{center}
+A$^*$ $=$ A$^*$mbush, R$^*$mbush $\leq$ P-A$^*$mbush
+$\leq$ SAR-A$^*$mbush
+\end{center}
+\end{multicols}
+\end{document}
+

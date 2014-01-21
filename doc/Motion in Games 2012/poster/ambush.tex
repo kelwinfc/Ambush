@@ -1,0 +1,26 @@
+\begin{minipage}{0.3\textwidth}
+\section*{A*mbush}
+
+\begin{itemize}
+
+\item A$^*$mbush is an $A^*$-based algorithm that solves the
+ambush generation problem. 
+
+\item It consists of a \textbf{modification} of the $g$ function,
+that favours path diversity. We will call this function $g'$.
+
+\item Let $\Psi(v,i) = 1+(\# j : j \in A \wedge v \in path(j))$,
+be the number of agents different from agent $i$, that have the 
+node $v$ in their paths towards $t$ plus one.
+
+\item $g'(pos(i),i) = 0$ for the initial node.
+
+\item $g'(w, i) = g'(v,i) + \lambda_i(<v,w>) \cdot \Psi(w,i)^2$
+for every expanded edge $<v,w>$.
+
+\item The properties of $A^*$ are preserved. Nevertheless, the path
+\textbf{might not be optimal} for the original costs function $g$.
+
+\end{itemize}
+
+\end{minipage}
