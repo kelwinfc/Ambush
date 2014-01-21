@@ -372,9 +372,12 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
 {
     vector<int> min_path;
     vector<bool> chosen_nodes;
+    
     ambush amb(this->w, this->h);
     a_star astar(this->w, this->h);
+    
     set<int> nodes_in_path;
+    
     int tmp_current_vertex = a->get_current_vertex();
     int target = a->get_target()->get_current_vertex();
     
@@ -382,14 +385,24 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
     float best_uniformity = 0.0;
     vector<int> best_path;
     
+    /* Compute the minimum path and select the nodes that will be included in
+     * the computation of the best R
+     */
     astar.get_plan(a, min_path);
     this->selector->select(a->get_graph(), min_path, chosen_nodes);
+    
+    /* Compute the already chosen target's predecessors. This is used in order
+     * to avoid the re-computation of the ambush rate. If the new path includes
+     * a node that doesn't belong to this set, the ambush rate is increased
+     */
     this->get_pred_in_paths(nodes_in_path, target);
     
     a->set_path(min_path);
     best_uniformity = this->uniformity_metric(target);
     best_path = min_path;
     a->clear_path();
+    
+    /* Try with every chosen node as cutting point */
     int n=(int)min_path.size();
     for ( int i=n-1; i>=0; i-- ){
         if ( chosen_nodes[i] ){
@@ -397,10 +410,14 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
             vector<int> ambush_path;
             vector<int> path;
             
+            // Compute the A*mbush path with the cutting vertex as initial node
             a->set_current_vertex(min_path[i]);
             amb.get_plan(a, ambush_path);
             
+            // Combine the A* path with the A*mbush path
             concatenate_paths(min_path, ambush_path, i, path);
+            
+            // Compute the target's predecessor considered in the new path
             int new_previous = target;
             if ( path.size() > 1 ){
                 new_previous = path[ path.size() - 2 ];
@@ -431,9 +448,13 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
             a->set_current_vertex(tmp_current_vertex);
         }
     }
+    
     path = best_path;
 }
 
+/* This function computes the set of target's predecessors that belong
+ * to a agent's path.
+ */
 void self_adaptive_r_ambush::get_pred_in_paths(set<int>& nodes, int target)
 {
     nodes.clear();
@@ -453,12 +474,17 @@ void self_adaptive_r_ambush::get_pred_in_paths(set<int>& nodes, int target)
     }
 }
 
+/* This function computes the uniformity of the distribution of the
+ * agents towards the target. The function returns a value between 0
+ * and 1. A value close to 0 means that the distribution is uniforme,
+ * a value close to 1 means the opposite.
+ */
 float self_adaptive_r_ambush::uniformity_metric(int target)
 {
     float ret = 0.0;
     
     uint n = 0;
-    map<int, int> num;
+    map<int, int> num; // Number of agents that have a given node in their path
     
     graph* g = this->w->get_graph();
     vector< pair<int, float> >* pred_t = g->get_predecessors(target);
@@ -467,6 +493,10 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
     
     vector<agent*>* agents = this->w->get_agents();
     vector<agent*>::iterator it_agents;
+    
+    /* Count the number of agents that have computed the path.
+     * Count the number of paths that include each target's predecessor.
+     */
     for ( it_agents = agents->begin(); it_agents != agents->end(); ++it_agents )
     {
         agent* a = *it_agents;
@@ -474,7 +504,9 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
             
             vector<int>* path = a->get_path();
             if ( path->size() > 1 && path->back() == target ){
+                
                 int prev = path->at( path->size() - 2 );
+                
                 if ( num.find(prev) == num.end() ){
                     num[prev] = 1;
                 } else {
@@ -486,6 +518,8 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
         }
     }
     
+    /* Compute the numerator of the function (See paper).
+     */
     for ( it_pred = pred_t->begin(); it_pred != pred_t->end(); ++it_pred ){
         int i = it_pred->first;
         
@@ -496,9 +530,13 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
         }
     }
     
-    return 1.0 - ret / ( n - (int)floor((float)n / num_pred_t )+ 1e-6);
+    return 1.0 - ret / ( n - (int)floor((float)n / num_pred_t ) + 1e-6 );
 }
 
+/* Despite R-A*mbush was designed before Self Adaptive R-A*mbush, the last one
+ * is a generalization of R-A*mbush. Then, the implementation of R-A*mbush is
+ * done using the most general model.
+ */
 r_ambush::r_ambush(world* w, float r, heuristic* h)
 {
     this->w = w;

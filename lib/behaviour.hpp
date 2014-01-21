@@ -116,7 +116,17 @@ class self_adaptive_r_ambush : public increment_a_star {
         virtual void get_plan(agent* a, vector<int>& path);
     
     protected:
+        
+        /* This function computes the uniformity of the distribution of the
+         * agents towards the target. The function returns a value between 0
+         * and 1. A value close to 0 means that the distribution is uniforme,
+         * a value close to 1 means the opposite.
+         */
         float uniformity_metric(int target);
+        
+        /* This function computes the set of target's predecessors that belong
+         * to a agent's path.
+         */
         void get_pred_in_paths(set<int>& nodes, int target);
 };
 
