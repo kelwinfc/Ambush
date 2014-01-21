@@ -5,6 +5,7 @@
 #include <queue>
 #include <stack>
 #include <algorithm>
+#include <iostream>
 
 #include "graph.hpp"
 #include "utils.hpp"
@@ -54,13 +55,15 @@ class increment_a_star : public behaviour {
     protected:
         heuristic* h;
         void (*I)(world*, agent*, vector<float>&);
+        bool delete_h;
     
     public:
-        increment_a_star(){ this->h = 0; this->I = 0; }
-        
+        increment_a_star();
         increment_a_star(void (*increment_function)(world*, agent*,
                                                     vector<float>&),
                          world* w, heuristic* h = 0);
+        
+        ~increment_a_star();
         
         virtual void get_plan(agent* a, vector<int>& path);
 };
@@ -87,7 +90,7 @@ class priority_ambush : public increment_a_star {
     
     protected:
         bool (*P)(agent*, agent*);
-    
+        
     public:
         priority_ambush(world* w,
                         bool (*priority_function)(agent*, agent*) = 
@@ -101,11 +104,13 @@ class self_adaptive_r_ambush : public increment_a_star {
     
     protected:
         node_selector* selector;
+        bool delete_selector;
     
     public:
         self_adaptive_r_ambush();
         self_adaptive_r_ambush(world* w, node_selector* ns=0,
                                heuristic* h = 0);
+        ~self_adaptive_r_ambush();
         
         // TODO
         virtual void get_plan(agent* a, vector<int>& path);
@@ -123,11 +128,10 @@ class r_ambush : public self_adaptive_r_ambush {
 };
 
 // Experimentos de Kelwin
-class partial_observability_ambush : public behaviour {
+class partial_observability_ambush : public increment_a_star {
     
     protected:
-        heuristic* h;
-    
+        
     public:
         partial_observability_ambush(world* w, heuristic* h = 0){}
         
@@ -135,11 +139,10 @@ class partial_observability_ambush : public behaviour {
 };
 
 // Tesis de Lezama
-class capacity_ambush : public behaviour {
+class capacity_ambush : public increment_a_star {
     
     protected:
-        heuristic* h;
-    
+        
     public:
         capacity_ambush(world* w, heuristic* h = 0){}
         

@@ -104,7 +104,13 @@ void randomized_dfs::get_plan(agent* a, vector<int>& path)
         reverse( path.begin(), path.end() );
     }
 }
-        
+
+increment_a_star::increment_a_star(){
+    this->h = 0;
+    this->I = 0;
+    this->delete_h = true;
+}
+
 increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
                                                   vector<float>&),
                                    world* w, heuristic* h)
@@ -115,6 +121,14 @@ increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
     
     if ( !h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
+    }
+}
+
+increment_a_star::~increment_a_star(){
+    if ( this->delete_h && this->h != 0){
+        delete this->h;
+        this->h = 0;
     }
 }
 
@@ -139,6 +153,7 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
     
     if ( !this->h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
     }
     
     for ( int i = 0; i < num_vertex; i++ ){
@@ -226,6 +241,7 @@ a_star::a_star(world* w, heuristic* h)
     
     if ( !h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
     }
 }
 
@@ -242,6 +258,7 @@ ambush::ambush(world* w, heuristic* h)
     
     if ( !h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
     }
 }
 
@@ -285,6 +302,7 @@ priority_ambush::priority_ambush(world* w,
     
     if ( !h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
     }
 }
 
@@ -315,9 +333,10 @@ void priority_ambush::get_plan(agent* a, vector<int>& path)
 
 self_adaptive_r_ambush::self_adaptive_r_ambush()
 {
-    this->w        = 0;
-    this->selector = new noop_node_selector();
-    this->h        = 0;
+    this->w               = 0;
+    this->selector        = new noop_node_selector();
+    this->h               = 0;
+    this->delete_selector = true;
 }
 
 self_adaptive_r_ambush::self_adaptive_r_ambush(world* w, node_selector* ns,
@@ -329,12 +348,23 @@ self_adaptive_r_ambush::self_adaptive_r_ambush(world* w, node_selector* ns,
     
     if ( !h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
     }
     
     if ( !ns ){
         this->selector = new noop_node_selector(w);
+        this->delete_selector = true;
+    } else {
+        this->delete_selector = false;
     }
-        
+}
+
+self_adaptive_r_ambush::~self_adaptive_r_ambush()
+{
+    if ( this->delete_selector && this->selector != 0 ){
+        delete this->selector;
+        this->selector = 0;
+    }
 }
 
 //TODO
@@ -364,6 +394,7 @@ r_ambush::r_ambush(world* w, float r, heuristic* h)
     
     if ( !h ){
         this->h = new h_zero(w);
+        this->delete_h = true;
     }
     
     this->selector = new r_node_selector(this->w, this->r);
