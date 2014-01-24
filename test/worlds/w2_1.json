@@ -1,7 +1,7 @@
 {
     "name" : "World Toy 2",
     "graph" : "test/graphs/g1.json",
-    "random_positions" : false,
+    "random_positions" : true,
     "num_experiments": 100,
     "agents" : [
                 {"behavior":"A*mbush",
