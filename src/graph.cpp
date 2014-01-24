@@ -38,18 +38,7 @@ graph::graph(char* filename)
             
             const rapidjson::Value& next_node = nodes[i];
             
-            if ( !next_node.IsArray() ){
-                continue;
-            }
-            for (rapidjson::SizeType j = 0; j < next_node.Size(); j++){
-                const rapidjson::Value& next_arg = next_node[j];
-                const rapidjson::Value& name = next_arg["arg"];
-                const rapidjson::Value& value = next_arg["value"];
-                
-                if ( name.IsString() && value.IsNumber() ){
-                    args[i][name.GetString()] = value.GetDouble();
-                }
-            }
+            args[i] = args_manager(next_node);
         }
     }
     
@@ -122,9 +111,9 @@ vector< pair<int, float> >* graph::get_predecessors( int w )
     return &this->pred[w];
 }
 
-float graph::get_arg(int v, string arg)
+args_manager* graph::get_args(int v)
 {
-    return this->args[v][arg];
+    return &this->args[v];
 }
 
 float graph::edge_cost(int v, int w)

@@ -7,23 +7,23 @@ args_manager::args_manager()
 
 args_manager::args_manager(const rapidjson::Value& description)
 {
-    for (rapidjson::SizeType j = 0; j < description.Size(); j++){
-        const rapidjson::Value& next_arg = description[j];
-        const rapidjson::Value& name = next_arg["arg"];
-        const rapidjson::Value& value = next_arg["value"];
-        
-        if ( !name.IsString() ){
-            continue;
-        }
-        
-        if ( value.IsInt() ){
-            this->set_int_arg(name.GetString(), value.GetInt());
-        } else if ( value.IsDouble() ){
-            this->set_float_arg(name.GetString(), value.GetDouble());
-        } else if ( value.IsBool() ){
-            this->set_bool_arg(name.GetString(), value.GetBool());
-        } else if ( value.IsString() ){
-            this->set_string_arg(name.GetString(), value.GetString());
+    if ( description.IsArray() ){
+        for (rapidjson::SizeType j = 0; j < description.Size(); j++){
+            const rapidjson::Value& next_arg = description[j];
+            const rapidjson::Value& name = next_arg["arg"];
+            const rapidjson::Value& value = next_arg["value"];
+            
+            if ( name.IsString() ){
+                if ( value.IsInt() ){
+                    this->set_int_arg(name.GetString(), value.GetInt());
+                } else if ( value.IsDouble() ){
+                    this->set_float_arg(name.GetString(), value.GetDouble());
+                } else if ( value.IsBool() ){
+                    this->set_bool_arg(name.GetString(), value.GetBool());
+                } else if ( value.IsString() ){
+                    this->set_string_arg(name.GetString(), value.GetString());
+                }
+            }
         }
     }
 }

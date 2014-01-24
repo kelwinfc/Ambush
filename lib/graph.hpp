@@ -24,7 +24,7 @@ class graph {
         vector< vector< pair<int, float> > > suc;
         vector< vector< pair<int, float> > > pred;
         bool is_directed;
-        vector< map<string, float> > args;
+        vector< args_manager > args;
     
     public:
         graph(bool directed=false);
@@ -40,7 +40,7 @@ class graph {
         vector< pair<int, float> >* get_successors( int v );
         vector< pair<int, float> >* get_predecessors( int w );
         
-        float get_arg(int v, string arg);
+        args_manager* get_args(int v);
         
         float edge_cost(int v, int w);
         float path_cost(vector<int>& path);

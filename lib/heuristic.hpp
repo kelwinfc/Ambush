@@ -10,6 +10,7 @@
 #include "utils.hpp"
 #include "agent.hpp"
 #include "world.hpp"
+#include "args_manager.hpp"
 
 using namespace std;
 
