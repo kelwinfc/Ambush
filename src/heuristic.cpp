@@ -35,13 +35,13 @@ h_euclidean::h_euclidean(world* w)
 float h_euclidean::h(int v, int t)
 {
     float vx, vy, tx, ty, dx, dy;
-    args_manager* am_v = this->g->get_args(v);
-    args_manager* am_t = this->g->get_args(t);
+    node* am_v = this->g->get_node(v);
+    node* am_t = this->g->get_node(t);
     
-    vx = am_v->get_float_arg("x");
-    vy = am_v->get_float_arg("y");
-    tx = am_t->get_float_arg("x");
-    ty = am_t->get_float_arg("y");
+    vx = am_v->args.get_float_arg("x");
+    vy = am_v->args.get_float_arg("y");
+    tx = am_t->args.get_float_arg("x");
+    ty = am_t->args.get_float_arg("y");
     
     dx = vx - vy;
     dy = tx - ty;

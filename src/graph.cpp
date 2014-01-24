@@ -1,6 +1,14 @@
 #include "graph.hpp"
 #include <iostream>
 
+node::node()
+{
+}
+
+node::node(const args_manager& args){
+    this->args = args;
+}
+
 edge::edge(int from, int to, float cost)
 {
     this->from = from;
@@ -45,15 +53,16 @@ graph::graph(char* filename)
         this->add_vertex();
     }
     
-    args.resize(this->num_vertex());
+    nodes.resize(this->num_vertex());
     
-    const rapidjson::Value& nodes = document["nodes"];
-    if(nodes.IsArray()){
-        for (rapidjson::SizeType i = 0; i < nodes.Size(); i++){
+    const rapidjson::Value& nodes_descr = document["nodes"];
+    if(nodes_descr.IsArray()){
+        for (rapidjson::SizeType i = 0; i < nodes_descr.Size(); i++){
             
-            const rapidjson::Value& next_node = nodes[i];
+            const rapidjson::Value& next_node = nodes_descr[i];
             
-            args[i] = args_manager(next_node);
+            args_manager node_args(next_node);
+            nodes[i] = node(node_args);
         }
     }
     
@@ -129,9 +138,9 @@ vector< edge >* graph::get_predecessors( int w )
     return &this->pred[w];
 }
 
-args_manager* graph::get_args(int v)
+node* graph::get_node(int v)
 {
-    return &this->args[v];
+    return &this->nodes[v];
 }
 
 float graph::edge_cost(int v, int w)

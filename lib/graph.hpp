@@ -17,6 +17,16 @@
 
 using namespace std;
 
+class node {
+    
+    public:
+        args_manager args;
+        
+        node();
+        node(const args_manager& args);
+    
+};
+
 class edge {
     
     public:
@@ -37,7 +47,7 @@ class graph {
         vector< vector< edge > > pred;
         
         bool is_directed;
-        vector< args_manager > args;
+        vector< node > nodes;
     
     public:
         graph(bool directed=false);
@@ -53,7 +63,7 @@ class graph {
         vector< edge >* get_successors( int v );
         vector< edge >* get_predecessors( int w );
         
-        args_manager* get_args(int v);
+        node* get_node(int v);
         
         float edge_cost(int v, int w);
         float path_cost(vector<int>& path);
