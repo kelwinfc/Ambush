@@ -1,0 +1,28 @@
+{
+    "name" : "World Toy 2",
+    "graph" : "test/graphs/g1.json",
+    "random_positions" : false,
+    "num_experiments": 100,
+    "agents" : [
+                {"behavior":"A*mbush",
+                 "args":[]
+                },
+                {"behavior":"A*mbush",
+                 "args":[{"arg":"speed", "value":1.0},
+                         {"arg":"visibility", "value":3.0}
+                        ]
+                },
+                {"behavior":"A*mbush",
+                 "args":[{"arg":"speed", "value":1.0},
+                         {"arg":"visibility", "value":3.0}
+                        ]
+                },
+                {"behavior":"A*mbush",
+                 "args":[{"arg":"speed", "value":0.5}]
+                }
+               ],
+    "target" :
+    { "behavior":"Noop", "pos":3,
+      "args":[{"arg":"speed", "value":0.5}]
+    }
+}
