@@ -4,21 +4,17 @@
     "random_positions" : true,
     "num_experiments": 100,
     "agents" : [
-                {"behavior":"A*mbush",
-                 "args":[]
+                {"args":[]
                 },
-                {"behavior":"A*mbush",
-                 "args":[{"arg":"speed", "value":1.0},
+                {"args":[{"arg":"speed", "value":1.0},
                          {"arg":"visibility", "value":3.0}
                         ]
                 },
-                {"behavior":"A*mbush",
-                 "args":[{"arg":"speed", "value":1.0},
+                {"args":[{"arg":"speed", "value":1.0},
                          {"arg":"visibility", "value":3.0}
                         ]
                 },
-                {"behavior":"A*mbush",
-                 "args":[{"arg":"speed", "value":0.5}]
+                {"args":[{"arg":"speed", "value":0.5}]
                 }
                ],
     "target" :

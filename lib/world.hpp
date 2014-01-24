@@ -15,14 +15,16 @@ class agent;
 
 class world {
     private:
+        string name;
         vector<agent*> agents;
         graph* g;
-        
+        int num_experiments;
+        bool random_positions;
+        agent* target;
+    
     public:
         world(graph* g);
-        
-        //TODO define a json format to describe a problem instance
-        world(string& filename);
+        world(char* filename);
         
         void add_agent(agent* a);
         void clear_paths();

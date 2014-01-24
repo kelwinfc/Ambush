@@ -6,13 +6,13 @@ EXECUTABLES=tests
 
 DEP_utils=
 DEP_args_manager=
-DEP_graph=utils
-DEP_heuristic=utils agent graph world
-DEP_world=utils agent graph behavior
-DEP_node_selector=utils agent graph
-DEP_behavior=agent utils heuristic graph world
-DEP_agent=utils behavior world
-DEP_tests=utils agent behavior graph world
+DEP_graph=utils args_manager
+DEP_heuristic=utils agent graph world args_manager
+DEP_world=utils agent graph behavior args_manager
+DEP_node_selector=utils agent graph args_manager
+DEP_behavior=agent utils heuristic graph world args_manager
+DEP_agent=utils behavior world args_manager
+DEP_tests=utils agent behavior graph world args_manager
 all: $(EXECUTABLES)
 
 tests: $(FILES:%=bin/%.o) bin/tests.o

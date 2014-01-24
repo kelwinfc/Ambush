@@ -6,6 +6,13 @@
 #include "behavior.hpp"
 #include "utils.hpp"
 #include "world.hpp"
+#include "args_manager.hpp"
+
+#include "rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
+#include "rapidjson/prettywriter.h"
+#include "rapidjson/filestream.h"
+#include "rapidjson/stringbuffer.h"
 
 using namespace std;
 
@@ -21,6 +28,7 @@ class agent {
         agent* target;
         behavior* b;
         graph* g;
+        args_manager args;
         
         float speed;
         float capacity;
@@ -31,6 +39,10 @@ class agent {
         agent(int index, graph* g, world* w, behavior* b,
               int current_v = -1);
         agent(const agent& a);
+        agent(const rapidjson::Value& description);
+        
+        void set_world(world* w);
+        void set_graph(graph* g);
         
         void set_current_vertex(int v);
         void set_path(vector<int>& path);

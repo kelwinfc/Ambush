@@ -20,6 +20,34 @@ agent::agent(const agent& a)
     this->b_has_path = a.b_has_path;
 }
 
+agent::agent(const rapidjson::Value& description)
+{
+    if ( description.IsArray() ){
+        for (rapidjson::SizeType j = 0; j < description.Size(); j++){
+            
+            const rapidjson::Value& descr = description[j];
+            if ( descr["pos"].IsInt() ){
+                this->v = descr["pos"].GetInt();
+            }
+            
+            if ( descr["args"].IsObject() ){
+                args_manager args(descr["args"]);
+                this->args = args;
+            }
+        }
+    }
+}
+
+void agent::set_world(world* w)
+{
+    this->w = w;
+}
+
+void agent::set_graph(graph* g)
+{
+    this->g = g;
+}
+
 int agent::get_index() const
 {
     return this->index;

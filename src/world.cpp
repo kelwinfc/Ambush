@@ -4,8 +4,55 @@
 world::world(graph* g)
 {
     this->g = g;
+    this->name = "";
+    this->num_experiments = 0;
+    this->random_positions = true;
+    this->target = 0;    
 }
-        
+
+world::world(char* filename)
+{
+    FILE * pFile = fopen (filename, "r");
+    rapidjson::FileStream is(pFile);
+    rapidjson::Document document;
+    document.ParseStream<0>(is);
+    
+    if ( document["name"].IsString() ){
+        this->name = document["name"].GetString();
+    }
+    
+    if ( document["num_experiments"].IsInt() ){
+        this->num_experiments = document["num_experiments"].GetInt();   
+    }
+    
+    if ( document["random_positions"].IsBool() ){
+        this->num_experiments = document["random_positions"].GetBool();   
+    }
+    
+    if ( document["graph"].IsString() ){
+        this->g = new graph(document["graph"].GetString());
+    }
+    
+    if ( document["target"].IsObject() ){
+        this->target = new agent(document["target"]);
+    }
+    
+    const rapidjson::Value& agents_json = document["agents"];
+    if(agents_json.IsArray()){
+        for (rapidjson::SizeType i = 0; i < agents_json.Size(); i++){
+            const rapidjson::Value& next_agent = agents_json[i];
+            
+            if ( next_agent.IsObject() ){
+                agent* a = new agent(next_agent);
+                a->set_graph(this->g);
+                a->set_world(this);
+                a->set_target(this->target);
+                this->add_agent(a);
+            }
+        }
+    }
+}
+
 void world::add_agent(agent* a)
 {
     this->agents.push_back(a);
