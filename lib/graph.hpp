@@ -13,6 +13,7 @@
 #include "rapidjson/stringbuffer.h"
 
 #include "utils.hpp"
+#include "args_manager.hpp"
 
 using namespace std;
 

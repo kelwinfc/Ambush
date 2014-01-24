@@ -1,10 +1,11 @@
 GCC=g++
 GCC_FLAGS=-Ilib -Wall -O3
 
-FILES=utils heuristic graph node_selector behavior agent world
+FILES=utils args_manager heuristic graph node_selector behavior agent world
 EXECUTABLES=tests
 
 DEP_utils=
+DEP_args_manager=
 DEP_graph=utils
 DEP_heuristic=utils agent graph world
 DEP_world=utils agent graph behavior
@@ -12,7 +13,6 @@ DEP_node_selector=utils agent graph
 DEP_behavior=agent utils heuristic graph world
 DEP_agent=utils behavior world
 DEP_tests=utils agent behavior graph world
-
 all: $(EXECUTABLES)
 
 tests: $(FILES:%=bin/%.o) bin/tests.o
@@ -23,6 +23,7 @@ bin/%.o: src/%.cpp lib/%.hpp
 	$(GCC) -c $< -o $@ $(GCC_FLAGS)
 
 bin/utils.o: $(DEP_utils:%=src/%.cpp) $(DEP_utils:%=lib/%.hpp)
+bin/args_manager.o: $(DEP_args_manager:%=src/%.cpp) $(DEP_args_manager:%=lib/%.hpp)
 bin/graph.o: $(DEP_graph:%=src/%.cpp) $(DEP_graph:%=lib/%.hpp)
 bin/node_selector.o: $(DEP_node_selector:%=src/%.cpp) $(DEP_node_selector:%=lib/%.hpp)
 bin/behavior.o: $(DEP_behavior:%=src/%.cpp) $(DEP_behavior:%=lib/%.hpp)
