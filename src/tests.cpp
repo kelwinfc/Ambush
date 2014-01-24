@@ -1,5 +1,21 @@
 #include "tests.hpp"
 
+void eval_behavior(world& w, vector<agent*>& agents, agent& target,
+                   behavior* b, string name)
+{
+    int n = (int)agents.size();
+    
+    for ( int i=0; i<n; i++ ){
+        agents[i]->set_behavior(b);
+    }
+    w.clear_paths();
+    w.compute_paths(&target);
+    
+    printf("%s: %0.4f %3.2f%%\n",
+           name.c_str(),
+           w.ambush_rate(&target),
+           w.increment_rate(&target));
+}
 int main(int argc, char* argv[])
 {
     graph g((char*)"test/graphs/g2.json");
@@ -10,6 +26,9 @@ int main(int argc, char* argv[])
     ambush amb(&w);
     priority_ambush pamb(&w);
     self_adaptive_r_ambush sar(&w);
+    
+    cout << setprecision(4);
+    cout.flush();
     
     int n = 4;
     agent target(n, &g, &w, &np, 5);
@@ -22,51 +41,11 @@ int main(int argc, char* argv[])
         w.add_agent(agents[i]);
     }
     
-    for ( int i=0; i<n; i++ ){
-        agents[i]->set_behavior(&dfs);
-    }
-    w.clear_paths();
-    w.compute_paths(&target);
-    cout << "DFS: " << w.ambush_rate(&target)
-         << ", " << w.increment_rate(&target) << "%"
-         << endl;
-    
-    for ( int i=0; i<n; i++ ){
-        agents[i]->set_behavior(&ast);
-    }
-    w.clear_paths();
-    w.compute_paths(&target);
-    cout << "A*: " << w.ambush_rate(&target)
-         << ", " << w.increment_rate(&target) << "%"
-         << endl;
-    
-    for ( int i=0; i<n; i++ ){
-        agents[i]->set_behavior(&amb);
-    }
-    w.clear_paths();
-    w.compute_paths(&target);
-    cout << "A*mbush: " << w.ambush_rate(&target)
-         << ", " << w.increment_rate(&target) << "%"
-         << endl;
-    
-    for ( int i=0; i<n; i++ ){
-        agents[i]->set_behavior(&pamb);
-    }
-    w.clear_paths();
-    w.compute_paths(&target);
-    cout << "P-A*mbush: " << w.ambush_rate(&target)
-         << ", " << w.increment_rate(&target) << "%"
-         << endl;
-    
-    for ( int i=0; i<n; i++ ){
-        agents[i]->set_behavior(&sar);
-    }
-    w.clear_paths();
-    w.compute_paths(&target);
-    
-    cout << "SAR-A*mbush: " << w.ambush_rate(&target)
-         << ", " << w.increment_rate(&target) << "%"
-         << endl;
+    eval_behavior(w, agents, target, &ast,  "         A*");
+    eval_behavior(w, agents, target, &dfs,  "        DFS");
+    eval_behavior(w, agents, target, &amb,  "    A*mbush");
+    eval_behavior(w, agents, target, &pamb, "  P-A*mbush");
+    eval_behavior(w, agents, target, &sar,  "SAR-A*mbush");
     
     return 0;
 }

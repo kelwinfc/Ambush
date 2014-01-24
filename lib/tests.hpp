@@ -2,6 +2,7 @@
 #define __AMBUSH_TESTS
 
 #include <iostream>
+#include <iomanip>
 
 #include "utils.hpp"
 #include "graph.hpp"

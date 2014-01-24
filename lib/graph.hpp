@@ -36,7 +36,7 @@ class edge {
         args_manager args;
         
         edge(int from, int to, float cost);
-        edge(int from, int to, float cost, args_manager& args);
+        edge(int from, int to, float cost, const args_manager& args);
 };
 
 class graph {
@@ -56,7 +56,7 @@ class graph {
         
         int add_vertex();
         
-        void add_edge( int v, int w, float cost );
+        void add_edge( const edge& e );
         
         int num_vertex();
         

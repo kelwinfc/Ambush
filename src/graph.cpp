@@ -16,7 +16,7 @@ edge::edge(int from, int to, float cost)
     this->cost = cost;
 }
 
-edge::edge(int from, int to, float cost, args_manager& args)
+edge::edge(int from, int to, float cost, const args_manager& args)
 {
     this->from = from;
     this->to   = to;
@@ -79,6 +79,7 @@ graph::graph(char* filename)
             const rapidjson::Value& src_json  = next_edge["src"];
             const rapidjson::Value& dst_json  = next_edge["dst"];
             const rapidjson::Value& cost_json = next_edge["cost"];
+            const rapidjson::Value& args_json = next_edge["args"];
             
             if ( src_json.IsInt() && dst_json.IsInt() && cost_json.IsNumber() )
             {
@@ -88,11 +89,13 @@ graph::graph(char* filename)
                 src  = src_json.GetInt();
                 dst  = dst_json.GetInt();
                 cost = (float)cost_json.GetDouble();
+                args_manager args(args_json);
                 
                 if ( 0 <= src && src < (int)this->suc.size() &&
                      0 <= dst && dst < (int)this->suc.size() && 0 <= cost )
                 {
-                    this->add_edge(src, dst, cost);
+                    edge e(src, dst, cost, args);
+                    this->add_edge(e);
                 }
             }
         }
@@ -108,17 +111,16 @@ int graph::add_vertex()
     return this->num_vertex();
 }
 
-void graph::add_edge( int v, int w, float cost )
+void graph::add_edge( const edge& e )
 {
-    edge e(v, w, cost);
-    edge e_back(w, v, cost);
+    edge e_back(e.to, e.from, e.cost, e.args);
     
-    this->suc[v].push_back(e);
-    this->pred[w].push_back(e);
+    this->suc[e.from].push_back(e);
+    this->pred[e.to].push_back(e);
     
     if ( !this->is_directed ){
-        this->suc[w].push_back(e_back);
-        this->pred[v].push_back(e_back);
+        this->suc[e_back.from].push_back(e_back);
+        this->pred[e_back.to].push_back(e_back);
     }
 }
 

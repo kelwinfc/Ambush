@@ -9,10 +9,10 @@
                 [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ],
                 [ { "arg": "x", "value": 0}, { "arg": "y", "value": 0 } ]
             ],
-    "edges":[{"src":0,"dst":1,"cost":1.0},
-             {"src":0,"dst":2,"cost":1.0},
-             {"src":1,"dst":3,"cost":1.0},
-             {"src":2,"dst":3,"cost":1.0},
-             {"src":3,"dst":4,"cost":1.0}
+    "edges":[{"src":0,"dst":1,"cost":1.0,"args":[]},
+             {"src":0,"dst":2,"cost":1.0,"args":[]},
+             {"src":1,"dst":3,"cost":1.0,"args":[]},
+             {"src":2,"dst":3,"cost":1.0,"args":[]},
+             {"src":3,"dst":4,"cost":1.0,"args":[]}
             ]
 }
