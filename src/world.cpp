@@ -22,7 +22,7 @@ void world::clear_paths()
 
 float world::ambush_rate(agent* target)
 {
-    vector< pair<int, float> >* pred = 
+    vector< edge >* pred = 
         this->g->get_predecessors(target->get_current_vertex());
     
     vector< agent* >::iterator it;

@@ -74,12 +74,12 @@ void randomized_dfs::get_plan(agent* a, vector<int>& path)
         }
         
         /* Explore the neighbors of the current node */
-        vector< pair<int, float> >* suc_aux = g->get_successors(v);
-        vector< pair<int, float> > suc = *suc_aux;
+        vector< edge >* suc_aux = g->get_successors(v);
+        vector< edge > suc = *suc_aux;
         random_shuffle( suc.begin(), suc.end());
         
         for ( uint i = 0; i < suc.size(); i++ ){
-            int w = suc[i].first;
+            int w = suc[i].to;
             
             if ( parent[w] == -1 ){
                 astar_node neighbor_node;
@@ -197,15 +197,15 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
         }
         
         /* Explore the neighbors of the current node */
-        vector< pair<int, float> >* suc = g->get_successors(v);
+        vector< edge >* suc = g->get_successors(v);
         
         for ( uint i = 0; i < suc->size(); i++ ){
-            int w = suc->at(i).first;
+            int w = suc->at(i).to;
             /* The new distance involves the distance from the source to the
              * current vertex (v), the cost from v to its neighbor (w) and
              * the increment function of the node successor
              */
-            int nd = d + suc->at(i).second * increment[w] * increment[w];
+            int nd = d + suc->at(i).cost * increment[w] * increment[w];
             if ( min_dist[w] == -1 || nd < min_dist[w] ){
                 astar_node neighbor_node;
                 neighbor_node.v = w;
@@ -487,8 +487,8 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
     map<int, int> num; // Number of agents that have a given node in their path
     
     graph* g = this->w->get_graph();
-    vector< pair<int, float> >* pred_t = g->get_predecessors(target);
-    vector< pair<int, float> >::iterator it_pred;
+    vector< edge >* pred_t = g->get_predecessors(target);
+    vector< edge >::iterator it_pred;
     float num_pred_t = (float)pred_t->size();
     
     vector<agent*>* agents = this->w->get_agents();
@@ -521,7 +521,7 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
     /* Compute the numerator of the function (See paper).
      */
     for ( it_pred = pred_t->begin(); it_pred != pred_t->end(); ++it_pred ){
-        int i = it_pred->first;
+        int i = it_pred->to;
         
         int diff = num[i] - (int)ceil((float)n / num_pred_t);
         

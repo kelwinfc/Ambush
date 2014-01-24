@@ -1,6 +1,21 @@
 #include "graph.hpp"
 #include <iostream>
 
+edge::edge(int from, int to, float cost)
+{
+    this->from = from;
+    this->to   = to;
+    this->cost = cost;
+}
+
+edge::edge(int from, int to, float cost, args_manager& args)
+{
+    this->from = from;
+    this->to   = to;
+    this->cost = cost;
+    this->args = args;
+}
+
 graph::graph(bool directed)
 {
     this->is_directed = directed;
@@ -77,7 +92,7 @@ graph::graph(char* filename)
 
 int graph::add_vertex()
 {
-    vector< pair<int, float> > s, p;
+    vector< edge > s, p;
     this->suc.push_back(s);
     this->pred.push_back(p);
     
@@ -86,12 +101,15 @@ int graph::add_vertex()
 
 void graph::add_edge( int v, int w, float cost )
 {
-    this->suc[v].push_back( make_pair(w, cost) );
-    this->pred[w].push_back( make_pair(v, cost) );
+    edge e(v, w, cost);
+    edge e_back(w, v, cost);
+    
+    this->suc[v].push_back(e);
+    this->pred[w].push_back(e);
     
     if ( !this->is_directed ){
-        this->suc[w].push_back( make_pair(v, cost) );
-        this->pred[v].push_back( make_pair(w, cost) );
+        this->suc[w].push_back(e_back);
+        this->pred[v].push_back(e_back);
     }
 }
 
@@ -99,13 +117,13 @@ int graph::num_vertex(){
     return this->suc.size();
 }
 
-vector< pair<int, float> >* graph::get_successors( int v )
+vector< edge >* graph::get_successors( int v )
 {
     assert( 0 <= v && (unsigned int)v < this->suc.size() );
     return &this->suc[v];
 }
 
-vector< pair<int, float> >* graph::get_predecessors( int w )
+vector< edge >* graph::get_predecessors( int w )
 {
     assert( 0 <= w && (unsigned int)w < this->pred.size() );
     return &this->pred[w];
@@ -119,9 +137,9 @@ args_manager* graph::get_args(int v)
 float graph::edge_cost(int v, int w)
 {
     for ( uint j=0; j<suc[v].size(); j++ ){
-        int next = suc[v][j].first;
+        int next = suc[v][j].to;
         if ( next == w ){
-            return suc[v][j].second;
+            return suc[v][j].cost;
         }
     }
     return 0.0;

@@ -17,12 +17,25 @@
 
 using namespace std;
 
+class edge {
+    
+    public:
+        int from;
+        int to;
+        float cost;
+        args_manager args;
+        
+        edge(int from, int to, float cost);
+        edge(int from, int to, float cost, args_manager& args);
+};
+
 class graph {
     
     private:
         string name;
-        vector< vector< pair<int, float> > > suc;
-        vector< vector< pair<int, float> > > pred;
+        vector< vector< edge > > suc;
+        vector< vector< edge > > pred;
+        
         bool is_directed;
         vector< args_manager > args;
     
@@ -37,8 +50,8 @@ class graph {
         
         int num_vertex();
         
-        vector< pair<int, float> >* get_successors( int v );
-        vector< pair<int, float> >* get_predecessors( int w );
+        vector< edge >* get_successors( int v );
+        vector< edge >* get_predecessors( int w );
         
         args_manager* get_args(int v);
         
