@@ -124,6 +124,7 @@ float world::increment_rate(agent* target)
 
 float world::graph_coverage()
 {
+    cout << endl;
     set<int> covered_vertex;
     
     vector< agent* >::iterator it;
@@ -133,8 +134,10 @@ float world::graph_coverage()
         vector<int>* path = a->get_path();
         vector<int>::iterator path_it;
         for ( path_it = path->begin(); path_it != path->end(); ++path_it ){
+            cout << *path_it << " ";
             covered_vertex.insert( *path_it );
         }
+        cout << endl;
     }
     
     return (float) covered_vertex.size() / (float) this->g->num_vertex();

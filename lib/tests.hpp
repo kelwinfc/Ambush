@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <ctime>
 
 #include "utils.hpp"
 #include "graph.hpp"

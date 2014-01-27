@@ -383,7 +383,7 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
     int tmp_current_vertex = a->get_current_vertex();
     int target = a->get_target()->get_current_vertex();
     
-    int increase_ambush = false;
+    int ambush_increased = false;
     float best_uniformity = 0.0;
     vector<int> best_path;
     /* Compute the minimum path and select the nodes that will be included in
@@ -428,7 +428,7 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
             float uniformity = this->uniformity_metric(target);
             a->clear_path();
             
-            if ( !increase_ambush && 
+            if ( !ambush_increased && 
                  nodes_in_path.find(new_previous) == nodes_in_path.end() )
             {
                 /* The ambush rate is increased and therefore this is first
@@ -436,7 +436,7 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
                  */
                 best_path = path;
                 best_uniformity = uniformity;
-                increase_ambush = true;
+                ambush_increased = true;
             } else if ( uniformity > best_uniformity ){
                 
                 /* If the Ambush rate is not increased, select the cutting

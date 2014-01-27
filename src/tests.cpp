@@ -9,18 +9,37 @@ void eval_behavior(world& w, vector<agent*>& agents, agent& target,
         agents[i]->set_behavior(b);
     }
     w.clear_paths();
-    w.compute_paths(&target);
     
-    printf("%s: %0.4f %3.2f%% %3.2f%%\n",
+    const clock_t begin_time = clock();
+    w.compute_paths(&target);
+    const clock_t end_time = clock();
+    
+    printf("%s: %0.4f %6.2f %6.2f %10.2f\n",
            name.c_str(),
            w.ambush_rate(&target),
            w.increment_rate(&target),
-           w.graph_coverage()
+           w.graph_coverage(),
+           float( end_time - begin_time ) * 1000.0 / 
+               (float)( CLOCKS_PER_SEC * agents.size() )
           );
 }
+
 int main(int argc, char* argv[])
 {
-    graph g((char*)"test/graphs/g2.json");
+    argc--;
+    argv++;
+    
+    int n = 10;
+    if ( argc > 1 ){
+        sscanf(argv[1], "%d", &n);
+    }
+    
+    char* graph_name = (char*)"test/graphs/level2.json";
+    if ( argc > 0 ){
+        graph_name = argv[0];
+    }
+    graph g(graph_name);
+    
     world w(&g);
     noop np(&w);
     randomized_dfs dfs(&w);
@@ -29,7 +48,6 @@ int main(int argc, char* argv[])
     priority_ambush pamb(&w);
     self_adaptive_r_ambush sar(&w);
     
-    int n = 4;
     agent target(n, &g, &w, &np, 5);
     
     vector<agent*> agents;
@@ -40,7 +58,7 @@ int main(int argc, char* argv[])
         w.add_agent(agents[i]);
     }
     
-    printf("Algorithm: Ambush-Rate Path-Increment(%%) Graph-Coverage(%%)\n");
+    printf("Algorithm: Ambush-Rate Path-Increment(%%) Graph-Coverage(%%) Time(ms)\n");
     
     eval_behavior(w, agents, target, &ast,  "         A*");
     eval_behavior(w, agents, target, &dfs,  "        DFS");
