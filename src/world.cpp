@@ -122,6 +122,24 @@ float world::increment_rate(agent* target)
     return avg_increment / this->agents.size() - 100.0;
 }
 
+float world::graph_coverage()
+{
+    set<int> covered_vertex;
+    
+    vector< agent* >::iterator it;
+    
+    for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
+        agent* a = *it;
+        vector<int>* path = a->get_path();
+        vector<int>::iterator path_it;
+        for ( path_it = path->begin(); path_it != path->end(); ++path_it ){
+            covered_vertex.insert( *path_it );
+        }
+    }
+    
+    return (float) covered_vertex.size() / (float) this->g->num_vertex();
+}
+
 void world::compute_paths(agent* target)
 {
     vector<agent*>::iterator it;

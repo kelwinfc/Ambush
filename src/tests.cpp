@@ -11,10 +11,12 @@ void eval_behavior(world& w, vector<agent*>& agents, agent& target,
     w.clear_paths();
     w.compute_paths(&target);
     
-    printf("%s: %0.4f %3.2f%%\n",
+    printf("%s: %0.4f %3.2f%% %3.2f%%\n",
            name.c_str(),
            w.ambush_rate(&target),
-           w.increment_rate(&target));
+           w.increment_rate(&target),
+           w.graph_coverage()
+          );
 }
 int main(int argc, char* argv[])
 {
@@ -27,9 +29,6 @@ int main(int argc, char* argv[])
     priority_ambush pamb(&w);
     self_adaptive_r_ambush sar(&w);
     
-    cout << setprecision(4);
-    cout.flush();
-    
     int n = 4;
     agent target(n, &g, &w, &np, 5);
     
@@ -40,6 +39,8 @@ int main(int argc, char* argv[])
         agents[i]->set_target(&target);
         w.add_agent(agents[i]);
     }
+    
+    printf("Algorithm: Ambush-Rate Path-Increment(%%) Graph-Coverage(%%)\n");
     
     eval_behavior(w, agents, target, &ast,  "         A*");
     eval_behavior(w, agents, target, &dfs,  "        DFS");

@@ -108,6 +108,7 @@ void randomized_dfs::get_plan(agent* a, vector<int>& path)
 increment_a_star::increment_a_star(){
     this->h = 0;
     this->I = 0;
+    this->delete_h = false;
 }
 
 increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
@@ -118,7 +119,7 @@ increment_a_star::increment_a_star(void (*incr_f)(world*, agent*,
     this->h = h;
     this->I = incr_f;
     
-    if ( !h ){
+    if ( !this->h ){
         this->h = new h_zero(w);
         this->delete_h = true;
     }
@@ -201,6 +202,7 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
         
         for ( uint i = 0; i < suc->size(); i++ ){
             int w = suc->at(i).to;
+            
             /* The new distance involves the distance from the source to the
              * current vertex (v), the cost from v to its neighbor (w) and
              * the increment function of the node successor
@@ -240,7 +242,7 @@ a_star::a_star(world* w, heuristic* h)
     this->w = w;
     this->h = h;
     
-    if ( !h ){
+    if ( !this->h ){
         this->h = new h_zero(w);
         this->delete_h = true;
     }
@@ -257,7 +259,7 @@ ambush::ambush(world* w, heuristic* h)
     this->w = w;
     this->h = h;
     
-    if ( !h ){
+    if ( !this->h ){
         this->h = new h_zero(w);
         this->delete_h = true;
     }
@@ -301,7 +303,7 @@ priority_ambush::priority_ambush(world* w,
     this->P = priority_function;
     this->h = h;
     
-    if ( !h ){
+    if ( !this->h ){
         this->h = new h_zero(w);
         this->delete_h = true;
     }
@@ -347,7 +349,7 @@ self_adaptive_r_ambush::self_adaptive_r_ambush(world* w, node_selector* ns,
     this->selector = ns;
     this->h        = h;
     
-    if ( !h ){
+    if ( !this->h ){
         this->h = new h_zero(w);
         this->delete_h = true;
     }
@@ -384,7 +386,6 @@ void self_adaptive_r_ambush::get_plan(agent* a, vector<int>& path)
     int increase_ambush = false;
     float best_uniformity = 0.0;
     vector<int> best_path;
-    
     /* Compute the minimum path and select the nodes that will be included in
      * the computation of the best R
      */
@@ -543,7 +544,7 @@ r_ambush::r_ambush(world* w, float r, heuristic* h)
     this->h = h;
     this->r = r;
     
-    if ( !h ){
+    if ( !this->h ){
         this->h = new h_zero(w);
         this->delete_h = true;
     }
