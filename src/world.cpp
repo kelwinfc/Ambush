@@ -67,28 +67,17 @@ void world::clear_paths()
     }
 }
 
-float world::ambush_rate(agent* target)
+float world::ambush_rate_relaxed(agent* target)
 {
     vector< edge >* pred = 
         this->g->get_predecessors(target->get_current_vertex());
-    
-    vector< agent* >::iterator it;
-    set<int> activated_pred;
-    
-    for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
-        agent* a = *it;
-        vector<int>* path = a->get_path();
-        if ( path->size() > 1 ){
-            activated_pred.insert( path->at( path->size() - 2 ) );
-        }
-    }
     
     int den = min(pred->size(), this->agents.size());
     if ( den == 0 ){
         return 1.0;
     }
     
-    return (float) activated_pred.size() / (float) den;
+    return (float) this->num_activated_predecessors(target) / (float) den;
 }
 
 float world::increment_rate(agent* target)
@@ -124,7 +113,6 @@ float world::increment_rate(agent* target)
 
 float world::graph_coverage()
 {
-    cout << endl;
     set<int> covered_vertex;
     
     vector< agent* >::iterator it;
@@ -134,10 +122,8 @@ float world::graph_coverage()
         vector<int>* path = a->get_path();
         vector<int>::iterator path_it;
         for ( path_it = path->begin(); path_it != path->end(); ++path_it ){
-            cout << *path_it << " ";
             covered_vertex.insert( *path_it );
         }
-        cout << endl;
     }
     
     return (float) covered_vertex.size() / (float) this->g->num_vertex();
@@ -170,4 +156,69 @@ int world::num_agents()
 graph* world::get_graph()
 {
     return this->g;
+}
+
+int world::num_activated_predecessors(agent* target)
+{
+    set<int> activated_pred;
+    vector< agent* >::iterator it;
+    
+    for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
+        agent* a = *it;
+        vector<int>* path = a->get_path();
+        if ( path->size() > 1 ){
+            activated_pred.insert( path->at( path->size() - 2 ) );
+        }
+    }
+    
+    return (int)activated_pred.size();
+}
+
+float world::ambush_rate(agent* target)
+{
+    graph* bip_graph = this->build_bipartite_reachability_graph(target);
+    float den = 0.0 + 1e-6;
+    
+    delete bip_graph;
+    return (float) this->num_activated_predecessors(target) / (float) den;
+}
+
+graph* world::build_bipartite_reachability_graph(agent* target)
+{
+    graph* rg = new graph(true);
+    map<int, int> src_mapping;
+    map<int, int> dst_mapping;
+    
+    vector< agent* >::iterator it;
+    for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
+        agent* a = *it;
+        int agent_index = a->get_index();
+        set<int> reachable_predecessors;
+        int from, to;
+        
+        // Add each agent as source vertex
+        from = src_mapping[agent_index] = rg->add_vertex() - 1;
+        
+        /* Add the nodes reached by this agent (in the reduced graph) as
+         * destination vertex
+         */
+        a->get_graph()->get_reachable_predecessors(a->get_current_vertex(),
+                a->get_target()->get_current_vertex(), reachable_predecessors);
+        
+        set<int>::iterator pit;
+        for ( pit = reachable_predecessors.begin();
+              pit != reachable_predecessors.end(); ++pit )
+        {
+            if ( dst_mapping.find(*pit) == dst_mapping.end() ){
+                to = dst_mapping[*pit] = rg->add_vertex() - 1;
+            }
+
+            to = dst_mapping[*pit];
+            
+            edge e(from, to, 1.0);
+            rg->add_edge(e);
+        }
+    }
+    
+    return rg;
 }

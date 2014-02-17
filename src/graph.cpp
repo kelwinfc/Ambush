@@ -24,6 +24,15 @@ edge::edge(int from, int to, float cost, const args_manager& args)
     this->args = args;
 }
 
+
+bool operator<(const edge& a, const edge& b)
+{
+    if ( a.cost != b.cost ){
+        return a.cost < b.cost;
+    }
+    return a.from < b.from || ( a.from == b.from && a.to < b.to );
+}
+
 graph::graph(bool directed)
 {
     this->is_directed = directed;
@@ -165,4 +174,50 @@ float graph::path_cost(vector<int>& path)
     }
     
     return ret;
+}
+
+void vector_to_pred_set(vector<edge>& v, set<int>& s)
+{
+    vector<edge>::iterator it;
+    for ( it = v.begin(); it != v.end(); it++ ){
+        s.insert(it->from);
+    }
+}
+
+void graph::get_reachable_predecessors(int source, int target,
+                                       set<int>& reachable_predecessors)
+{
+    queue<int> q;
+    vector<bool> visited;
+    set<int> predecessors;
+
+    vector_to_pred_set(this->pred[target], predecessors);
+    
+    reachable_predecessors.clear();
+    visited.resize(this->num_vertex());
+    fill(visited.begin(), visited.end(), 0);
+    
+    q.push(source);
+    while ( !q.empty() ){
+        int v = q.front();
+        q.pop();
+
+        if ( visited[v] || v == target ){
+            continue;
+        }
+        
+        if ( predecessors.find(v) != predecessors.end() ){
+            reachable_predecessors.insert(v);
+        }
+        
+        visited[v] = true;
+        
+        uint num_suc = this->suc[v].size();
+        for ( uint i = 0; i < num_suc; i++ ){
+            int w = this->suc[v][i].to;
+            if ( !visited[w] && w != target ){
+                q.push(w);
+            }
+        }
+    }
 }

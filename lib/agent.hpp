@@ -55,8 +55,10 @@ class agent {
         int          get_current_vertex();
         vector<int>* get_path();
         agent*       get_target();
-        behavior*   get_behavior();
+        behavior*    get_behavior();
         graph*       get_graph();
+
+        void get_reachable_predecessors(int target, set<int>& predecessors);
 };
 
 #endif

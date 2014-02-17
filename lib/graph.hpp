@@ -1,10 +1,12 @@
 #ifndef __AMBUSH_GRAPH
 #define __AMBUSH_GRAPH
 
+#include <cassert>
+#include <string>
 #include <vector>
 #include <map>
-#include <string>
-#include <cassert>
+#include <set>
+#include <queue>
 
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
@@ -37,6 +39,8 @@ class edge {
         
         edge(int from, int to, float cost);
         edge(int from, int to, float cost, const args_manager& args);
+
+        friend bool operator<(const edge &, const edge &);
 };
 
 class graph {
@@ -67,6 +71,9 @@ class graph {
         
         float edge_cost(int v, int w);
         float path_cost(vector<int>& path);
+
+        void get_reachable_predecessors(int source, int target,
+                                        set<int>& predecessors);
 };
 
 #endif
