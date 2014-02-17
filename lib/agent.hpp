@@ -57,7 +57,7 @@ class agent {
         agent*       get_target();
         behavior*    get_behavior();
         graph*       get_graph();
-
+        
         void get_reachable_predecessors(int target, set<int>& predecessors);
 };
 

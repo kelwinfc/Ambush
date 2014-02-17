@@ -42,7 +42,14 @@ class world {
 
     private:
         int num_activated_predecessors(agent* target);
-        graph* build_bipartite_reachability_graph(agent* target);
+
+        /* Builds the bipartite graph that matches each agent to the reachable
+         * predecessors of the target by him. Two artificial nodes are
+         * created: a super-source (index 0) and a super-sink (index 1)
+         */
+        graph* build_bipartite_reachability_graph(agent* target,
+                                                  map<int, int>& src_mapping,
+                                                  map<int, int>& dst_mapping);
 };
 
 #endif

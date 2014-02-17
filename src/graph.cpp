@@ -221,3 +221,111 @@ void graph::get_reachable_predecessors(int source, int target,
         }
     }
 }
+
+int graph::get_index(int from, int to)
+{
+    uint num_suc = this->suc[from].size();
+    for ( uint i = 0; i < num_suc; i++ ){
+        if ( this->suc[from][i].to == to ){
+            return i;
+        }
+    }
+    return -1;
+}
+
+float graph::mbm_find_path()
+{
+    queue<int> q;
+    vector<bool> visited;
+    vector<int> parent;
+    
+    q.push(0);
+
+    visited.resize( this->num_vertex() );
+    parent.resize( this->num_vertex() );
+    
+    fill(visited.begin(), visited.end(), 0);
+    fill(parent.begin(), parent.end(), -1);
+    
+    visited[0] = true;
+
+    bool keep = true;
+    
+    while ( !q.empty() && keep ){
+        int v = q.front();
+        q.pop();
+
+        uint num_suc = this->suc[v].size();
+        for ( uint i = 0; i < num_suc && keep; i++ ){
+            int w = this->suc[v][i].to;
+
+            if ( !visited[w] && this->suc[v][i].cost > 0 ){
+                q.push(w);
+                visited[w] = true;
+                parent[w] = v;
+                
+                if ( w == 1 ){
+                    keep = false;
+                    break;
+                }
+            }
+        }
+    }
+    
+    int v = 1;
+    float path_cap = -1.0;
+    
+    while ( parent[v] > -1 ){
+        int prev = parent[v];
+        int i_prev_v = this->get_index(prev, v);
+        if ( path_cap < 0 ||
+                this->suc[prev][i_prev_v].cost < path_cap ){
+            path_cap = this->suc[prev][i_prev_v].cost;
+        }
+        v = prev;
+    }
+    
+    v = 1;
+    while ( parent[v] != -1 ){
+        int prev = parent[v];
+        int i_prev_v = this->get_index(prev, v);
+        int i_v_prev = this->get_index(v, prev);
+        
+        this->suc[prev][i_prev_v].cost -= path_cap;
+        this->suc[v][i_v_prev].cost += path_cap;
+        v = prev;
+    }
+
+    if ( path_cap < 0 ){
+        return 0.0;
+    }
+    
+    return path_cap;
+}
+
+float graph::maximum_bipartite_matching(vector< pair<int, int> >& match)
+{
+    float ret = 0.0;
+    
+    while ( true ){
+        float path_capacity = this->mbm_find_path();
+        if ( path_capacity < 1e-6 ){
+            break;
+        }
+        
+        ret += path_capacity;
+    }
+
+    int n = this->num_vertex();
+    
+    for ( int i = 2; i < n; i++ ){
+        int m = this->suc[i].size();
+        for ( int j = 0; j < m; j++ ){
+            if ( this->suc[i][j].to > 1 && this->suc[i][j].cost < 1.0 ){
+                match.push_back( make_pair(i,j) );
+                cout << i << " " << j << endl;
+            }
+        }
+    }
+    return ret;
+}

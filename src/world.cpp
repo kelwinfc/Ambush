@@ -176,19 +176,29 @@ int world::num_activated_predecessors(agent* target)
 
 float world::ambush_rate(agent* target)
 {
-    graph* bip_graph = this->build_bipartite_reachability_graph(target);
+    map<int, int> src_mapping;
+    map<int, int> dst_mapping;
+    vector< pair<int, int> > mm;
+    
+    graph* bip_graph = this->build_bipartite_reachability_graph(target,
+        src_mapping, dst_mapping);
+
+    bip_graph->maximum_bipartite_matching(mm);
+    cout << "mbm " << mm.size() << endl;
+    
     float den = 0.0 + 1e-6;
     
-    delete bip_graph;
+    //delete bip_graph;
     return (float) this->num_activated_predecessors(target) / (float) den;
 }
 
-graph* world::build_bipartite_reachability_graph(agent* target)
+graph* world::build_bipartite_reachability_graph(agent* target,
+                                                 map<int, int>& src_mapping,
+                                                 map<int, int>& dst_mapping)
 {
-    graph* rg = new graph(true);
-    map<int, int> src_mapping;
-    map<int, int> dst_mapping;
-    
+    graph* rg = new graph();
+    rg->add_vertex(); // Super-source (index 0)
+    rg->add_vertex(); // Super-sink (index 1)
     vector< agent* >::iterator it;
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
         agent* a = *it;
@@ -198,6 +208,8 @@ graph* world::build_bipartite_reachability_graph(agent* target)
         
         // Add each agent as source vertex
         from = src_mapping[agent_index] = rg->add_vertex() - 1;
+        edge source_to_agent(0, from, 1.0);
+        rg->add_edge(source_to_agent);
         
         /* Add the nodes reached by this agent (in the reduced graph) as
          * destination vertex
@@ -211,14 +223,15 @@ graph* world::build_bipartite_reachability_graph(agent* target)
         {
             if ( dst_mapping.find(*pit) == dst_mapping.end() ){
                 to = dst_mapping[*pit] = rg->add_vertex() - 1;
+                edge destination_to_sink(to, 1, 1.0);
+                rg->add_edge(destination_to_sink);
             }
-
+            
             to = dst_mapping[*pit];
             
             edge e(from, to, 1.0);
             rg->add_edge(e);
         }
     }
-    
     return rg;
 }

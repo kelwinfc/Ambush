@@ -72,8 +72,14 @@ class graph {
         float edge_cost(int v, int w);
         float path_cost(vector<int>& path);
 
+        float maximum_bipartite_matching(vector< pair<int, int> >& match);
+        
         void get_reachable_predecessors(int source, int target,
                                         set<int>& predecessors);
+
+    private:
+        float mbm_find_path();
+        int get_index(int from, int to);
 };
 
 #endif
