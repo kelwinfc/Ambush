@@ -323,7 +323,6 @@ float graph::maximum_bipartite_matching(vector< pair<int, int> >& match)
         for ( int j = 0; j < m; j++ ){
             if ( this->suc[i][j].to > 1 && this->suc[i][j].cost < 1.0 ){
                 match.push_back( make_pair(i,j) );
-                cout << i << " " << j << endl;
             }
         }
     }

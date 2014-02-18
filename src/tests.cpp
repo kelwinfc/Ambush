@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
     
     vector<agent*> agents;
     for ( int i=0; i<n; i++ ){
-        agent* a = new agent(i, &g, &w, &np, min(i,g.num_vertex()-1)/*0*/);
+        agent* a = new agent(i, &g, &w, &np, 0);
         agents.push_back(a);
         agents[i]->set_target(&target);
         w.add_agent(agents[i]);

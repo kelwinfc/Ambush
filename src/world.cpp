@@ -184,11 +184,9 @@ float world::ambush_rate(agent* target)
         src_mapping, dst_mapping);
 
     bip_graph->maximum_bipartite_matching(mm);
-    cout << "mbm " << mm.size() << endl;
-    
-    float den = 0.0 + 1e-6;
-    
-    //delete bip_graph;
+
+    float den = (float)mm.size() + 1e-6;
+    delete bip_graph;
     return (float) this->num_activated_predecessors(target) / (float) den;
 }
 
