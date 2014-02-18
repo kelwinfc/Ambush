@@ -1,0 +1,52 @@
+\begin{thebibliography}{\uppercase{TMSV03}}
+
+\bibitem[CLRS09]{CLRS09}
+\textsc{Cormen T., Leiserson C., Rivest R., Stein C.}:
+\newblock \emph{Introduction to Algorithms}, 3rd~ed.
+\newblock The MIT Press, 2009.
+
+\bibitem[CS11]{CS11}
+\textsc{Cui X., Shi H.}:
+\newblock Direction oriented pathfinding in video games.
+\newblock \emph{International Journal of Artificial Intelligence \&
+  Applications 2} (2011).
+
+\bibitem[GP10]{GP10}
+\textsc{Gendreau M., Potvin J.}:
+\newblock \emph{Handbook of Metaheuristics}, 2nd~ed., vol.~146.
+\newblock International Series in Operations Research \& Management Science,
+  Springer, 2010.
+
+\bibitem[Hai01]{Hai01}
+\textsc{Haines E.}:
+\newblock {Point in Polygon Strategies}.
+\newblock \url{http://http://erich.realtimerendering.com/ptinpoly/}, 2001.
+\newblock [Online; accedida 26-Noviembre-2011].
+
+\bibitem[HNR72]{HNR72}
+\textsc{Hart P., Nilsson N., Raphael B.}:
+\newblock Correction to ``a formal basis for the heuristic determination of
+  minimum cost paths''.
+\newblock \emph{SIGART Newsletter 37} (1972), 28--29.
+
+\bibitem[MF09]{MF09}
+\textsc{Millington I., Funge J.}:
+\newblock \emph{Artificial Intelligence for Games}, 2nd~ed.
+\newblock Morgan Kaufmann Publishers, 2009.
+
+\bibitem[RN93]{RN93}
+\textsc{Russell S., Norvig P.}:
+\newblock \emph{Artificial Intelligence: A Modern Approach}, 2nd~ed.
+\newblock Prentice-Hall, Englewood Cliffs, NJ, 1993.
+
+\bibitem[Sil06]{Sil06}
+\textsc{Silver D.}:
+\newblock Cooperative pathfinding.
+\newblock \emph{AI Game Programming Wisdom 3} (2006), 99--111.
+
+\bibitem[TMSV03]{TMSV03}
+\textsc{Teixeira R., Marzullo K., Savage S., Voelker G.}:
+\newblock In search of path diversity in isp networks.
+\newblock \emph{IMC} (October 2003), 27--29.
+
+\end{thebibliography}
