@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: paper.aux
+The style file: eg-alpha.bst
+Database file #1: egbibsample.bib
+"{" immediately follows a field name---line 44 of file egbibsample.bib
+ :  number
+ :        {4} }
+I'm skipping whatever remains of this entry
+You've used 3 entries,
+            2855 wiz_defined-function locations,
+            641 strings with 5047 characters,
+and the built_in function-call counts, 1122 in all, are:
+= -- 104
+> -- 60
+< -- 0
++ -- 21
+- -- 21
+* -- 85
+:= -- 202
+add.period$ -- 6
+call.type$ -- 3
+change.case$ -- 19
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 44
+empty$ -- 81
+format.name$ -- 24
+if$ -- 222
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 5
+newline$ -- 18
+num.names$ -- 9
+pop$ -- 20
+preamble$ -- 1
+purify$ -- 22
+quote$ -- 0
+skip$ -- 33
+stack$ -- 0
+substring$ -- 36
+swap$ -- 6
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 17
+warning$ -- 0
+while$ -- 10
+width$ -- 6
+write$ -- 40
+(There was 1 error message)

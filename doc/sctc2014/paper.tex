@@ -1,0 +1,94 @@
+% ---------------------------------------------------------------------------
+% Author guideline and sample document for EG publication using LaTeX2e input
+% D.Fellner, v1.13, Nov 13, 2007
+
+\documentclass{egpubl}
+
+% --- for  Annual CONFERENCE
+% \ConferenceSubmission % uncomment for Conference submission
+% \ConferencePaper      % uncomment for (final) Conference Paper
+% \STAR                 % uncomment for STAR contribution
+% \Tutorial             % uncomment for Tutorial contribution
+% \ShortPresentation    % uncomment for (final) Short Conference Presentation
+%
+% --- for  CGF Journal
+% \JournalSubmission    % uncomment for submission to Computer Graphics Forum
+% \JournalPaper         % uncomment for final version of Journal Paper
+%
+% --- for  CGF Journal: special issue
+% \SpecialIssueSubmission    % uncomment for submission to Computer Graphics Forum, special issue
+% \SpecialIssuePaper         % uncomment for final version of Journal Paper, special issue
+%
+% --- for  EG Workshop Proceedings
+% \WsSubmission    % uncomment for submission to EG Workshop
+% \WsPaper         % uncomment for final version of EG Workshop contribution
+%
+
+\electronicVersion % can be used both for the printed and electronic version
+
+% !! *please* don't change anything above
+% !! unless you REALLY know what you are doing
+% ------------------------------------------------------------------------
+
+% for including postscript figures
+% mind: package option 'draft' will replace PS figure by a filname within a frame
+\ifpdf \usepackage[pdftex]{graphicx} \pdfcompresslevel=9
+\else \usepackage[dvips]{graphicx} \fi
+
+\PrintedOrElectronic
+
+% prepare for electronic version of your document
+\usepackage{t1enc,dfadobe}
+
+\usepackage[utf8]{inputenc}
+\usepackage{egweblnk}
+\usepackage{cite}
+\usepackage{comment}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% For backwards compatibility to old LaTeX type font selection.
+% Uncomment if your document adheres to LaTeX2e recommendations.
+\let\rm=\rmfamily    \let\sf=\sffamily    \let\tt=\ttfamily
+\let\it=\itshape     \let\sl=\slshape     \let\sc=\scshape
+\let\bf=\bfseries
+
+% end of prologue
+
+\newcommand{\bigO}{\mathcal{O}}
+
+\title[Ambush]%
+      {Pruebas de Generaci\'on de Emboscadas Utilizando A\*mbush}
+
+% for anonymous conference submission please enter your SUBMISSION ID
+% instead of the author's name (and leave the affiliation blank) !!
+\author[K. Fernandes \& C. Chang]
+       {K. Fernandes$^{1,2}$
+        y C. Chang$^{1}$
+        \\
+         $^1$Departamento de Computaci\'on y Tecnolog\'ia de la
+         Informaci\'on, Universidad Sim\'on Bol\'ivar, Venezuela\\
+         $^2$INESC TEC, Porto, Portugal
+      }
+
+\begin{document}
+\noEGpagenumber
+
+\maketitle
+
+\input{abstract}
+\input{introduction}
+%\input{definition}
+%\input{state_of_the_art}
+%\input{astar}
+%\input{ambush}
+%\input{variations}
+%\input{experiments}
+%\input{conclusions}
+%\input{future_work}
+%\input{extra}
+
+\bibliographystyle{eg-alpha}
+\bibliography{egbibsample}
+
+\end{document}

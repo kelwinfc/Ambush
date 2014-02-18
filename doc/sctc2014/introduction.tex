@@ -1,0 +1,40 @@
+\section{Introducci\'on}
+
+En el \'area de Inteligencia Artificial para Videojuegos, la generaci\'on
+de conductas inteligentes ha sido un reto constante \cite{MF09}, frecuentemente
+derivado en el desarrollo de acciones prestablecidas que el usuario puede
+f\'acilmente identificar despu\'es de varias ejecuciones del juego.
+Esta caracter\'istica es a\'un m\'as com\'un cuando se trata de la generaci\'on
+de movimientos t\'acticos y estrat\'egicos grupales, los cuales suelen ser sumamente
+complejos de implementar.
+
+Un problema muy tratado en la literatura es la b\'usqueda de caminos
+a un punto com\'un, por parte de grupos de agentes dentro de un juego
+\cite{MF09}. Este punto suele venir dado por un lugar en el mapa de juego,
+potencialmente la posici\'on del oponente. El esquema regularmente utilizado
+es generar caminos de costo m\'inimo \cite{HNR72} \cite{RN93}
+hacia este punto, sobre el grafo inducido por el mapa del juego. Es
+muy probable, que estos caminos confluyan, evitando la diversidad de
+rutas y exploraci\'on del mapa.
+
+Al efectuar una persecuci\'on al oponente, la utilizaci\'on de caminos
+\'optimos como estrategia deja muchos espacios de escapatoria libres,
+por lo que es de especial inter\'es generar mecanismos de diversificaci\'on de
+rutas que generen situaciones de emboscada.
+
+\textbf{
+En este punto hablar de nuestra soluci\'on y de como esta prob\'o ser
+correcta. Mencionar que este art\'iculo pretende ser un soporte adicional
+a los dos anteriores para demostrar la validez de las distintas variantes
+de forma exhaustiva as\'i como tambi\'en de presentar una nueva m\'etrica
+que permite medir de forma m\'as refinada el grado de emboscada.
+}
+
+\begin{comment}
+La t\'ecnica expuesta pr\'oximamente es adaptable a muchos contextos en
+los que, si bien no es necesaria una situaci\'on de emboscada, es
+importante generar diversidad de caminos con el fin de no sobresaturar
+ciertos sectores del grafo subyacente. Ejemplo de estos son controladores
+de tr\'afico, enrutamiento de paquetes f\'isicos o digitales \cite{TMSV03},
+rob\'otica, entre otros.
+\end{comment}

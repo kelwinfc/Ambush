@@ -1,0 +1,19 @@
+\begin{thebibliography}{\uppercase{HNR72}}
+
+\bibitem[HNR72]{HNR72}
+\textsc{Hart P., Nilsson N., Raphael B.}:
+\newblock Correction to ``a formal basis for the heuristic determination of
+  minimum cost paths''.
+\newblock \emph{SIGART Newsletter 37} (1972), 28--29.
+
+\bibitem[MF09]{MF09}
+\textsc{Millington I., Funge J.}:
+\newblock \emph{Artificial Intelligence for Games}, 2nd~ed.
+\newblock Morgan Kaufmann Publishers, 2009.
+
+\bibitem[RN93]{RN93}
+\textsc{Russell S., Norvig P.}:
+\newblock \emph{Artificial Intelligence: A Modern Approach}, 2nd~ed.
+\newblock Prentice-Hall, Englewood Cliffs, NJ, 1993.
+
+\end{thebibliography}
