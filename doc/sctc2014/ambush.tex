@@ -1,1 +1,110 @@
-\section{A\*mbush}
+\section{A*, A\*mbush y sus Variantes}
+\label{sec:ambush}
+
+En esta secci\'on se muestra el conjunto de adaptaciones realizadas
+al algoritmo de \astar, presentadas anteriormente en el art\'iculo
+\cite{FGC12e}, para el c\'alculo de emboscadas. Esta secci\'on se
+presenta por fined de completitud del trabajo planteado para un
+mayor entendimiento de los experimentos realizados.
+
+\subsection{\astar}
+
+El algoritmo de \astar \cite{HNR72}\cite{RN93}\cite{MF09}
+es una variación del algoritmo de Dijkstra \cite{CLRS09}
+para cómputos de caminos de costo mínimo.
+Consiste en un algoritmo de búsqueda informada \cite{RN93},
+basado en los siguientes elementos:
+
+\begin{itemize}
+\item $g$: Es el costo acumulado desde el nodo inicial a un nodo actual $v$.
+\item $\hat{h}$: Estimado del costo desde el nodo actual $v$ a la meta.
+\item $\hat{f} = g + \hat{h}$: Estimado del costo desde el nodo inicial a la meta, pasando por $v$.
+\end{itemize}
+
+Para garantizar optimalidad, la heuristica $\hat{h}$ debe
+ser admisible \cite{HNR72}, es decir, no debe estimar
+costos mayores al óptimo del grafo.
+El algoritmo actúa de forma voraz, expandiendo el 
+si\-guien\-te nodo no explorado con menor costo estimado $\hat{f}$.
+Este proceso continúa hasta llegar a la meta. 
+
+En este caso, la complejidad asintótica en tiempo
+del algoritmo de A* es de $\bigO(|V|log(|V|) + |V|*h + |E|)$,
+con $h$ el costo de cómputo de la función $\hat{h}$,
+suponiendo que se cuenta con una implementación eficiente de
+cola de prioridades tal como un Fibonacci heap \cite{CLRS09} (estructura
+de montículo que permite acceder al mínimo elemento del montículo
+y agregar un elemento en tiempo constante; además de
+e\-li\-mi\-nar uno en tiempo logarítmico amortizado) y que estamos
+computando el costo heurístico de cada nodo una sola vez.
+
+\subsection{\ambush}
+
+A*mbush, presentado como una variaci\'on de A* para el c\'alculo
+de emboscadas, consiste en una modificación de la función $g$, que
+favorezca la diversidad de caminos, a la cual denominaremos $g'$.
+Esta modificaci\'on busca penalizar aquellos nodos/arcos a trav\'es
+de los cuales pasen m\'as agentes, para esto, se asume que los
+agentes pueden establecer comunicaci\'on total entre ellos para
+obtener informaci\'on compartida del c\'alculo de los caminos.
+
+Sea $\Psi(v,i) = 1+(\# j : j \in A \wedge v \in path(j))$,
+el número de agentes distintos al agente $i$, que contienen al
+nodo $v$ en sus caminos hasta $t$. Se considera que si un agente
+no está buscando en dicho momento alcanzar el nodo $t$, o si
+aún no ha realizado la búsqueda del camino, este es vacío, por
+lo que no se consideran en el cómputo de $\Psi(v,i)$; dado
+que $i$ no ha computado ya su camino hasta $t$, se considera
+nulo su camino.
+
+Para el nodo inicial, se considera $g'(pos(i),i) = 0$.
+Sea $<v,w>$ el siguiente arco a considerar en la expansión del
+nodo $v$ en una iteración cualquiera del algoritmo, se considera
+$g'(w, i) = g'(v,i) + \lambda_i(<v,w>) \cdot \Psi(w,i)^2$\\
+
+Dado que $\Psi(v,i) \geq 1$, el camino obtenido por \textit{A*mbush}
+es óptimo sobre la nueva definición de $g'$, por lo que las
+propiedades de $A^*$ se mantienen \cite{HNR72}. Sin embargo, sobre
+la función original de costos, el camino obtenido no es necesariamente
+óptimo.
+
+Dado que es posible precomputar la funci\'on de incremento de
+costos $\Psi$. Si almacenamos los resultados de dicha funci\'on
+en una estructura de acceso constante, el costo de computar $g'$
+es asintóticamente igual al de $g$, por lo tanto, la única
+variación en el costo del algoritmo, viene dada por el
+cómputo inicial de la función $\Psi$. Ambas variaciones, tienen
+complejidad en tiempo
+$\bigO(|V|log(|V|) + |V|*h + |E| + |A|*|V| )$.
+
+En el campo específico de los videjuegos, los grafos
+de interés, vienen dados por la división en polígonos
+del mapa
+\cite{MF09} \cite{CS11}
+(regularmente con pocos lados), según las
+regiones transitables de éste o cuadrículas y sus
+adyacencias \cite{MF09} \cite{CS11}.
+Dado que los polígonos tienen un número
+reducido de lados, estos grafos, suelen ser poco densos;
+es decir, $|E| \in \bigO(|V|)$, por lo que el tiempo
+de ejecución de este método, sobre los grafos de interés
+en el área de videojuegos, viene dado por
+$\bigO(|V|(log(|V|) + h + |A|) )$.
+
+\begin{comment}
+Adicionalmente, el número de agentes suele no ser
+lo suficientemente grande para afectar significativamente
+la complejidad del algoritmo. Casos extremos en los que
+sea necesaria la utilización de un gran número de agentes,
+se pueden solucionar con la agrupación de éstos bajo líderes
+ficticios \cite{MF09}, de modo que por cada grupo se realice un solo
+cálculo del camino. Naturalmente, mientras se agrupen los
+individuos en conjuntos más grandes, la diversidad de
+caminos se verá afectada negativamente.
+\end{comment}
+
+\subsection{P-A*mbush}
+
+\subsection{R-A*mbush}
+
+\subsection{SAR-A*mbush}

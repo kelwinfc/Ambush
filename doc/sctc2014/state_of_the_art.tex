@@ -1,1 +1,46 @@
 \section{Trabajos Relacionados}
+\label{sec:state_of_the_art}
+
+Este trabajo se centra en el estudio del m\'etodo expuesto
+previamente por Fern\'andez y colaboradores \cite{FGC12e}\cite{FGC12}.
+Enfoques alternativos a \'este fueron propuestos por Silver \cite{Sil06}
+y por van Toll y colaboradores \cite{TCG12}.
+
+En el trabajo propuesto por Silver \cite{Sil06}, denominado
+\textit{Space-Time \astar}, se plantea una variante de $A^*$ 
+donde se tiene un grafo no dirigido en forma de cuadrícula,
+con función de costos común para todos los agentes y 
+constante entre cada par de nodos.
+
+El objetivo principal de dicho trabajo es evitar el paso de
+dos agentes por un mismo nodo en un instante de tiempo dado.
+La variación planteada, incluye una extensión en el número
+de dimensiones de \astar: se considera además de la posición
+de los agentes, el tiempo transcurrido. Dicha variación tiene
+un costo añadido en tiempo y memoria considerable debido a que
+se incrementa el tamaño del espacio de búsqueda. Aunque el objetivo
+final de las soluciones es diferente, la estudiada en el presente
+trabajo presenta una clara ventaja sobre \textit{Space-Time A$^*$}
+en varios aspectos. En primer lugar, presenta resuelve con un algoritmo
+de menor complejidad de c\'omputo problemas m\'as generales, debido a
+que permite la utilizaci\'on de grafos dirigidos con costos de arcos
+variables. Asimismo se puede trabajar con agentes que
+tengan grafos distintos entre sí.
+Por otro lado, en el caso de tener agentes con distintas velocidades,
+\textit{Space-Time A$^*$} genera un espacio de búsqueda en extremo
+denso, cuando la velocidad relativa entre los e\-le\-men\-tos del juego es
+alta. En cambio, $A^*mbush$ no se ve afectado por la diferencia de 
+velocidades entre los agentes.
+
+Asignando costos homogéneos para cada arco e incremento infinito
+sobre nodos o arcos ocupados, el problema que resuelve $A^*mbush$
+se reduce al problema planteado para \textit{Space-Time
+A$^*$}.
+
+El segundo trabajo mencionado, desarrollado por van Toll y otros
+\cite{TCG12}, muestra un enfoque basado en densidades para generar
+diversidad de caminos. Sin embargo, la diversificaci\'on de caminos
+es dada s\'olo alcanzar un gran n\'umero de agentes atravesando una
+misma \'area, por lo que se torna infactible en los casos estudiados
+en este trabajo, donde se pretende alcanzar emboscadas utilizando
+el m\'inimo n\'umero de agentes posible.

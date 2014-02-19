@@ -1,12 +1,12 @@
 \section{Introducci\'on}
 
-En el \'area de Inteligencia Artificial para Videojuegos, la generaci\'on
-de conductas inteligentes ha sido un reto constante \cite{MF09}, frecuentemente
-derivado en el desarrollo de acciones prestablecidas que el usuario puede
-f\'acilmente identificar despu\'es de varias ejecuciones del juego.
-Esta caracter\'istica es a\'un m\'as com\'un cuando se trata de la generaci\'on
-de movimientos t\'acticos y estrat\'egicos grupales, los cuales suelen ser sumamente
-complejos de implementar.
+La generaci\'on de conductas inteligentes ha sido un reto constante
+en el \'area de Inteligencia Artificial para Videojuegos \cite{MF09},
+frecuentemente derivado en el desarrollo de acciones prestablecidas que
+el usuario puede f\'acilmente identificar despu\'es de varias ejecuciones
+del juego. Esta caracter\'istica se evidencia a\'un m\'as com\'un cuando
+se trata de la generaci\'on de movimientos t\'acticos y estrat\'egicos
+grupales, los cuales suelen ser sumamente complejos de implementar.
 
 Un problema muy tratado en la literatura es la b\'usqueda de caminos
 a un punto com\'un, por parte de grupos de agentes dentro de un juego
@@ -22,19 +22,27 @@ Al efectuar una persecuci\'on al oponente, la utilizaci\'on de caminos
 por lo que es de especial inter\'es generar mecanismos de diversificaci\'on de
 rutas que generen situaciones de emboscada.
 
-\textbf{
-En este punto hablar de nuestra soluci\'on y de como esta prob\'o ser
-correcta. Mencionar que este art\'iculo pretende ser un soporte adicional
-a los dos anteriores para demostrar la validez de las distintas variantes
-de forma exhaustiva as\'i como tambi\'en de presentar una nueva m\'etrica
-que permite medir de forma m\'as refinada el grado de emboscada.
-}
+Anteriormente, fue propuesta una soluci\'on para este problema utilizando
+variantes del algoritmo de A* \cite{FGC12e}\cite{FGC12}. Estas
+variantes muestran ser efectivas en el c\'alculo de rutas de emboscada.
+El presente trabajo pretende demostrar que dicho enfoque se adapta bien
+ante diversos tipos de grafos de distinto tamaño.
+Para realizar esta evaluaci\'on, se propone una nueva m\'etrica para validar
+la calidad de una emboscada, que incorpora m\'as informaci\'on que la m\'etrica
+planteada originalmente. Esta nueva m\'etrica incluye informaci\'on de
+alcanzabilidad por parte de los agentes que pretenden realizar la emboscada
+a las salidas dejadas como escapatoria. Esto con el fin de no penalizar casos
+en los cuales el nivel de emboscada alcanzado es el m\'aximo posible
+dadas las condiciones iniciales.
 
-\begin{comment}
-La t\'ecnica expuesta pr\'oximamente es adaptable a muchos contextos en
-los que, si bien no es necesaria una situaci\'on de emboscada, es
-importante generar diversidad de caminos con el fin de no sobresaturar
-ciertos sectores del grafo subyacente. Ejemplo de estos son controladores
-de tr\'afico, enrutamiento de paquetes f\'isicos o digitales \cite{TMSV03},
-rob\'otica, entre otros.
-\end{comment}
+El resto de este art\'iculo est\'a organizado de la siguiente manera.
+En la secci\'on \ref{sec:state_of_the_art} se presentan distintas soluciones
+de la literatura para este problema, en la secci\'on \ref{sec:definition}
+se muestra la definici\'on formal del problema, en conjunto con la m\'etrica
+anterior y la planteada en el presente trabajo para medir la calidad de una
+estrategia de emboscada. A continuaci\'on, en la secci\'on \ref{sec:ambush}
+son mostrados los algoritmos de \ambush y sus variantes, anteriormente
+presentados con mayor detalle por Fern\'andez y colaboradores
+\cite{FGC12e}\cite{FGC12}. Los ex\-pe\-ri\-men\-tos realizados se incluyen en
+la secci\'on \ref{sec:experiments} y, finalmente, las conclusiones y trabajo
+futuro son presentados en la secci\'on \ref{sec:conclusions}.

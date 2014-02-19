@@ -1,4 +1,29 @@
-\begin{thebibliography}{\uppercase{HNR72}}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{\uppercase{vTCG12}}
+
+\bibitem[CLRS09]{CLRS09}
+\textsc{Cormen T., Leiserson C., Rivest R., Stein C.}:
+\newblock \emph{Introduction to Algorithms}, 3rd~ed.
+\newblock The MIT Press, 2009.
+
+\bibitem[CS11]{CS11}
+\textsc{Cui X., Shi H.}:
+\newblock Direction oriented pathfinding in video games.
+\newblock \emph{International Journal of Artificial Intelligence \&
+  Applications 2} (2011).
+
+\bibitem[FGC12a]{FGC12e}
+\textsc{Fern{\'a}ndez K., Gonz{\'a}lez G., Chang C.}:
+\newblock A* mbush family: A* variations for ambush behavior and path diversity
+  generation.
+\newblock In \emph{Motion in Games}. Springer, 2012, pp.~314--325.
+
+\bibitem[FGC12b]{FGC12}
+\textsc{Fern{\'a}ndez K., Gonz{\'a}lez G., Chang C.}:
+\newblock A mbush: una variaci{\'o}n de a para generar emboscadas y diversidad
+  de caminos.
+\newblock \emph{Memorias del II Simposio Cient\'ifico y Tecnol\'ogico en
+  Ciencias de la Computaci\'on (SCTC 2012)} (2012).
 
 \bibitem[HNR72]{HNR72}
 \textsc{Hart P., Nilsson N., Raphael B.}:
@@ -15,5 +40,20 @@
 \textsc{Russell S., Norvig P.}:
 \newblock \emph{Artificial Intelligence: A Modern Approach}, 2nd~ed.
 \newblock Prentice-Hall, Englewood Cliffs, NJ, 1993.
+
+\bibitem[Sil06]{Sil06}
+\textsc{Silver D.}:
+\newblock Cooperative pathfinding.
+\newblock \emph{AI Game Programming Wisdom 3} (2006), 99--111.
+
+\bibitem[vTCG12]{TCG12}
+\textsc{van Toll W.~G., Cook A.~F., Geraerts R.}:
+\newblock Real-time density-based crowd simulation.
+\newblock \emph{Computer Animation and Virtual Worlds 23}, 1 (2012), 59--69.
+
+\bibitem[W{\etalchar{*}}01]{Wes01}
+\textsc{West D.~B., et~al.}:
+\newblock \emph{Introduction to graph theory}, vol.~2.
+\newblock Prentice hall Upper Saddle River, 2001.
 
 \end{thebibliography}

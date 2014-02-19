@@ -1,1 +1,132 @@
 \section{Definici\'on Formal del Problema}
+\label{sec:definition}
+
+Sea $G = (V,E)$ un grafo (dirigido o no), donde $V$ es el conjunto de
+nodos y $E$ el conjunto de arcos. Sea $A$ un conjunto de agentes
+interesados en alcanzar un punto com\'un $t \in V$. Se tiene
+que cada agente $a \in A$, se encuentra en algún nodo del grafo
+denotado $pos(a)$. Además, se define para $a$ la función
+de costos de su desplazamiento por el grafo
+$\lambda_a : E \longrightarrow \mathbb{R}^{\geq 0}$.
+Se considera, sin pérdida de generalidad, que $V$ y $E$ son comunes para
+todos los agentes, con el fin de no generar inconsistencias en la
+información compartida entre estos. Sin embargo, cada agente puede tener
+función de costos distintas, adaptadas a sus restricciones.
+Sea $path(a)$ con $a \in A$, el camino que está siguiendo el agente
+$a$ hasta el nodo $t$.
+
+Previamente, el grado de emboscada (\ref{eq:prev})
+efectuado por el conjunto de agentes
+$A$ al nodo $t$ se defini\'o como \cite{FGC12e}\cite{FGC12}:
+
+\begin{small}
+\begin{eqnarray}
+ \Phi(t) &=& 
+ \dfrac{|\{ i : path(j) = <pos(j),\ \ldots,\ i,\ t>, j \in A\}|}
+	  {\min(|\{ <i,t> : <i,t> \in E \} |,|A|) }
+\label{eq:prev}
+\end{eqnarray}
+\end{small}
+
+Esta m\'etrica define la emboscada como la proporción de nodos adyacentes
+al nodo objetivo desde los cuales algún agente está alcanzándolo. Normalizando
+este valor con res\-pec\-to al m\'aximo n\'umero de nodos adyacentes a $t$ mediante
+los cuales, con el n\'umero de agentes disponibles, podr\'ia \'este ser alcanzado.
+Por lo tanto, $0 \leq \Phi(t) \leq 1$. Bajo estas condiciones, el objetivo
+de un algoritmo de generaci\'on de emboscadas es maximilar el
+valor de $\Phi(t)$, dando prioridad a la diversidad de los caminos
+considerados por el conjunto de agentes sobre su optimalidad.
+
+En la figura \ref{fig:prev_phi}, se pueden observar en el grafo
+superior dos agentes situados en los nodos izquierdos. Los caminos
+seleccionados por los agentes hasta el destino $t$ se presenta con
+una l\'inea continua, mientras que los arcos no seleccionados se
+presentan con una l\'inea segmentada. El n\'umero de nodos adyacentes
+al destino es de cuatro. De estos cuatro nodos, s\'olo dos están siendo
+considerados en los caminos de los agentes. Sin embargo, es el m\'aximo
+grado de emboscada alcanzable con el n\'umero de agentes implicados.
+En el escenario inferior se est\'an utilizando dos agentes para cubrir
+una \'unica escapatoria, por lo que la emboscada no es \'optima.
+
+\input{figures/previous_phi}
+
+Sin embargo, esta m\'etrica penaliza casos donde no es posible alcanzar
+una mejor emboscada, a\'un cuando se cuenta con suficientes agentes, debido
+a la configuraci\'on del grafo y de las posiciones iniciales de estos. 
+Ejemplos de estos casos pueden ser observados en la figura \ref{fig:error_phi}. En
+la situaci\'on superior, se observa que a pesar de contar con cuatro agentes,
+las dos salidas restantes no son alcanzables por estos sin pasar antes por el
+nodo objetivo. Por otra parte, en la situaci\'on inferior, a pesar de que todas
+las salidas son alcanzables por los agentes, no es posible alcanzar una
+configuraci\'on de caminos capaz de cubrir todas las salidas. Para ambos
+casos, a pesar de que la asignaci\'on de caminos es la mejor dadas las
+condiciones iniciales, la m\'etrica originalmente planteada reporta resultados
+sub\'optimos.
+
+\input{figures/error_previous_phi}
+
+Por lo tanto, es necesario utilizar una nueva medida de emboscada
+para poder discriminar correctamente entre las escapatorias que podr\'ian
+ser cubiertas por alg\'un agente y aquellas que no. Esta nueva medida,
+denotada por $\Phi^*$ (\ref{eq:new}) busca normalizar a los agentes utilizando
+el tamaño de la m\'axima asociaci\'on de agentes a los nodos predecesores
+del objetivo que \'estos son capaces de alcanzar. Se define $\Phi^*$ como:
+
+\begin{small}
+\begin{eqnarray}
+ \Phi(t) &=& 
+\dfrac{|\{ i : path(j) = <pos(j),\ \ldots,\ i,\ t>, j \in A\}|}
+	  {|\{ y : (x,y) \in MaxMatching(BipG(G,A,t))\}|}
+\label{eq:new}
+\end{eqnarray}
+\end{small}
+
+\noindent
+donde $BipG(G,A,t)$ define el grafo bipartito que asocia a agentes con
+los nodos alcanzables por cada uno que sean predecesores del nodo objetivo
+(\ref{eq:bipgraph}).
+Este grafo se construye considerando como nodos el conjunto
+de los agentes y el conjunto de los nodos predecesores alcanzables por alg\'un
+agente (\ref{eq:bipgraphdst}). Por otra parte, los arcos provienen
+de la matriz de alcanzabilidad entre agentes y predecesores (\ref{eq:bipgraphedges}).
+
+\begin{small}
+\begin{eqnarray}
+BipG(G,A,t) & = & 
+  (A\ \cup\ Dst(G,A,t),\ Edges(G,A,t)) \label{eq:bipgraph}\\
+Dst(G,A,t) & = & Reachable(Reduced(G,t),\ A)\label{eq:bipgraphdst} \\
+Edges(G,A,t) & = & \{ (x,y) : x \in A \wedge y \in Dst(G,A,t) \wedge\ \nonumber\\
+& & \hspace{27pt} ScopeXY(G,A,t,x,y)\nonumber\\
+& & \} \label{eq:bipgraphedges}\\
+\nonumber\\
+Reduced((V,E), t) & = & (V-\{t\}, E - \{<x,y>: x = t  \vee y = t\})\nonumber\\
+Reachable(G,A) &=& \bigcup_{a \in A} Scope(G, pos(a))\nonumber\\
+Scope((\{\},E), v) & = & \{\}\nonumber\\
+Scope(G, v) & = & \{v\} \cup \bigcup_{w \in suc(G,v)}Scope(Reduced(G,v),w)\nonumber\\
+\nonumber\\
+ScopeXY(G,A,t,x,y) &=& x \in A \ \wedge\ y \in Scope(Reduced(G,t),pos(x))\nonumber
+\end{eqnarray}
+\end{small}
+
+\noindent
+y donde, asumiendo que el operador $argmax$ retorna el conjunto de mayor
+tamaño que eval\'ue como cierta la condici\'on expuesta, se define
+la m\'axima asociaci\'on de un grafo como (\ref{eq:mm})
+
+\begin{small}
+\begin{eqnarray}
+MaxMatching((V,E)) & = & argmax_{m \subseteq E}( AtMostOnceSrc(m)\ \wedge\nonumber\\
+				   &   & \hspace{43pt}AtMostOnceDst(m)\nonumber\\
+				   &   & )
+\label{eq:mm}
+\end{eqnarray}
+\end{small}
+
+Una implementaci\'on real de esta m\'etrica debe usar un algoritmo de
+c\'alculo de apareamiento en grafos bipartitos en tiempo polinomial\cite{Wes01}.
+La definici\'on ac\'a planteada en t\'erminos de generaci\'on de subconjuntos
+es utilizada \'unicamente por motivos de definici\'on formal. En cualquier caso,
+el costo asociado a calcular la calidad de la emboscada no se ve reflejado en
+el c\'alculo de las rutas para los agentes, dado que esto es un procedimiento
+de validaci\'on experimental y no forma parte del algoritmo de \ambush ni de
+sus va\-rian\-tes.
