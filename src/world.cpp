@@ -166,7 +166,7 @@ int world::num_activated_predecessors(agent* target)
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
         agent* a = *it;
         vector<int>* path = a->get_path();
-        if ( path->size() > 1 ){
+        if ( path->size() > 1 && path->at(0) != path->at(1) ){
             activated_pred.insert( path->at( path->size() - 2 ) );
         }
     }
