@@ -15,10 +15,9 @@ void eval_behavior(world& w, vector<agent*>& agents, agent& target,
     const clock_t end_time = clock();
 
     results[0] += w.ambush_rate_relaxed(&target);
-    results[1] += w.increment_rate(&target);
-    results[2] += w.graph_coverage();
-    results[3] += float( end_time - begin_time ) * 1000.0 /
-               (float)( CLOCKS_PER_SEC * agents.size() );
+    results[1] += w.ambush_rate(&target);
+    results[2] += w.increment_rate(&target);
+    results[3] += w.graph_coverage();
     /*
     printf("%s: %0.4f %6.2f %6.2f %10.2f\n",
            name.c_str(),
@@ -64,11 +63,12 @@ int main(int argc, char* argv[])
     int num_tests = 100;
     for ( int c=0; c<cases; c++){
         vector< vector<float> > results;
-        results.resize(5);
         for ( int i=0; i<5; i++){
+            vector<float> next;
             for (int i=0; i<4; i++){
-                results[i].push_back(0.0);
+                next.push_back(0.0);
             }
+            results.push_back(next);
         }
         
         cout << "Num agents " <<  num_agents[c] << endl;
@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
             eval_behavior(w, agents, target, &dfs, results[1]);
             eval_behavior(w, agents, target, &amb, results[2]);
             eval_behavior(w, agents, target, &pamb, results[3]);
-            //eval_behavior(w, agents, target, &sar, results[4]);
+            eval_behavior(w, agents, target, &sar, results[4]);
         }
         
         for ( int i=0; i<results.size(); i++ ){
