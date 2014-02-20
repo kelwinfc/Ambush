@@ -12,6 +12,11 @@
 \newblock \emph{International Journal of Artificial Intelligence \&
   Applications 2} (2011).
 
+\bibitem[DM02]{DM02}
+\textsc{Dorogovtsev S.~N., Mendes J.~F.}:
+\newblock Evolution of networks.
+\newblock \emph{Advances in physics 51}, 4 (2002), 1079--1187.
+
 \bibitem[FGC12a]{FGC12e}
 \textsc{Fern{\'a}ndez K., Gonz{\'a}lez G., Chang C.}:
 \newblock A* mbush family: A* variations for ambush behavior and path diversity
@@ -30,6 +35,12 @@
 \newblock Correction to ``a formal basis for the heuristic determination of
   minimum cost paths''.
 \newblock \emph{SIGART Newsletter 37} (1972), 28--29.
+
+\bibitem[Kle00]{Kle00}
+\textsc{Kleinberg J.}:
+\newblock The small-world phenomenon: An algorithmic perspective.
+\newblock In \emph{Proceedings of the thirty-second annual ACM symposium on
+  Theory of computing} (2000), ACM, pp.~163--170.
 
 \bibitem[MF09]{MF09}
 \textsc{Millington I., Funge J.}:
@@ -55,5 +66,10 @@
 \textsc{West D.~B., et~al.}:
 \newblock \emph{Introduction to graph theory}, vol.~2.
 \newblock Prentice hall Upper Saddle River, 2001.
+
+\bibitem[WS98]{WS98}
+\textsc{Watts D.~J., Strogatz S.~H.}:
+\newblock Collective dynamics of ‘small-world’networks.
+\newblock \emph{nature 393}, 6684 (1998), 440--442.
 
 \end{thebibliography}

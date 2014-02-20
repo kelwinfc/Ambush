@@ -1,2 +1,28 @@
 \section{Conclusiones y Trabajo Futuro}
 \label{sec:conclusions}
+
+\ambush\ y sus variantes muestran una evidente mejora en la conducta de
+emboscada, con un c\'omputo adicional poco significativo con respecto
+al algoritmo base de generaci\'on de caminos m\'inimos \astar.
+
+Como se pudo apreciar en la secci\'on \ref{sec:experiments}, ninguna
+de las variantes de \ambush\ muestra resultados inferiores a los obtenidos
+por \astar. Adem\'as, todas las variaciones mostraron no ser gravemente
+afectadas por diferencias significativas en el tamaño de los grafos y
+del n\'umero de agentes. Dada la diversidad de situaciones planteadas
+en los experimentos, se puede afirmar que \ambush\ muestra un comportamiento
+estable y efectivo.
+
+\ambush\ genera comportamientos de emboscada inteligentes para situaciones
+en las que múltiples agentes necesitan alcanzar un objetivo común. En
+contraste con estrategias preestablecidas, regularmente implementadas para
+situaciones específicas de cada juego, que derivan en situaciones repetitivas,
+\ambush\ logra fomentar situaciones va\-ria\-das de emboscada dentro del 
+comportamiento táctico grupal de los agentes.
+
+En el futuro, se pretende extender este trabajo incluyendo informaci\'on
+de capacidad para cada nodo, de tal forma de incluir restricciones
+f\'isicas del mundo en el c\'alculo de la ruta. Adem\'as, se pretende
+incluir restricciones en la comunicaci\'on que los agentes son capaces
+de establecer entre si, para de esta forma poder adaptarse a situaciones
+en las cuales existe s\'olo observailidad parcial entre los agentes.

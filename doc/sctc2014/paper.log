@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.11.8)  19 FEB 2014 17:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.11.8)  20 FEB 2014 18:02
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -748,14 +748,16 @@ File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopat
 hs.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
-)))
+))) (/usr/share/texmf-texlive/tex/latex/multirow/multirow.sty
+\bigstrutjot=\dimen159
+)
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
 s.code.tex
 File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 
 (/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
-\arrowsize=\dimen159
+\arrowsize=\dimen160
 ))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarychain
 s.code.tex
@@ -775,35 +777,35 @@ File: tikzlibraryscopes.code.tex 2008/06/27 v2.10 (rcs-revision 1.2)
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
-LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
+LaTeX Font Info:    ... okay on input line 83.
 
 (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count127
-\scratchdimen=\dimen160
+\scratchdimen=\dimen161
 \scratchbox=\box37
 \nofMPsegments=\count128
 \nofMParguments=\count129
 \everyMPshowfont=\toks35
 \MPscratchCnt=\count130
-\MPscratchDim=\dimen161
+\MPscratchDim=\dimen162
 \MPnumerator=\count131
 \everyMPtoPDFconversion=\toks36
 )
-Package hyperref Info: Link coloring ON on input line 81.
+Package hyperref Info: Link coloring ON on input line 83.
  (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -812,42 +814,42 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count132
 )
-LaTeX Info: Redefining \ref on input line 81.
-LaTeX Info: Redefining \pageref on input line 81.
+LaTeX Info: Redefining \ref on input line 83.
+LaTeX Info: Redefining \pageref on input line 83.
 \AtBeginShipoutBox=\box38
 
 ABD: EveryShipout initializing macros
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 85.
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 85
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 87.
+LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 87
 .
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 85
+LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 87
 .
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/omlptmcm.fd
 File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 85
+LaTeX Font Info:    Try loading font information for OMX+psycm on input line 87
 .
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/omxpsycm.fd
 File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
 )
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 85.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 87.
 
 (/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 85.
+LaTeX Font Info:    Try loading font information for U+msa on input line 87.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 85.
+LaTeX Font Info:    Try loading font information for U+msb on input line 87.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -915,54 +917,82 @@ Underfull \hbox (badness 1314) in paragraph at lines 112--118
  []
 
 ) (./experiments.tex
+Underfull \hbox (badness 2698) in paragraph at lines 4--9
+\T1/ptm/m/n/9 Para cada ex-per-i-mento se es-tu-dian cu-a-tro al-go-rit-mos:
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
  
  []
 
-[4] <figures/g1.png, id=113, 901.86937pt x 525.46312pt>
-File: figures/g1.png Graphic file (type png)
- <use figures/g1.png>
-<figures/g2.png, id=114, 901.11656pt x 530.73282pt>
-File: figures/g2.png Graphic file (type png)
- <use figures/g2.png>
+[4] (./tables/g.tex
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
+) (./tables/grid.tex
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 34.
-)
-(./conclusions.tex) (./paper.bbl (./paper.brf)
+(Font)              Font shape `T1/ptm/b/it' tried instead on input line 5.
+) (./tables/watts.tex)
+(./tables/nswg.tex) (./tables/dm.tex
+Underfull \hbox (badness 7486) in paragraph at lines 5--5
+[]\T1/ptm/b/n/9 Table 5: []\T1/ptm/m/it/9 Calidad de em-boscada para grafos tip
+o
+ []
+
+)) (./conclusions.tex
+Underfull \vbox (badness 2384) has occurred while \output is active []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+ 
+ []
+
+[5]
+Underfull \hbox (badness 1259) in paragraph at lines 16--22
+[]\T1/ptm/m/n/9 A*mbush gen-era com-por-tamien-tos de em-boscada in-
+ []
+
+) (./paper.bbl (./paper.brf)
 \tf@brf=\write5
 \openout5 = `paper.brf'.
 
-)
+
 Underfull \hbox (badness 10000) has occurred while \output is active
  
  []
 
-[5 <./figures/g1.png (PNG copy)> <./figures/g2.png (PNG copy)>] (./paper.aux) )
+[6])
+Underfull \hbox (badness 10000) has occurred while \output is active
  
+ []
+
+[7
+
+] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
- 14640 strings out of 495061
- 256593 string characters out of 1182621
- 352195 words of memory out of 3000000
- 17395 multiletter control sequences out of 15000+50000
- 56223 words of font info for 91 fonts, out of 3000000 for 9000
+ 14692 strings out of 495061
+ 257190 string characters out of 1182621
+ 441618 words of memory out of 3000000
+ 17420 multiletter control sequences out of 15000+50000
+ 59026 words of font info for 93 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 56i,11n,61p,451b,831s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type
-1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy6.pfb
-></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw
-/symbol/usyr.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></u
-sr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-texl
-ive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/
-times/utmri8a.pfb>
-Output written on paper.pdf (5 pages, 290153 bytes).
+ 56i,11n,61p,425b,831s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sh
+are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1
+/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
+onts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
+7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texliv
+e/fonts/type1/urw/symbol/usyr.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
+es/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr
+/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (7 pages, 205470 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
- 35 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 225 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,28 +1,13 @@
 \section{Experimentos}
 \label{sec:experiments}
 
-Para cada experimento se estudian cinco algoritmos:
-una implementaci\'on base de \astar que sirve de referencia,
-una implementaci\'on de caminos simples aleatorios mediante
-b\'usqueda en profundidad, \ambush, \pambush con mecanismo
-de prioridad determinado por la distancia real de los agentes
-a la meta y finalmente, \sarambush.
+Para cada experimento se estudian cuatro algoritmos:
+una implementaci\'on base de \astar\ que sirve de referencia,
+\ambush, \pambush\ (\textbf{P}) con mecanismo de prioridad determinado por
+la distancia real de los agentes a la meta y finalmente, \sarambush\
+(\textbf{SAR}).
 
-presentan resultados del incremento medio porcentual de los caminos.
-Para cada topolog\'ia de grafo, se generan aleatoriamente 100 grafos,
-sobre los cuales se ejecutan experimentos con 100 disposiciones distintas
-de agentes y del nodo objetivo.
-Para cada uno de estos algoritmos se muestra el valor de emboscada
-utilizando la m\'etrica originalmente propuesta y utilizando la
-m\'etrica propuesta en el presente trabajo. El n\'umero de agentes
-es variado con el fin de mostrar su impacto en el grado de emboscada
-y en el incremento derivado de la escogencia de caminos sub\'optimos.
-Adem\'as se muestran resultados con las dos instancias de mapas ($g1$ y $g2$)
-presentadas en el trabajo previo \cite{FGC12} con 60 y 85 nodos
-respectivamente. Estos mapas provienen de la poligonalizaci\'on del mapa
-de juego en pol\'igonos. Estas restricciones son ampliamente utilizadas
-en juegos\cite{MF09}. Estos grafos se pueden visualizar en la figura \ref{fig:gs}.
-
+\begin{comment}
 \begin{figure}[htb]
 	\begin{center}
 		\includegraphics[scale=0.23]{figures/g1.png}
@@ -33,3 +18,70 @@ en juegos\cite{MF09}. Estos grafos se pueden visualizar en la figura \ref{fig:gs
 	     \textbf{Abajo:} Mapa 2 poligonalizado (85 pol\'igonos).
      }
 \end{figure}
+\end{comment}
+
+Para cada topolog\'ia de grafo, se generan grafos aleatoriamente de distintos
+tamaños, sobre los cuales se ejecutan experimentos con 100 disposiciones
+distintas de agentes y del nodo objetivo. En los casos donde se referencia
+que todos los agentes parten de la misma posici\'on inicial, \'esta es
+aleatoria mas com\'un para todos los agentes.
+Para cada uno de estos algoritmos se muestra el valor de emboscada
+utilizando la m\'etrica originalmente propuesta y utilizando la
+m\'etrica propuesta en el presente trabajo. Se prob\'o variar el
+n\'umero de agentes con el fin de mostrar su impacto en el grado de emboscada.
+Adem\'as se muestran resultados con las dos instancias de mapas ($g1$ y $g2$)
+presentadas en el trabajo previo \cite{FGC12} con 60 y 85 nodos
+respectivamente. Estos mapas provienen de la poligonalizaci\'on de mapas
+de juego en pol\'igonos. Este tipo de grafos son ampliamente utilizados
+en juegos\cite{MF09}.
+
+\input{tables/g}
+
+Para los experimentos con los grafos iniciales (g1 y g2), se mostr\'o
+la efectividad de las tres variantes propuestas con respecto a \astar.
+Adicionalmente, se evidencia en este y otros experimentos la mejora
+que la m\'etrica original estaba subevaluando varios casos de emboscada.
+Los resultados de este experimento se pueden evidenciar en la tabla
+\ref{tab:ambush_g}. Asimismo, en este y en los experimentos subsiguientes
+se puede apreciar como en los casos donde los agentes parten de una misma
+posici\'on inicial, las diversas variantes de \ambush\ logran efectivamente
+mejorar el grado de emboscada, incluso con un n\'umero bajo de agentes
+involucrados.
+
+\input{tables/grid}
+
+Los dem\'as grafos utilizados son de varios tipos provenientes de la
+literatura. El primer tipo de grafos generados explorado son los grafos
+en grilla cuadrada con 8-conectividad. Este tipo de grafos es muy com\'un en el
+desarrollo de juegos debido a la eficacia en la determinaci\'on de caminos
+y en la ubicaci\'on del agente \cite{MF09}.
+Los resultados de este experimento se pueden apreciar en la tabla
+\ref{tab:ambush_grid}. A medida que el grafo se hace m\'as grande, la
+calidad media de emboscada se hace mayor, sin embargo, a\'un en grafos
+pequeños se muestra que la emboscada se alcanza efectivamente.
+
+\input{tables/watts}
+
+\input{tables/nswg}
+
+Seguidamente se experiment\'o con grafos con propiedad de mundo-pequeño
+(Small-World Networks) \cite{WS98}. En este tipo de grafos
+la mayor\'ia de los nodos no son vecinos de los dem\'as, sin embargo,
+la mayor\'ia son alcanzables por cualquier otro utilizando caminos con
+un n\'umero corto de pasos. Este tipo de grafos podr\'ian ser dif\'iciles
+para un m\'etodo como \ambush debido a esta propiedad, al no ofrecer suficiente
+distancia para que los agentes se alejen imposibilitando as\'i alcanzar la
+emboscada. Sin embargo, en las tablas \ref{tab:ambush_watts} y \ref{tab:ambush_nswg}
+se muestra que el algoritmo es capaz de sobrellevar esta situaci\'on y lograr
+emboscadas perfectas en muchos de los casos. Los tipos de grafos con esta
+propiedad estudiados son los propuestos por Watts y Strogatz \cite{WS98}
+y el propuesto por Kleinberg \cite{Kle00}.
+
+\input{tables/dm}
+
+Finalmente, se realizaron experimentos con el modelo de grafos propuesto
+por Dorogovtsev y Mendes \cite{DM02}. El cual produce grafos planares,
+similares a los utilizados en el \'area de inter\'es. Bajo este tipo
+de grafos, si bien el grado de emboscada alcanzado fue menor con respecto
+a los otros tipos utilizados, se mostr\'o un incremento significativo
+de este con respecto al algoritmo base probado \astar.

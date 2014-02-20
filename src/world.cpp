@@ -102,13 +102,14 @@ float world::increment_rate(agent* target)
     }
     
     for ( uint i=0; i<shortest_paths.size(); i++ ){
-        if ( shortest_paths[i] < 1e-6 ){
-            continue;
+        if ( shortest_paths[i] == 0.0 ){
+            avg_increment += 1.0;
+        } else {
+            avg_increment += chosen_path[i] / ( shortest_paths[i]);
         }
-        avg_increment += chosen_path[i] * 100.0 / shortest_paths[i];
     }
     
-    return avg_increment / this->agents.size() - 100.0;
+    return ( avg_increment / this->agents.size() - 1.0 ) * 100.0;
 }
 
 float world::graph_coverage()
@@ -183,10 +184,16 @@ float world::ambush_rate(agent* target)
     graph* bip_graph = this->build_bipartite_reachability_graph(target,
         src_mapping, dst_mapping);
 
-    bip_graph->maximum_bipartite_matching(mm);
+    float res = bip_graph->maximum_bipartite_matching(mm);
 
-    float den = (float)mm.size() + 1e-6;
+    float den = (float)mm.size();
+    
     delete bip_graph;
+
+    if ( mm.size() == 0 ){
+        return 1.0;
+    }
+    
     return (float) this->num_activated_predecessors(target) / (float) den;
 }
 

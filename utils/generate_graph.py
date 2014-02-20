@@ -3,28 +3,39 @@ import networkx as nx
 import random as rdm
 import matplotlib.pyplot as plt
 import json
+from math import sqrt
 
 # Grid 2D:
 def grid2d(n,m):
-    g = nx.Graph()
 
-    for i in range(0,n-1):
-        g.add_edge(i,i+1)
-
-    for i in range(1,m):
-        base = (n *i)
-        for j in range(0,n):
-            g.add_edge(base+j,base+j+1)
-            g.add_edge(base-n+j,base+j)
-    g.remove_node(n*m)
+    def pos_to_index(i,j, n, m):
+        return i*m + j
+    def index_to_row(i, n, m):
+        return i/m
+    def index_to_column(i, n, m):
+        return i % m
     
-    i = 0
-    for node in g.nodes():
-        x = i/n
-        y = i%n
-        g.node[node]['y']=int(y)
-        g.node[node]['x']=int(x)
-        i += 1
+    g = nx.Graph()
+    
+    for i in xrange(n):
+        for j in xrange(m):
+            for di in [-1,0,1]:
+                for dj in [-1,0,1]:
+                    ni = i+di
+                    nj = j+dj
+                    
+                    if 0 <= ni and ni < n and \
+                       0 <= nj and nj < m and\
+                       (di != 0 or dj != 0) :
+                       
+                        g.add_edge( pos_to_index(i,j,n,m),
+                                    pos_to_index(ni,nj,n,m),
+                                  )
+    
+    for idx, node in enumerate(g.nodes()):
+        g.node[node]['y'] = index_to_column(idx, n, m)
+        g.node[node]['x'] = index_to_row(idx, n, m)
+    
     return g
 
 # Dorogovtsev - Mendes graph generator
@@ -42,6 +53,46 @@ def dorogovtsev_mendes(n):
         g.add_edges_from([(i,node1),(i,node2)])
     return g
 
+def distance(g, v, w):
+    dx = g.node[v]["x"] - g.node[w]["x"]
+    dy = g.node[v]["y"] - g.node[w]["y"]
+
+    return sqrt(dx**2 + dy**2)
+
+def random_geometric_graph(n,r):    
+    g = nx.random_geometric_graph(n,r)
+    for node in g.nodes():
+        g.node[node]["x"] = g.node[node]["pos"][0]
+        g.node[node]["y"] = g.node[node]["pos"][1]
+        g.node[node].pop("pos")
+    
+    for v in g.nodes():
+        for w in g.edge[v]:
+            g.edge[v][w]['cost'] = distance(g, v, w)
+    
+    return g
+
+def navigable_small_world_graph(n):
+    g_aux = nx.navigable_small_world_graph(n,1,5, 1.0)
+    g = nx.Graph()
+
+    index = {}
+    
+    for idx, v in enumerate(g_aux.nodes()):
+        (x,y) = v
+        g.add_node(idx)
+        g.node[idx]["x"] = x
+        g.node[idx]["y"] = y
+        index[v] = idx
+    
+    for v in g_aux.nodes():
+        for w in g_aux.edge[v]:
+            idv = index[v]
+            idw = index[w]
+            g.add_edge(idv, idw, cost=1)#distance(g, idv, idw))
+    
+    return g
+
 def translate_grid(g):
     newg = nx.Graph()
     return newg
@@ -56,12 +107,12 @@ if option == "--help":
           " # grid2nn name n: Return a 2D grid of size n*n graph\n" \
           " # grid2nm name n m: Return a 2D grid of size n*m graph\n" \
           " # dm name n: Return a Dorogovtsev-Mendes graph\n" \
-          " # dgm name n: Return a Dorogovtsev-Goltsev-Mendes graph" \
-          " # ws name n k p: Return a Watts-Strogatz small-world graph" \
-          " # rgg name n r [d]: Return a random geometric graph" \
-          " # gtg name n t: Return a geographical geometrica graph" \
-          " # wg name n: Return a Waxamn Graph" \
-          " # nswg name n: Return a Navigable Small Sworld Graph"
+          " # dgm name n: Return a Dorogovtsev-Goltsev-Mendes graph\n" \
+          " # ws name n k p: Return a Watts-Strogatz small-world graph\n" \
+          " # rgg name n r [d]: Return a random geometric graph\n" \
+          " # gtg name n t: Return a geographical geometrica graph\n" \
+          " # wg name n: Return a Waxamn Graph\n" \
+          " # nswg name n: Return a Navigable Small Sworld Graph\n"
 elif option == "--version":
     print "Graph Generator version \"0.1\"\n" \
           "Part of A*mbush Test Package\n" \
@@ -108,7 +159,7 @@ else:
             g = nx.random_geometric_graph(n,r,d)
             name = 'Random Geometric Graph (n='+str(n)+', r='+str(r)+', d='+str(d)+')'
         else:
-            g = nx.random_geometric_graph(n,r)
+            g = random_geometric_graph(n,r)
             name = 'Random Geometric Graph (n='+str(n)+', r='+str(r)+')'
     elif option == "gtg":
         t = float(args[3])
@@ -118,7 +169,7 @@ else:
         g = nx.waxman_graph(n)
         name = 'Waxman Graph (n='+str(n)+')'
     elif option == "nswg":
-        g = nx.navigable_small_world_graph(n)
+        g = navigable_small_world_graph(n)
         name = 'Navigable Small World Graph (n='+str(n)+')'    
     else:
         print("generate_graph: invalid option:"+option)
