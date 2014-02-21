@@ -6,45 +6,45 @@ Database file #1: egbibsample.bib
  :  number
  :        {4} }
 I'm skipping whatever remains of this entry
-You've used 13 entries,
+You've used 15 entries,
             2855 wiz_defined-function locations,
-            714 strings with 6515 characters,
-and the built_in function-call counts, 5225 in all, are:
-= -- 523
-> -- 250
-< -- 2
-+ -- 91
-- -- 88
-* -- 407
-:= -- 852
-add.period$ -- 27
-call.type$ -- 13
-change.case$ -- 80
-chr.to.int$ -- 12
-cite$ -- 13
-duplicate$ -- 203
-empty$ -- 386
-format.name$ -- 102
-if$ -- 1068
+            729 strings with 6738 characters,
+and the built_in function-call counts, 5970 in all, are:
+= -- 603
+> -- 276
+< -- 3
++ -- 100
+- -- 96
+* -- 471
+:= -- 968
+add.period$ -- 31
+call.type$ -- 15
+change.case$ -- 91
+chr.to.int$ -- 14
+cite$ -- 15
+duplicate$ -- 228
+empty$ -- 444
+format.name$ -- 113
+if$ -- 1218
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 17
-newline$ -- 69
-num.names$ -- 39
-pop$ -- 76
+missing$ -- 19
+newline$ -- 79
+num.names$ -- 45
+pop$ -- 82
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 107
 quote$ -- 0
-skip$ -- 172
+skip$ -- 193
 stack$ -- 0
-substring$ -- 265
-swap$ -- 42
-text.length$ -- 2
-text.prefix$ -- 2
+substring$ -- 324
+swap$ -- 46
+text.length$ -- 3
+text.prefix$ -- 3
 top$ -- 0
-type$ -- 97
+type$ -- 115
 warning$ -- 0
-while$ -- 51
-width$ -- 15
-write$ -- 164
+while$ -- 60
+width$ -- 17
+write$ -- 188
 (There was 1 error message)

@@ -1,0 +1,49 @@
+{
+ "directed": false,
+ "nodes": [
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  []
+ ],
+ "edges": [
+  {
+   "src": 0,
+   "dst": 6,
+   "cost": 1.0,
+   "args": []
+  },
+  {
+   "src": 1,
+   "dst": 8,
+   "cost": 1.0,
+   "args": []
+  },
+  {
+   "src": 1,
+   "dst": 2,
+   "cost": 1.0,
+   "args": []
+  },
+  {
+   "src": 3,
+   "dst": 9,
+   "cost": 1.0,
+   "args": []
+  },
+  {
+   "src": 4,
+   "dst": 5,
+   "cost": 1.0,
+   "args": []
+  }
+ ],
+ "name": "Erdos-Renyi Graph (10,0.1) - er10",
+ "num_nodes": 10
+}

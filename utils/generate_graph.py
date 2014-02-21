@@ -112,7 +112,12 @@ if option == "--help":
           " # rgg name n r [d]: Return a random geometric graph\n" \
           " # gtg name n t: Return a geographical geometrica graph\n" \
           " # wg name n: Return a Waxamn Graph\n" \
-          " # nswg name n: Return a Navigable Small Sworld Graph\n"
+          " # nswg name n: Return a Navigable Small Sworld Graph\n"\
+          " # l name n p q: Return a Lobster graph\n"\
+          " # bg name n p: Return a Binomial Graph\n"\
+          " # rr name n d: Return a Random Regular Graph with degree d\n"\
+          " # er name n p: Return a Erdos-Renyi Graph\n"
+
 elif option == "--version":
     print "Graph Generator version \"0.1\"\n" \
           "Part of A*mbush Test Package\n" \
@@ -170,7 +175,51 @@ else:
         name = 'Waxman Graph (n='+str(n)+')'
     elif option == "nswg":
         g = navigable_small_world_graph(n)
-        name = 'Navigable Small World Graph (n='+str(n)+')'    
+        name = 'Navigable Small World Graph (n='+str(n)+')'
+    elif option == "l":
+        p1 = 0.5
+        p2 = 0.5
+        
+        if len(args) > 4:
+            p1 = float(args[4])
+        if len(args) > 5:
+            p2 = float(args[5])
+        
+        g = nx.random_lobster(n, p1, p2)
+        name = 'Lobster ('+str(n)+','+str(p1)+","+str(p2)+')'
+    elif option == "bg":
+        p = 0.1
+        
+        if len(args) > 4:
+            p = float(args[4])
+        
+        g = nx.binomial_graph(n, p)
+        name = 'Binomial Graph ('+str(n)+','+str(p)+')'
+    elif option == "bg":
+        p = 0.1
+
+        if len(args) > 4:
+            p = float(args[4])
+
+        g = nx.binomial_graph(n, p)
+        name = 'Binomial Graph ('+str(n)+','+str(p)+')'
+    elif option == "rr":
+        d = 3
+
+        if len(args) > 4:
+            d = float(args[4])
+        
+        g = nx.random_regular_graph(d, n)
+        name = 'Random Regular Graph ('+str(n)+','+str(d)+')'
+    elif option == "er":
+        p = 0.1
+        
+        if len(args) > 4:
+            p = float(args[4])
+        
+        g = nx.erdos_renyi_graph(n, p)
+        name = 'Erdos-Renyi Graph ('+str(n)+','+str(p)+')'
+    
     else:
         print("generate_graph: invalid option:"+option)
         print("Try generate_graph --help for more information")
@@ -183,7 +232,7 @@ else:
     # Define the Graph
     graph = { "name":name, "num_nodes":len(g.nodes()), "directed":False,
               "nodes":[], "edges":[] }
-
+    
     # Define the Nodes
     for node in g.nodes(data=True):
         info = []

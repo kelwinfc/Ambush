@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.11.8)  20 FEB 2014 18:02
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.11.8)  21 FEB 2014 11:55
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -929,25 +929,22 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [4] (./tables/g.tex
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
-) (./tables/grid.tex
+) (./tables/lobster.tex
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <9> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 5.
-) (./tables/watts.tex)
-(./tables/nswg.tex) (./tables/dm.tex
-Underfull \hbox (badness 7486) in paragraph at lines 5--5
-[]\T1/ptm/b/n/9 Table 5: []\T1/ptm/m/it/9 Calidad de em-boscada para grafos tip
-o
- []
-
-)) (./conclusions.tex
-Underfull \vbox (badness 2384) has occurred while \output is active []
-
-
+) (./tables/er.tex)
+(./tables/grid.tex) (./tables/watts.tex) (./tables/nswg.tex)
 Underfull \hbox (badness 10000) has occurred while \output is active
  
  []
 
-[5]
+[5] (./tables/dm.tex
+Underfull \hbox (badness 7486) in paragraph at lines 5--5
+[]\T1/ptm/b/n/9 Table 7: []\T1/ptm/m/it/9 Calidad de em-boscada para grafos tip
+o
+ []
+
+)) (./conclusions.tex
 Underfull \hbox (badness 1259) in paragraph at lines 16--22
 []\T1/ptm/m/n/9 A*mbush gen-era com-por-tamien-tos de em-boscada in-
  []
@@ -966,33 +963,42 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  
  []
 
-[7
+[7]
+Underfull \hbox (badness 10000) has occurred while \output is active
+ 
+ []
 
-] (./paper.aux) ) 
+[8
+
+] (./paper.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 71 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
- 14692 strings out of 495061
- 257190 string characters out of 1182621
- 441618 words of memory out of 3000000
- 17420 multiletter control sequences out of 15000+50000
+ 14717 strings out of 495061
+ 257439 string characters out of 1182621
+ 460134 words of memory out of 3000000
+ 17434 multiletter control sequences out of 15000+50000
  59026 words of font info for 93 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  56i,11n,61p,425b,831s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
-7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texliv
-e/fonts/type1/urw/symbol/usyr.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
-es/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr
-/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive
-/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (7 pages, 205470 bytes).
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive
+/fonts/type1/urw/symbol/usyr.pfb></usr/share/texmf-texlive/fonts/type1/urw/time
+s/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr/
+share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/
+fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (8 pages, 214561 bytes).
 PDF statistics:
- 225 PDF objects out of 1000 (max. 8388607)
- 44 named destinations out of 1000 (max. 500000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 49 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

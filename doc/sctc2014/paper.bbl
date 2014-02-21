@@ -17,6 +17,11 @@
 \newblock Evolution of networks.
 \newblock \emph{Advances in physics 51}, 4 (2002), 1079--1187.
 
+\bibitem[ER59]{ER59}
+\textsc{Erd{\H{o}}s P., R{\'e}nyi A.}:
+\newblock On random graphs.
+\newblock \emph{Publicationes Mathematicae Debrecen 6} (1959), 290--297.
+
 \bibitem[FGC12a]{FGC12e}
 \textsc{Fern{\'a}ndez K., Gonz{\'a}lez G., Chang C.}:
 \newblock A* mbush family: A* variations for ambush behavior and path diversity
@@ -29,6 +34,11 @@
   de caminos.
 \newblock \emph{Memorias del II Simposio Cient\'ifico y Tecnol\'ogico en
   Ciencias de la Computaci\'on (SCTC 2012)} (2012).
+
+\bibitem[Gal09]{Gal09}
+\textsc{Gallian J.~A.}:
+\newblock A dynamic survey of graph labeling.
+\newblock \emph{The electronic journal of combinatorics 16}, 6 (2009), 1--219.
 
 \bibitem[HNR72]{HNR72}
 \textsc{Hart P., Nilsson N., Raphael B.}:
