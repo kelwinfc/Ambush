@@ -68,7 +68,14 @@ cualquier par de nodos, por lo que no es posible cubrir aquellos nodos
 escapatoria sin pasar por el nodo objetivo. En la tabla \ref{tab:ambush_lobster}
 se muestran los resultados obtenidos utilizando este tipo de grafos.
 A\'alogamente, en la tabla \ref{tab:ambush_er} se muestran los resultados
-para el modelo Erd{\H{o}s-R{\'e}nyi.
+para el modelo Erd{\H{o}s-R{\'e}nyi. Para este tipo de grafos, dada la
+existencia de m\'ultiples caminos entre un par de nodos, no s\'olo se
+evidencia una mejora de la nueva m\'etrica con respecto a la anterior sino
+tambi\'en de las variantes de \ambush\ con respecto a \astar. La mejora
+aportada por \ambush\ parece casi imperceptible al ser estudiada
+con la m\'etrica original, sin embargo, al ser analizado con la nueva
+m\'etrica, se hace notar que el grado de emboscada alcanzado tiende a ser
+el m\'aximo posible.
 
 \input{tables/grid}
 
@@ -76,18 +83,18 @@ Los dem\'as grafos utilizados son de varios tipos provenientes de la
 literatura. El primer tipo de grafos generados explorado son los grafos
 en grilla cuadrada con 8-conectividad. Este tipo de grafos es muy com\'un en el
 desarrollo de juegos debido a la eficacia en la determinaci\'on de caminos
-y en la ubicaci\'on del agente \cite{MF09}.
+y en la ubicaci\'on del agente en una de las casillas \cite{MF09}.
 Los resultados de este experimento se pueden apreciar en la tabla
 \ref{tab:ambush_grid}. A medida que el grafo se hace m\'as grande, la
 calidad media de emboscada se hace mayor, sin embargo, a\'un en grafos
 pequeños se muestra que la emboscada se alcanza efectivamente. Para este
-tipo de grafos, dada la existencia de m\'ultiples caminos entre un par
-de nodos, no s\'olo se evidencia una mejora de la nueva m\'etrica con respecto
-a la anterior sino tambi\'en de las variantes de \ambush\ con respecto a \astar.
-La mejora aportada por \ambush\ parece casi imperceptible al ser estudiada
-con la m\'etrica original, sin embargo, al ser analizado con la nueva
-m\'etrica, se hace notar que el grado de emboscada alcanzado tiende a ser
-el m\'aximo posible.
+tipo de grafos ambas m\'etricas reportan los mismos valores dado que la
+grilla se encuentra completamente conectada, siendo posible alcanzar a
+cualquier nodo por m\'as de una v\'ia. De esta forma,
+ambos conjuntos, el de predecesores y el de asociaci\'on de agentes a
+nodos son el mismo, por lo que el factor de normalizaci\'on act\'ua de la
+misma forma en ambas m\'etricas. Este fen\'omeno no se aprecia en los otros
+tipos de grafos estudiados.
 
 \input{tables/watts}
 

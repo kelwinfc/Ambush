@@ -11,7 +11,11 @@ por \astar. Adem\'as, todas las variaciones mostraron no ser gravemente
 afectadas por diferencias significativas en el tamaño de los grafos y
 del n\'umero de agentes. Dada la diversidad de situaciones planteadas
 en los experimentos, se puede afirmar que \ambush\ muestra un comportamiento
-estable y efectivo.
+estable y efectivo. El tipo de grafos bajo los cuales \ambush\ y sus
+variantes presentaron menor eficacia fueron en los grafos con modelo
+Dorogovtsev-Mendes, en los cuales, si bien el algoritmo fue capaz de
+incrementar significativamente el grado de emboscada, no alcanz\'o
+los resultados obtenidos con los otros tipos de grafo.
 
 \ambush\ genera comportamientos de emboscada inteligentes para situaciones
 en las que múltiples agentes necesitan alcanzar un objetivo común. En
@@ -24,9 +28,11 @@ En este trabajo se present\'o una nueva m\'etrica para medir el grado de
 emboscada que, al utilizar una mayor cantidad de informaci\'on es capaz
 de identificar aquellos casos en los cuales las salidas dejadas al
 adversario son de hecho imposible de cubrir por alguno de los agentes.
-De esta forma, se propone una m\'etrica que eval\'ua de forma m\'as
-estable la calidad de emboscada independientemente de la topolog\'ia
-del grafo base.
+La m\'etrica propuesta eval\'ua de forma m\'as estable la calidad de
+emboscada independientemente de la topolog\'ia del grafo base.
+La métrica propuesta en el presente trabajo es mejor que la anterior
+para medir el nivel de emboscada, como se refleja en la mayoría de
+los experimentos.
 
 En el futuro, se pretende extender este trabajo incluyendo informaci\'on
 de capacidad para cada nodo, de tal forma de incluir restricciones
