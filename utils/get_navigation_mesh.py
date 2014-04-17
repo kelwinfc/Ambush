@@ -1,14 +1,11 @@
-import cv2
-import numpy as np
 from sys import argv
-from scipy.spatial import Delaunay
-import matplotlib.pyplot as plt
+import errno
+import os
 
 import matplotlib.delaunay as triang
-import pylab
-import numpy
-import heapq
-from math import sqrt
+from skimage import morphology
+import numpy as np
+import cv2
 
 def draw_corners(img, corners, v=0.5):
     dst = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
@@ -64,102 +61,50 @@ def draw_triangles(img, points, tri):
         cv2.polylines(dst, [t], True, (255,0,0))
     cv2.imshow("triangles", dst)
     
-def dist_transform(img):
-    def dist((x0,y0),(x1,y1)):
-        dx = x1 - x0
-        dy = y1 - y0
-        
-        return sqrt(dx * dx + dy * dy)
-    
-    ret = np.zeros(img.shape,np.float32)
-    v = np.zeros(img.shape,np.uint8)
-    q = []
-
+def medial_axis(img):
     rows, cols = img.shape
-    
-    for idx, x in enumerate(img):
-        for idy, y in enumerate(x):
-            if y == 0:
-                heapq.heappush(q, (0, (idx, idy), (idx, idy)))
-                v[idx][idy] = 255
-    
     for x in xrange(rows):
-        heapq.heappush(q, (0, (x, 0), (x, 0)))
-        heapq.heappush(q, (0, (x, cols - 1), (x, cols - 1)))
-        v[x][0] = 255
-        v[x][cols - 1] = 255
-    
-    for y in xrange(cols):
-        heapq.heappush(q, (0, (0, y), (0, y)))
-        heapq.heappush(q, (0, (rows - 1, y), (rows - 1, y)))
-        v[0][y] = 255
-        v[rows - 1][y] = 255
-    
-    while len(q) > 0:
-        (d, (x, y), (px, py)) = heapq.heappop(q)
-        
-        ret[x][y] = d
-        
-        for dx in range(-1,2):
-            for dy in range(-1,2):
-                nx = x + dx
-                ny = y + dy
+        img[x][0] = 0
+        img[x][cols-1] = 0
+    for x in xrange(cols):
+        img[0][x] = 0
+        img[rows-1][x] = 0
 
-                if 0 <= nx and nx < rows and 0 <= ny and ny < cols and\
-                       v[nx][ny] == 0 and img[nx][ny] != 0:
-                   v[nx][ny] = 255
-                   heapq.heappush(q, (dist((nx, ny),(px, py)), (nx, ny),
-                                      (px, py)))
-    
-    cv2.imshow("v", v)
-    
-    return cv2.normalize(ret,0,255)
+
+    skel, distance = morphology.medial_axis(img, return_distance=True)
+    skel = [ [ 255 if y else 0 for y in x] for x in skel]
+    skel = np.array(skel)
+
+    return skel, distance
+
+if len(argv) < 2:
+    sys.exit(-1)
+
+path = "results/medial_axis/" + argv[1].split("/")[-1].split(".")[0] + "/"
+print "Output path:", path
+
+try:
+    os.mkdir(path)
+except OSError as exc:
+    if exc.errno == errno.EEXIST and os.path.isdir(path):
+        pass
 
 filename = argv[1]
 img = cv2.imread(filename)
-cv2.imshow('src', img)
+cv2.imwrite(path + 'src.jpg', img)
 
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+gray = cv2.threshold(gray, 20, 255, cv2.THRESH_BINARY)[1]
 
-_, gray = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
-cv2.imshow('binarized', gray)
+kernel = np.ones((3,3), np.uint8)
+gray = cv2.erode(gray, kernel, iterations = 1)
 
-size = np.size(gray)
-skel = np.zeros(gray.shape,np.uint8)
+cv2.imwrite(path + 'binarized.jpg', gray)
+print "Image binarized"
 
-element = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
-done = False
+ma, distance = medial_axis(gray)
 
-d = dist_transform(gray)
+cv2.imwrite(path + 'medial_axis.jpg',  ma)
+cv2.imwrite(path + 'distance_transform.jpg',  distance)
 
-cv2.imshow("skel",d)
-cv2.waitKey(0)
-
-#cv2.imshow("distance", distance)
-
-gray = np.float32(gray)
-
-corners = cv2.cornerHarris(gray,2,3,0.04)
-
-print corners.shape
-v = 0.01
-draw_corners(gray, corners, v)
-points = get_points(corners, v)
-
-print "Num points:", len(points)
-    
-x = np.array([x for (x, _) in points])
-y = np.array([y for (_, y) in points])
-
-cens, edg, tri, neig = triang.delaunay(x,y)
-draw_triangles(gray, points, tri)
-
-
-#for t in tri:
-  ## t[0], t[1], t[2] are the points indexes of the triangle
-  #t_i = [t[0], t[1], t[2], t[0]]
-  #pylab.plot(x[t_i],y[t_i])
-#pylab.plot(x,y,'o')
-cv2.waitKey(0)
-#pylab.show()
-
+print "Medial axis computed"
