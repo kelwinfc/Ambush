@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.17)  27 APR 2014 20:47
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.11.17)  27 APR 2014 21:02
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -751,263 +751,31 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
 ))) (/usr/share/texmf-texlive/tex/latex/multirow/multirow.sty
 \bigstrutjot=\dimen159
 )
-(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrow
-s.code.tex
-File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
-
-(/usr/share/texmf/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
-File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
-\arrowsize=\dimen160
-))
-(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarychain
-s.code.tex
-File: tikzlibrarychains.code.tex 2008/02/27 v2.10 (rcs-revision 1.5)
-
-(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryposit
-ioning.code.tex
-File: tikzlibrarypositioning.code.tex 2008/10/06 v2.10 (rcs-revision 1.7)
-))
-(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatri
-x.code.tex
-File: tikzlibrarymatrix.code.tex 2008/06/18 v2.10 (rcs-revision 1.2)
-)
-(/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryscope
-s.code.tex
-File: tikzlibraryscopes.code.tex 2008/06/27 v2.10 (rcs-revision 1.2)
-) (./paper.aux)
-\openout1 = `paper.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
-LaTeX Font Info:    ... okay on input line 84.
-
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count127
-\scratchdimen=\dimen161
-\scratchbox=\box37
-\nofMPsegments=\count128
-\nofMParguments=\count129
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count130
-\MPscratchDim=\dimen162
-\MPnumerator=\count131
-\everyMPtoPDFconversion=\toks36
-)
-Package hyperref Info: Link coloring ON on input line 84.
- (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
-Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
-
-(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
-Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
-)
-\c@section@level=\count132
-)
-LaTeX Info: Redefining \ref on input line 84.
-LaTeX Info: Redefining \pageref on input line 84.
-\AtBeginShipoutBox=\box38
-
-ABD: EveryShipout initializing macros
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 88.
-LaTeX Font Info:    Try loading font information for OT1+ptmcm on input line 88
-.
-
-(/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptmcm.fd
-File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
-)
-LaTeX Font Info:    Try loading font information for OML+ptmcm on input line 88
-.
-
-(/usr/share/texmf-texlive/tex/latex/psnfss/omlptmcm.fd
-File: omlptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ptmcm.
-)
-LaTeX Font Info:    Try loading font information for OMX+psycm on input line 88
-.
-
-(/usr/share/texmf-texlive/tex/latex/psnfss/omxpsycm.fd
-File: omxpsycm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/psycm.
-)
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 88.
-
-(/usr/share/texmf-texlive/tex/latex/psnfss/ot1ptm.fd
-File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-)
-LaTeX Font Info:    Try loading font information for U+msa on input line 88.
-
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2009/06/22 v3.00 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 88.
-
-(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) (./abstract.tex
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1--31
-
- []
+Package hyperref Info: Option `colorlinks' set `true' on input line 60.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1--31
+! LaTeX Error: File `biblatex.sty' not found.
 
- []
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
 
+Enter file name: x
 
-Underfull \hbox (badness 10000) in paragraph at lines 1--31
-
- []
-
-) (./introduction.tex) (./state_of_the_art.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-[]
- []
-
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
-Underfull \hbox (badness 2418) in paragraph at lines 4--8
-\T1/ptm/m/n/9 pre-vi-a-mente por Fer-nán-dez y co-lab-o-radores [[][][]FGC12a[]
-[]]
- []
-
-) (./definition.tex (./figures/previous_phi.tex)
-(./figures/error_previous_phi.tex)
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[2]
-Overfull \hbox (9.54866pt too wide) in alignment at lines 103--117
- [] [] [] [] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-)
-(./ambush.tex
-Underfull \hbox (badness 1314) in paragraph at lines 12--17
-\T1/ptm/m/n/9 El al-go-ritmo de A* [[][][]HNR72[][]] [[][][]RN93[][]] [[][][]MF
-09[][]] es una
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[3]
-Underfull \hbox (badness 1314) in paragraph at lines 110--116
-\T1/ptm/m/n/9 Buscando min-i-mizar el in-cre-mento en el costo de los
- []
-
-) (./experiments.tex
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[4] (./tables/g.tex
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
-) (./tables/lobster.tex
-LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <9> not available
-(Font)              Font shape `T1/ptm/b/it' tried instead on input line 5.
-)
-Underfull \hbox (badness 2698) in paragraph at lines 8--13
-\T1/ptm/m/n/9 Para cada ex-per-i-mento se es-tu-dian cu-a-tro al-go-rit-mos:
- []
-
-(./tables/er.tex)
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[5] (./tables/grid.tex) (./tables/watts.tex) (./tables/nswg.tex))
-(./conclusions.tex
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[6]
-Underfull \hbox (badness 1259) in paragraph at lines 20--26
-[]\T1/ptm/m/n/9 A*mbush gen-era com-por-tamien-tos de em-boscada in-
- []
-
-) (./paper.bbl (./paper.brf)
-\tf@brf=\write5
-\openout5 = `paper.brf'.
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[7]
-Underfull \hbox (badness 7613) in paragraph at lines 37--37
-[]\T1/ptm/m/sc/8 Fernández K., González G., Chang C.\T1/ptm/m/n/8 :
- []
-
-) (./tables/dm.tex
-Underfull \hbox (badness 7486) in paragraph at lines 5--5
-[]\T1/ptm/b/n/9 Table 7: []\T1/ptm/m/it/9 Calidad de em-boscada para grafos tip
-o
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-)
-Underfull \hbox (badness 10000) has occurred while \output is active
- 
- []
-
-[8] (./paper.aux) )
-(\end occurred inside a group at level 1)
-
-### simple group (level 1) entered at line 72 ({)
-### bottom level 
+ )
+(\end occurred when \ifx on line 63 was incomplete)
+(\end occurred when \ifx on line 63 was incomplete) 
 Here is how much of TeX's memory you used:
- 14716 strings out of 494999
- 257436 string characters out of 1180815
- 433567 words of memory out of 3000000
- 17441 multiletter control sequences out of 15000+50000
- 59026 words of font info for 93 fonts, out of 3000000 for 9000
+ 13412 strings out of 494999
+ 234406 string characters out of 1180815
+ 287314 words of memory out of 3000000
+ 16339 multiletter control sequences out of 15000+50000
+ 4704 words of font info for 16 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 56i,11n,61p,602b,831s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmsy6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf-texlive
-/fonts/type1/urw/symbol/usyr.pfb></usr/share/texmf-texlive/fonts/type1/urw/time
-s/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr/
-share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/
-fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (8 pages, 216324 bytes).
+ 56i,1n,55p,416b,233s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+No pages of output.
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 49 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

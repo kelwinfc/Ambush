@@ -2,20 +2,16 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: paper.aux
 The style file: eg-alpha.bst
 Database file #1: egbibsample.bib
-"{" immediately follows a field name---line 44 of file egbibsample.bib
- :  number
- :        {4} }
-I'm skipping whatever remains of this entry
 You've used 15 entries,
             2855 wiz_defined-function locations,
             729 strings with 6741 characters,
-and the built_in function-call counts, 5968 in all, are:
+and the built_in function-call counts, 5970 in all, are:
 = -- 603
 > -- 276
 < -- 3
 + -- 99
 - -- 96
-* -- 471
+* -- 473
 := -- 968
 add.period$ -- 31
 call.type$ -- 15
@@ -47,4 +43,3 @@ warning$ -- 0
 while$ -- 60
 width$ -- 17
 write$ -- 188
-(There was 1 error message)
