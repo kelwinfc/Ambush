@@ -8,12 +8,12 @@ Database file #1: egbibsample.bib
 I'm skipping whatever remains of this entry
 You've used 15 entries,
             2855 wiz_defined-function locations,
-            729 strings with 6738 characters,
-and the built_in function-call counts, 5970 in all, are:
+            729 strings with 6741 characters,
+and the built_in function-call counts, 5968 in all, are:
 = -- 603
 > -- 276
 < -- 3
-+ -- 100
++ -- 99
 - -- 96
 * -- 471
 := -- 968
@@ -37,7 +37,7 @@ purify$ -- 107
 quote$ -- 0
 skip$ -- 193
 stack$ -- 0
-substring$ -- 324
+substring$ -- 323
 swap$ -- 46
 text.length$ -- 3
 text.prefix$ -- 3

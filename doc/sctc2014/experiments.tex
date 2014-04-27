@@ -1,6 +1,10 @@
 \section{Experimentos}
 \label{sec:experiments}
 
+\input{tables/g}
+
+\input{tables/lobster}
+
 Para cada experimento se estudian cuatro algoritmos:
 una implementaci\'on base de \astar\ que sirve de referencia,
 \ambush, \pambush\ (\textbf{P}) con mecanismo de prioridad determinado por
@@ -25,7 +29,7 @@ se generan grafos aleatoriamente de distintos tamaños. Para cada
 experimento se efect\'uan 100 disposiciones distintas de agentes
 y del nodo objetivo. En los casos donde se referencia
 que todos los agentes parten de la misma posici\'on inicial, \'esta es
-aleatoria mas com\'un para todos los agentes.
+com\'un para todos ellos, sin embargo, su disposici\'on es aleatoria.
 Para cada uno de estos algoritmos se muestra el valor de emboscada
 utilizando la m\'etrica originalmente propuesta y utilizando la
 m\'etrica propuesta en el presente trabajo. Se prob\'o variar el
@@ -35,8 +39,6 @@ presentadas en el trabajo previo \cite{FGC12} con 60 y 85 nodos
 respectivamente. Estos mapas provienen de la poligonalizaci\'on de mapas
 de juego en pol\'igonos. Este tipo de grafos son ampliamente utilizados
 en juegos\cite{MF09}.
-
-\input{tables/g}
 
 Para los experimentos con los grafos iniciales (g1 y g2), se mostr\'o
 la efectividad de las tres variantes propuestas con respecto a \astar.
@@ -49,8 +51,6 @@ se puede apreciar como en los casos donde los agentes parten de una misma
 posici\'on inicial, las diversas variantes de \ambush\ logran efectivamente
 mejorar el grado de emboscada, incluso con un n\'umero bajo de agentes
 involucrados.
-
-\input{tables/lobster}
 
 \input{tables/er}
 
@@ -80,6 +80,10 @@ el m\'aximo posible.
 
 \input{tables/grid}
 
+\input{tables/watts}
+
+\input{tables/nswg}
+
 Los dem\'as grafos utilizados son de varios tipos provenientes de la
 literatura. El primer tipo de grafos generados explorado son los grafos
 en grilla cuadrada con 8-conectividad, los cuales son muy comunes en el
@@ -97,24 +101,18 @@ nodos son el mismo, por lo que el factor de normalizaci\'on act\'ua de la
 misma forma en ambas m\'etricas. Este fen\'omeno no se aprecia en los otros
 tipos de grafos estudiados.
 
-\input{tables/watts}
-
-\input{tables/nswg}
-
 Seguidamente se experiment\'o con grafos con propiedad de mundo-pequeño
 (Small-World Networks) \cite{WS98}. En este tipo de grafos
 la mayor\'ia de los nodos no son vecinos de los dem\'as, sin embargo,
 la mayor\'ia son alcanzables por cualquier otro utilizando caminos con
 un n\'umero corto de pasos. Este tipo de grafos podr\'ian ser dif\'iciles
-para un m\'etodo como \ambush debido a esta propiedad, al no ofrecer suficiente
+para un m\'etodo como \ambush\ debido a esta propiedad, al no ofrecer suficiente
 distancia para que los agentes se alejen imposibilitando as\'i alcanzar la
 emboscada. Sin embargo, en las tablas \ref{tab:ambush_watts} y \ref{tab:ambush_nswg}
 se muestra que el algoritmo es capaz de so\-bre\-lle\-var esta situaci\'on y lograr
 emboscadas perfectas en muchos de los casos. Los tipos de grafos con esta
 propiedad es\-tu\-dia\-dos son los propuestos por Watts y Strogatz \cite{WS98}
 y el propuesto por Kleinberg \cite{Kle00}.
-
-\input{tables/dm}
 
 Finalmente, se realizaron experimentos con el modelo de grafos propuesto
 por Dorogovtsev y Mendes \cite{DM02}. El cual produce grafos planares,

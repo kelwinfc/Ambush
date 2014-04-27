@@ -1,10 +1,10 @@
-\section{A*, A\*mbush y sus Variantes}
+\section{A*, A*mbush y sus Variantes}
 \label{sec:ambush}
 
 En esta secci\'on se muestra el conjunto de adaptaciones realizadas
 al algoritmo de \astar, presentadas anteriormente en el art\'iculo
 \cite{FGC12e}, para el c\'alculo de emboscadas. Esta secci\'on se
-presenta por fined de completitud del trabajo planteado para un
+presenta por fines de completitud del trabajo planteado para un
 mayor entendimiento de los experimentos realizados.
 
 \subsection{\astar}
@@ -134,7 +134,7 @@ el valor de $R$. El algoritmo escoge como mejor $R$ aquel
 con m\'inimo radio que incremente el grado de emboscada. En
 caso de empates, el algoritmo considera el balance de los
 agentes (\ref{eq:distr}) a trav\'es de los predecesores del
-nodo objetivo, con el fin de lograr una distribuci\'on m\'as
+nodo objetivo ($pred(t)$), con el fin de lograr una distribuci\'on m\'as
 equilibrada de \'estos. 
 En la f\'ormula presentada (\ref{eq:distr}), $n$ representa
 el n\'umero de agentes que ya han calculado el camino y

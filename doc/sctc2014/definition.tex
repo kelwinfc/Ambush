@@ -29,7 +29,7 @@ $A$ al nodo $t$ se defini\'o como \cite{FGC12e}\cite{FGC12}:
 \end{small}
 
 Esta m\'etrica define la emboscada como la proporción de nodos adyacentes
-al nodo objetivo desde los cuales algún agente está alcanzándolo. Normalizando
+al nodo objetivo desde los cuales algún agente está alcanzándolo. Acotando
 este valor con res\-pec\-to al m\'aximo n\'umero de nodos adyacentes a $t$ mediante
 los cuales, con el n\'umero de agentes disponibles, podr\'ia \'este ser alcanzado.
 Por lo tanto, $0 \leq \Phi(t) \leq 1$. Bajo estas condiciones, el objetivo
@@ -70,7 +70,7 @@ para poder discriminar correctamente entre las escapatorias que podr\'ian
 ser cubiertas por alg\'un agente y aquellas que no. Esta nueva medida,
 denotada por $\Phi^*$ (\ref{eq:new}), busca normalizar a los agentes utilizando
 el tamaño de la m\'axima asociaci\'on de estos a los nodos predecesores
-del objetivo que capaces de ser alcanzados. Se define $\Phi^*$ como:
+del objetivo capaces de ser alcanzados. Se define $\Phi^*$ como:
 
 \begin{small}
 \begin{eqnarray}
@@ -83,12 +83,21 @@ del objetivo que capaces de ser alcanzados. Se define $\Phi^*$ como:
 
 \noindent
 donde $BipG(G,A,t)$ define el grafo bipartito que asocia a agentes con
-los nodos alcanzables por cada uno que sean predecesores del nodo objetivo
-(\ref{eq:bipgraph}).
+los predecesores del nodo objetivo alcanzables por ellos (\ref{eq:bipgraph}).
 Este grafo se construye considerando como nodos el conjunto
 de los agentes y el conjunto de los nodos predecesores alcanzables por alg\'un
 agente (\ref{eq:bipgraphdst}). Por otra parte, los arcos provienen
 de la matriz de alcanzabilidad entre agentes y predecesores (\ref{eq:bipgraphedges}).
+
+En la definici\'on del grafo mencionado, se hace uso de las funciones
+auxiliares \textit{Reduced}, \textit{Reachable}, \textit{Scope} y
+\textit{ScopeXY}. La funci\'on
+\textit{Reduced} retorna el grafo resultante de extraer un nodo al grafo
+dado como argumento. Las funciones \textit{Reachable} y \textit{Scope}
+definen los nodos alcanzables por un agente y desde un v\'ertice espec\'ifico
+respectivamente. Finalmente, el predicado \textit{ScopeXY} determina 
+si el agente $x$ es capaz de alcanzar al nodo $y$ sin pasar por $t$.
+Estas funciones son definidas formalmente a continuaci\'on.
 
 \begin{small}
 \begin{eqnarray}
