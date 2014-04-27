@@ -4,7 +4,7 @@
 Para cada experimento se estudian cuatro algoritmos:
 una implementaci\'on base de \astar\ que sirve de referencia,
 \ambush, \pambush\ (\textbf{P}) con mecanismo de prioridad determinado por
-la distancia real de los agentes a la meta y finalmente, \sarambush\
+la distancia real de los agentes a la meta y, finalmente, \sarambush\
 (\textbf{SAR}).
 
 \begin{comment}
@@ -30,7 +30,7 @@ Para cada uno de estos algoritmos se muestra el valor de emboscada
 utilizando la m\'etrica originalmente propuesta y utilizando la
 m\'etrica propuesta en el presente trabajo. Se prob\'o variar el
 n\'umero de agentes con el fin de mostrar su impacto en el grado de emboscada.
-Adem\'as se muestran resultados con las dos instancias de mapas ($g1$ y $g2$)
+Adem\'as, se muestran resultados con las dos instancias de mapas ($g1$ y $g2$)
 presentadas en el trabajo previo \cite{FGC12} con 60 y 85 nodos
 respectivamente. Estos mapas provienen de la poligonalizaci\'on de mapas
 de juego en pol\'igonos. Este tipo de grafos son ampliamente utilizados
@@ -42,9 +42,9 @@ Para los experimentos con los grafos iniciales (g1 y g2), se mostr\'o
 la efectividad de las tres variantes propuestas con respecto a \astar.
 Adicionalmente, se evidencia en este y otros experimentos la mejora
 al evaluar el grado de emboscada utilizando la m\'etrica nueva, dado
-que la original subeval\'ua varios casos de emboscada.
+que la original subeval\'ua va\-rios casos de emboscada.
 Los resultados de este experimento se pueden evidenciar en la tabla
-\ref{tab:ambush_g}. Asimismo, en este y en los experimentos subsiguientes
+\ref{tab:ambush_g}. Asimismo, en este y en los experimentos subsiguientes,
 se puede apreciar como en los casos donde los agentes parten de una misma
 posici\'on inicial, las diversas variantes de \ambush\ logran efectivamente
 mejorar el grado de emboscada, incluso con un n\'umero bajo de agentes
@@ -65,12 +65,13 @@ reducir el n\'umero de componentes fuertemente conexas. Los experimentos sobre
 grafos tipo langosta representan el peor caso para la m\'etrica originalmente
 propuesta; dado que estos son \'arboles, existe s\'olo un camino entre
 cualquier par de nodos, por lo que no es posible cubrir aquellos nodos
-escapatoria sin pasar por el nodo objetivo. En la tabla \ref{tab:ambush_lobster}
-se muestran los resultados obtenidos utilizando este tipo de grafos.
-A\'alogamente, en la tabla \ref{tab:ambush_er} se muestran los resultados
+es\-ca\-pa\-to\-ria sin pasar por el nodo objetivo. En la tabla
+\ref{tab:ambush_lobster} se muestran los resultados obtenidos utilizando
+este tipo de grafos.
+An\'alogamente, en la tabla \ref{tab:ambush_er} se muestran los resultados
 para el modelo Erd{\H{o}s-R{\'e}nyi. Para este tipo de grafos, dada la
-existencia de m\'ultiples caminos entre un par de nodos, no s\'olo se
-evidencia una mejora de la nueva m\'etrica con respecto a la anterior sino
+e\-xis\-ten\-cia de m\'ultiples caminos entre un par de nodos, no s\'olo se
+evidencia una mejora de la nueva m\'etrica con respecto a la anterior, sino
 tambi\'en de las variantes de \ambush\ con respecto a \astar. La mejora
 aportada por \ambush\ parece casi imperceptible al ser estudiada
 con la m\'etrica original, sin embargo, al ser analizado con la nueva
@@ -81,9 +82,9 @@ el m\'aximo posible.
 
 Los dem\'as grafos utilizados son de varios tipos provenientes de la
 literatura. El primer tipo de grafos generados explorado son los grafos
-en grilla cuadrada con 8-conectividad. Este tipo de grafos es muy com\'un en el
+en grilla cuadrada con 8-conectividad, los cuales son muy comunes en el
 desarrollo de juegos debido a la eficacia en la determinaci\'on de caminos
-y en la ubicaci\'on del agente en una de las casillas \cite{MF09}.
+y en la ubicaci\'on del agente en una de las ca\-si\-llas \cite{MF09}.
 Los resultados de este experimento se pueden apreciar en la tabla
 \ref{tab:ambush_grid}. A medida que el grafo se hace m\'as grande, la
 calidad media de emboscada se hace mayor, sin embargo, a\'un en grafos
@@ -108,9 +109,9 @@ un n\'umero corto de pasos. Este tipo de grafos podr\'ian ser dif\'iciles
 para un m\'etodo como \ambush debido a esta propiedad, al no ofrecer suficiente
 distancia para que los agentes se alejen imposibilitando as\'i alcanzar la
 emboscada. Sin embargo, en las tablas \ref{tab:ambush_watts} y \ref{tab:ambush_nswg}
-se muestra que el algoritmo es capaz de sobrellevar esta situaci\'on y lograr
+se muestra que el algoritmo es capaz de so\-bre\-lle\-var esta situaci\'on y lograr
 emboscadas perfectas en muchos de los casos. Los tipos de grafos con esta
-propiedad estudiados son los propuestos por Watts y Strogatz \cite{WS98}
+propiedad es\-tu\-dia\-dos son los propuestos por Watts y Strogatz \cite{WS98}
 y el propuesto por Kleinberg \cite{Kle00}.
 
 \input{tables/dm}

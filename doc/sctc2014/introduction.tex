@@ -1,20 +1,20 @@
 \section{Introducci\'on}
 
-La generaci\'on de conductas inteligentes ha sido un reto constante
+La generaci\'on de conductas inteligentes ha sido un reto cons\-tan\-te
 en el \'area de Inteligencia Artificial para Videojuegos \cite{MF09},
-frecuentemente derivado en el desarrollo de acciones prestablecidas que
+frecuentemente derivado en el desarrollo de acciones preestablecidas que
 el usuario puede f\'acilmente identificar despu\'es de varias ejecuciones
-del juego. Esta caracter\'istica se evidencia a\'un m\'as com\'un cuando
+del juego. Esta caracter\'istica se evidencia, m\'as com\'unmente, cuando
 se trata de la generaci\'on de movimientos t\'acticos y estrat\'egicos
 grupales, los cuales suelen ser sumamente complejos de implementar.
 
 Un problema muy tratado en la literatura es la b\'usqueda de caminos
-a un punto com\'un, por parte de grupos de agentes dentro de un juego
+a un punto com\'un por parte de grupos de agentes dentro de un juego
 \cite{MF09}. Este punto suele venir dado por un lugar en el mapa de juego,
 potencialmente la posici\'on del oponente. El esquema regularmente utilizado
 es generar caminos de costo m\'inimo \cite{HNR72} \cite{RN93}
-hacia este punto, sobre el grafo inducido por el mapa del juego. Es
-muy probable, que estos caminos confluyan, evitando la diversidad de
+hacia este punto sobre el grafo inducido por el mapa del juego. Es
+muy pro\-ba\-ble que estos caminos confluyan, evitando la diversidad de
 rutas y exploraci\'on del mapa.
 
 Al efectuar una persecuci\'on al oponente, la utilizaci\'on de caminos
@@ -22,26 +22,26 @@ Al efectuar una persecuci\'on al oponente, la utilizaci\'on de caminos
 por lo que es de especial inter\'es generar mecanismos de diversificaci\'on de
 rutas que generen situaciones de emboscada.
 
-Anteriormente, fue propuesta una soluci\'on para este problema utilizando
-variantes del algoritmo de A* \cite{FGC12e}\cite{FGC12}. Estas
-variantes muestran ser efectivas en el c\'alculo de rutas de emboscada.
+Anteriormente, fue propuesta una soluci\'on para este pro\-ble\-ma utilizando
+variantes del algoritmo de A* \cite{FGC12e}\cite{FGC12}, las cuales
+muestran ser efectivas en el c\'alculo de rutas de emboscada.
 El presente trabajo pretende demostrar que dicho enfoque se adapta bien
 ante diversos tipos de grafos de distinto tamaño.
 Para realizar esta evaluaci\'on, se propone una nueva m\'etrica para validar
-la calidad de una emboscada, que incorpora m\'as informaci\'on que la m\'etrica
+la calidad de una emboscada, incorporando m\'as informaci\'on que la m\'etrica
 planteada originalmente. Esta nueva m\'etrica incluye informaci\'on de
-alcanzabilidad por parte de los agentes que pretenden realizar la emboscada
-a las salidas dejadas como escapatoria. Esto con el fin de no penalizar casos
-en los cuales el nivel de emboscada alcanzado es el m\'aximo posible
-dadas las condiciones iniciales.
+alcanzabilidad por parte de los agentes, los cuales que pretenden realizar la
+emboscada a las salidas dejadas como escapatoria. Esto, con el fin de no
+penalizar casos en los cuales el nivel de emboscada alcanzado es el m\'aximo
+posible dadas las condiciones iniciales.
 
-El resto de este art\'iculo est\'a organizado de la siguiente manera.
+El resto de este art\'iculo est\'a organizado como sigue.
 En la secci\'on \ref{sec:state_of_the_art} se presentan distintas soluciones
-de la literatura para este problema, en la secci\'on \ref{sec:definition}
+de la literatura para este problema; en la secci\'on \ref{sec:definition}
 se muestra la definici\'on formal del problema, en conjunto con la m\'etrica
 anterior y la planteada en el presente trabajo para medir la calidad de una
 estrategia de emboscada. A continuaci\'on, en la secci\'on \ref{sec:ambush}
-son mostrados los algoritmos de \ambush y sus variantes, anteriormente
+son mostrados los algoritmos de \ambush\ y sus variantes, anteriormente
 presentados con mayor detalle por Fern\'andez y colaboradores
 \cite{FGC12e}\cite{FGC12}. Los ex\-pe\-ri\-men\-tos realizados se incluyen en
 la secci\'on \ref{sec:experiments} y, finalmente, las conclusiones y trabajo

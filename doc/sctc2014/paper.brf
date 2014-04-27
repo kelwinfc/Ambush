@@ -6,11 +6,11 @@
 \backcite {FGC12}{{1}{1}{section.1}}
 \backcite {FGC12e}{{1}{1}{section.1}}
 \backcite {FGC12}{{1}{1}{section.1}}
-\backcite {FGC12e}{{1}{2}{section.2}}
-\backcite {FGC12}{{1}{2}{section.2}}
-\backcite {Sil06}{{1}{2}{section.2}}
-\backcite {TCG12}{{1}{2}{section.2}}
-\backcite {Sil06}{{1}{2}{section.2}}
+\backcite {FGC12e}{{2}{2}{section.2}}
+\backcite {FGC12}{{2}{2}{section.2}}
+\backcite {Sil06}{{2}{2}{section.2}}
+\backcite {TCG12}{{2}{2}{section.2}}
+\backcite {Sil06}{{2}{2}{section.2}}
 \backcite {TCG12}{{2}{2}{section.2}}
 \backcite {FGC12e}{{2}{3}{section.3}}
 \backcite {FGC12}{{2}{3}{section.3}}
@@ -25,8 +25,6 @@
 \backcite {CLRS09}{{3}{4.1}{subsection.4.1}}
 \backcite {FGC12e}{{3}{4.2}{subsection.4.2}}
 \backcite {HNR72}{{4}{4.2}{subsection.4.2}}
-\backcite {MF09}{{4}{4.2}{subsection.4.2}}
-\backcite {CS11}{{4}{4.2}{subsection.4.2}}
 \backcite {MF09}{{4}{4.2}{subsection.4.2}}
 \backcite {CS11}{{4}{4.2}{subsection.4.2}}
 \backcite {FGC12}{{5}{5}{section.5}}

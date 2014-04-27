@@ -33,16 +33,16 @@ al nodo objetivo desde los cuales algún agente está alcanzándolo. Normalizand
 este valor con res\-pec\-to al m\'aximo n\'umero de nodos adyacentes a $t$ mediante
 los cuales, con el n\'umero de agentes disponibles, podr\'ia \'este ser alcanzado.
 Por lo tanto, $0 \leq \Phi(t) \leq 1$. Bajo estas condiciones, el objetivo
-de un algoritmo de generaci\'on de emboscadas es maximilar el
+de un algoritmo de generaci\'on de emboscadas es maximizar el
 valor de $\Phi(t)$, dando prioridad a la diversidad de los caminos
 considerados por el conjunto de agentes sobre su optimalidad.
 
 En la figura \ref{fig:prev_phi}, se pueden observar en el grafo
 superior dos agentes situados en los nodos izquierdos. Los caminos
-seleccionados por los agentes hasta el destino $t$ se presenta con
+seleccionados por los agentes hasta el destino $t$ se presentan con
 una l\'inea continua, mientras que los arcos no seleccionados se
 presentan con una l\'inea segmentada. El n\'umero de nodos adyacentes
-al destino es de cuatro. De estos cuatro nodos, s\'olo dos están siendo
+al destino es de cuatro, de los cuales, s\'olo dos están siendo
 considerados en los caminos de los agentes. Sin embargo, es el m\'aximo
 grado de emboscada alcanzable con el n\'umero de agentes implicados.
 En el escenario inferior se est\'an utilizando dos agentes para cubrir
@@ -52,12 +52,12 @@ una \'unica escapatoria, por lo que la emboscada no es \'optima.
 
 Sin embargo, esta m\'etrica penaliza casos donde no es posible alcanzar
 una mejor emboscada, a\'un cuando se cuenta con suficientes agentes, debido
-a la configuraci\'on del grafo y de las posiciones iniciales de estos. 
+a la configuraci\'on del grafo y a las posiciones iniciales de estos. 
 Ejemplos de estos casos pueden ser observados en la figura \ref{fig:error_phi}. En
 la situaci\'on superior, se observa que a pesar de contar con cuatro agentes,
 las dos salidas restantes no son alcanzables por estos sin pasar antes por el
 nodo objetivo. Por otra parte, en la situaci\'on inferior, a pesar de que todas
-las salidas son alcanzables por los agentes, no es posible alcanzar una
+las salidas son alcanzables por los agentes, no es posible lograr una
 configuraci\'on de caminos capaz de cubrir todas las salidas. Para ambos
 casos, a pesar de que la asignaci\'on de caminos es la mejor dadas las
 condiciones iniciales, la m\'etrica originalmente planteada reporta resultados
@@ -68,9 +68,9 @@ sub\'optimos.
 Por lo tanto, es necesario utilizar una nueva medida de emboscada
 para poder discriminar correctamente entre las escapatorias que podr\'ian
 ser cubiertas por alg\'un agente y aquellas que no. Esta nueva medida,
-denotada por $\Phi^*$ (\ref{eq:new}) busca normalizar a los agentes utilizando
-el tamaño de la m\'axima asociaci\'on de agentes a los nodos predecesores
-del objetivo que \'estos son capaces de alcanzar. Se define $\Phi^*$ como:
+denotada por $\Phi^*$ (\ref{eq:new}), busca normalizar a los agentes utilizando
+el tamaño de la m\'axima asociaci\'on de estos a los nodos predecesores
+del objetivo que capaces de ser alcanzados. Se define $\Phi^*$ como:
 
 \begin{small}
 \begin{eqnarray}
@@ -109,7 +109,7 @@ ScopeXY(G,A,t,x,y) &=& x \in A \ \wedge\ y \in Scope(Reduced(G,t),pos(x))\nonumb
 \end{small}
 
 \noindent
-y donde, asumiendo que el operador $argmax$ retorna el conjunto de mayor
+Asumiendo que el operador $argmax$ retorna el conjunto de mayor
 tamaño que eval\'ue como cierta la condici\'on expuesta, se define
 la m\'axima asociaci\'on de un grafo como (\ref{eq:mm})
 
@@ -128,5 +128,5 @@ La definici\'on ac\'a planteada en t\'erminos de generaci\'on de subconjuntos
 es utilizada \'unicamente por motivos de definici\'on formal. En cualquier caso,
 el costo asociado a calcular la calidad de la emboscada no se ve reflejado en
 el c\'alculo de las rutas para los agentes, dado que esto es un procedimiento
-de validaci\'on experimental y no forma parte del algoritmo de \ambush ni de
+de validaci\'on experimental y no forma parte del algoritmo de \ambush\ ni de
 sus va\-rian\-tes.
