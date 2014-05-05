@@ -4,6 +4,7 @@
 
 \documentclass{egpubl}
 
+
 % --- for  Annual CONFERENCE
 % \ConferenceSubmission % uncomment for Conference submission
 % \ConferencePaper      % uncomment for (final) Conference Paper
@@ -49,6 +50,15 @@
 \usepackage{tikz}
 \usepackage{multirow}
 
+%\usepackage[plainpages=false,pdfpagelabels]{hyperref}
+\usepackage{hyperref}
+\hypersetup{colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+urlcolor=black
+}
+
 \usetikzlibrary{arrows,chains,matrix,positioning,scopes}
 
 % For backwards compatibility to old LaTeX type font selection.
@@ -67,7 +77,7 @@
 \newcommand{\sarambush}{SAR-A*mbush}
 
 \title[Ambush]%
-      {Pruebas de Generaci\'on de Emboscadas Utilizando A*mbush}
+      {M\'etrica para Evaluaci\'on de Emboscadas Utilizando \ambush}
 
 % for anonymous conference submission please enter your SUBMISSION ID
 % instead of the author's name (and leave the affiliation blank) !!
@@ -91,10 +101,13 @@
 \input{definition}
 \input{ambush}
 \input{experiments}
+
 \input{conclusions}
 %\input{extra}
 
 \bibliographystyle{eg-alpha}
 \bibliography{egbibsample}
+
+\input{tables/dm}
 
 \end{document}

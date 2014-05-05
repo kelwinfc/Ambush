@@ -10,7 +10,7 @@
 \textsc{Cui X., Shi H.}:
 \newblock Direction oriented pathfinding in video games.
 \newblock \emph{International Journal of Artificial Intelligence \&
-  Applications 2} (2011).
+  Applications 2}, 4 (2011).
 
 \bibitem[DM02]{DM02}
 \textsc{Dorogovtsev S.~N., Mendes J.~F.}:
@@ -30,8 +30,8 @@
 
 \bibitem[FGC12b]{FGC12}
 \textsc{Fern{\'a}ndez K., Gonz{\'a}lez G., Chang C.}:
-\newblock A mbush: una variaci{\'o}n de a para generar emboscadas y diversidad
-  de caminos.
+\newblock A*mbush: una variaci{\'o}n de {A}* para generar emboscadas y
+  diversidad de caminos.
 \newblock \emph{Memorias del II Simposio Cient\'ifico y Tecnol\'ogico en
   Ciencias de la Computaci\'on (SCTC 2012)} (2012).
 

@@ -1,10 +1,10 @@
-\section{A*, A\*mbush y sus Variantes}
+\section{A*, A*mbush y sus Variantes}
 \label{sec:ambush}
 
 En esta secci\'on se muestra el conjunto de adaptaciones realizadas
 al algoritmo de \astar, presentadas anteriormente en el art\'iculo
 \cite{FGC12e}, para el c\'alculo de emboscadas. Esta secci\'on se
-presenta por fined de completitud del trabajo planteado para un
+presenta por fines de completitud del trabajo planteado para un
 mayor entendimiento de los experimentos realizados.
 
 \subsection{\astar}
@@ -13,7 +13,7 @@ El algoritmo de \astar\ \cite{HNR72}\cite{RN93}\cite{MF09}
 es una variación del algoritmo de Dijkstra \cite{CLRS09}
 para cómputos de caminos de costo mínimo.
 Consiste en un algoritmo de búsqueda informada \cite{RN93},
-basado en los siguientes elementos:
+basado en los siguientes e\-le\-men\-tos:
 
 \begin{itemize}
 \item $g$: Es el costo acumulado desde el nodo inicial a un nodo actual $v$.
@@ -40,12 +40,12 @@ computando el costo heurístico de cada nodo una sola vez.
 
 \subsection{\ambush}
 
-A*mbush, presentado como una variaci\'on de \astar\ para el c\'alculo
+\ambush, presentado como una variaci\'on de \astar\ para el c\'alculo
 de emboscadas\cite{FGC12e}, consiste en una modificación de la
 función $g$, que favorezca la diversidad de caminos, denominada $g'$.
 Esta modificaci\'on busca penalizar aquellos nodos/arcos a trav\'es
-de los cuales pasen m\'as agentes, para esto, se asume que los
-agentes pueden establecer comunicaci\'on total entre ellos para
+de los cuales pasen m\'as agentes, a\-su\-mien\-do que estos pueden
+establecer comunicaci\'on total entre ellos para
 obtener informaci\'on compartida del c\'alculo de los caminos.
 
 Sea $\Psi(v,i) = 1+(\# j : j \in A \wedge v \in path(j))$,
@@ -53,7 +53,7 @@ el número de agentes distintos al agente $i$, que contienen al
 nodo $v$ en sus caminos hasta $t$. Se considera como nulo los
 caminos a\'un no computados de los otros agentes.
 Para el nodo inicial, se considera $g'(pos(i),i) = 0$.
-Sea $<v,w>$ el siguiente arco a considerar en la expansión del
+Sea $<v,w>$ el si\-guien\-te arco a considerar en la expansión del
 nodo $v$ en una iteración cualquiera del algoritmo, se considera
 $g'(w, i) = g'(v,i) + \lambda_i(<v,w>) \cdot \Psi(w,i)^2$.
 
@@ -69,14 +69,12 @@ inicial de la función $\Psi$, dando como complejidad en tiempo
 $\bigO(|V|log(|V|) + |V|*h + |E| + |A|*|V| )$.
 
 En el campo específico de los videjuegos, los grafos
-de interés, vienen dados por la división en polígonos
-del mapa
-\cite{MF09} \cite{CS11}
-(regularmente con pocos lados), según las
+de interés vienen dados por la división en polígonos
+del mapa (regularmente con pocos lados), según las
 regiones transitables de éste o cuadrículas y sus
 adyacencias \cite{MF09} \cite{CS11}.
 Dado que los polígonos tienen un número
-reducido de lados, estos grafos, suelen ser poco densos;
+reducido de lados, estos grafos suelen ser poco densos;
 es decir, $|E| \in \bigO(|V|)$, por lo que el tiempo
 de ejecución de este método, sobre los grafos de interés
 en el área de videojuegos, viene dado por
@@ -87,21 +85,21 @@ $\bigO(|V|(log(|V|) + h + |A|) )$.
 Los caminos calculados por \ambush\ pueden verse m\'as o menos
 naturales dependiendo del orden en el cual los agentes computan
 las rutas. Por ejemplo, si un agente cercano al oponente escoge
-su camino de \'ultimo, este proceder\'a a recorrer una ruta
-larga, dando prioridad a la diversificaci\'on, mientras que
+su camino de \'ultimo, este pro\-ce\-de\-r\'a a recorrer una ruta
+larga dando prioridad a la diversificaci\'on, mientras que
 agentes alejados, por los cuales el jugador no suele tener un
 foco de atenci\'on alto, toman rutas \'optimas hacia el objetivo.
 \pambush\ se trata de una variaci\'on de \ambush\ que considera el
 orden del c\'omputo de los caminos de acuerdo a un m\'etodo de
 asignaci\'on de prioridades P. Este m\'etodo puede considerar
-no s\'olo la distancia sino tambi\'en otros factores dependientes
+no s\'olo la distancia, sino tambi\'en otros factores dependientes
 de la aplicaci\'on particular. En este trabajo se considera la
 prioridad de acuerdo a la distancia al destino.
 
 Otra ventaja, al considerar este m\'etodo de prioridades, es que
 \pambush\ alcanza siempre la meta en el menor tiempo posible por al
 menos uno de los agentes. A pesar de que el costo de calcular
-\pambush con distancia real es mayor que el costo de \ambush\ 
+\pambush\ con distancia real es mayor que el costo de \ambush\ 
 para un \'unico agente, el costo amortizado del c\'alculo de
 todos los agentes es el mismo que el de \ambush. Se sugiere
 utilizar otro tipo de distancias como la euclidiana en caso
@@ -109,14 +107,14 @@ de ser necesario disminuir los tiempos de respuesta.
 
 \subsection{\rambush}
 
-Buscando minimizar el incremento en el costo de los caminos
-se present\'o \rambush. El cual plantea ejecutar \ambush\ una
-vez alcanzado una cierta distancia m\'inima al objetivo ($R$) y,
+Buscando minimizar el incremento en el costo de los caminos,
+se present\'o \rambush, el cual plantea ejecutar \ambush\ una
+vez alcanzada una cierta distancia m\'inima al objetivo ($R$) y,
 antes de alcanzar este punto, utilizar \astar. De esta forma,
-se evita que los agentes escojan rutas innecesariamente largas
-desde un inicio.
+se evita que los agentes escojan rutas in\-ne\-ce\-sa\-ria\-men\-te
+largas desde un inicio.
 
-Sin embargo, esta soluci\'on es menos general que la original,
+Sin embargo, esta soluci\'on es menos general que la o\-ri\-gi\-nal,
 dado que requiere la incorporaci\'on del radio $R$, el cual es
 variable para cada posible mapa de juego y disposici\'on de los
 agentes. Es por esto que se plantea la variante \sarambush, la
@@ -136,7 +134,7 @@ el valor de $R$. El algoritmo escoge como mejor $R$ aquel
 con m\'inimo radio que incremente el grado de emboscada. En
 caso de empates, el algoritmo considera el balance de los
 agentes (\ref{eq:distr}) a trav\'es de los predecesores del
-nodo objetivo, con el fin de lograr una distribuci\'on m\'as
+nodo objetivo ($pred(t)$), con el fin de lograr una distribuci\'on m\'as
 equilibrada de \'estos. 
 En la f\'ormula presentada (\ref{eq:distr}), $n$ representa
 el n\'umero de agentes que ya han calculado el camino y
@@ -162,9 +160,9 @@ o igual que la distancia a la meta del agente.
 
 La eficiencia de esta variante esta condicionada al n\'umero de
 nodos considerados como candidatos a radio. Con el fin de demostrar
-el potencial m\'aximo del algoritmo, se considera cada posible nodo
-como candidato, sin embargo, para implementaci\'on con casos reales 
+el potencial m\'aximo del algoritmo, se con\-si\-de\-ra cada posible nodo
+como candidato. Sin embargo, para implementaci\'on con casos reales, 
 se aconseja utilizar un n\'umero fijo constante o utilizar alg\'un
 criterio como selecci\'on de los nodos que se encuentran en las
-posiciones que son potencia de dos, para as\'i minimizar el impacto
-de recomputar el camino para cada uno.
+posiciones que son potencia de dos; de esta forma, se busca minimizar
+el impacto de recomputar el camino para cada uno.
