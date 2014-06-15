@@ -14,9 +14,7 @@ args_manager::args_manager(const rapidjson::Value& description)
             const rapidjson::Value& value = next_arg["value"];
             
             if ( name.IsString() ){
-                if ( value.IsInt() ){
-                    this->set_int_arg(name.GetString(), value.GetInt());
-                } else if ( value.IsDouble() ){
+                if ( value.IsNumber() ){
                     this->set_float_arg(name.GetString(), value.GetDouble());
                 } else if ( value.IsBool() ){
                     this->set_bool_arg(name.GetString(), value.GetBool());
@@ -114,7 +112,8 @@ int args_manager::get_int_arg(string name)
 
 float args_manager::get_float_arg(string name)
 {
-    assert( this->arg_type(name) == ARG_FLOAT );
+    assert( this->arg_type(name) == ARG_FLOAT || 
+            this->arg_type(name) == ARG_INT);
     return this->float_args[name];
 }
 

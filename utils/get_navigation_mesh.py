@@ -8,6 +8,31 @@ from skimage import morphology
 import numpy as np
 import cv2
 
+from skimage import draw
+import numpy as np
+import matplotlib.pyplot as plt
+from os import sys
+
+def get_skeleton(img):
+    
+    rows, cols = img.shape
+    
+    for r in xrange(rows):
+        img[r][0] = 0
+        img[r][cols - 1] = 0
+    for c in xrange(cols):
+        img[0][c] = 0
+        img[rows - 1][c] = 0
+    
+    dst = np.asarray(map(lambda row:
+                         np.asarray(map(lambda x: 1 if x == 255 else 0,row)),
+                     img))
+    dst, _ = morphology.medial_axis(dst, return_distance=True)
+    dst = np.asarray(map(lambda row:
+                         np.asarray(map(lambda x: 255 if x else 0,row)),
+                     dst))
+    return dst
+
 def get_neighbor(img, i, j, (di, dj)):
     rows, cols = img.shape
     ni = i + di
@@ -69,7 +94,8 @@ def get_branching_points(img):
     return points
 
 def draw_branching_points(img, p):
-    dst = cv2.merge([img, img, img])#np.zeros(img.shape, np.uint)
+    dst = np.zeros(img.shape, np.uint)
+    cv2.merge([img, img, img], dst)
     dst = 255 - dst
     
     color = (0,0,255)
@@ -82,8 +108,9 @@ def draw_branching_points(img, p):
 if len(argv) < 2:
     sys.exit(-1)
 
-path = "results/medial_axis/" + argv[2] + "/"
-print "Output path:", path
+path = argv[2]
+if path[-1] != "/":
+    path += "/"
 
 try:
     os.mkdir(path)
@@ -93,12 +120,11 @@ except OSError as exc:
 
 filename = argv[1]
 ma = cv2.imread(filename, 0)
+cv2.imwrite(path + "src.jpg", ma)
+
 _, ma = cv2.threshold(ma, 100, 255, cv2.THRESH_BINARY)
+cv2.imwrite(path + "dst.jpg", ma)
 
-p = get_branching_points(ma)
+skeleton = get_skeleton(ma)
 
-bp_img = draw_branching_points(ma, p)
-
-cv2.imwrite(path + 'branching_points.jpg',  bp_img)
-
-print "Branching points computed"
+cv2.imwrite(path + "skeleton.jpg", skeleton)

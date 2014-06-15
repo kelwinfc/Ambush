@@ -315,7 +315,7 @@ float graph::maximum_bipartite_matching(vector< pair<int, int> >& match)
         
         ret += path_capacity;
     }
-
+    
     int n = this->num_vertex();
     
     for ( int i = 2; i < n; i++ ){

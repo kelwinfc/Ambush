@@ -1,6 +1,9 @@
 #ifndef RAPIDJSON_WRITER_H_
 #define RAPIDJSON_WRITER_H_
 
+#include <iostream>
+#include <sstream>
+
 #include "rapidjson.h"
 #include "internal/stack.h"
 #include "internal/strfunc.h"
@@ -11,6 +14,8 @@
 #pragma warning(push)
 #pragma warning(disable : 4127) // conditional expression is constant
 #endif
+
+using namespace std;
 
 namespace rapidjson {
 
@@ -162,7 +167,11 @@ protected:
 #if _MSC_VER
 		int ret = sprintf_s(buffer, sizeof(buffer), "%g", d);
 #else
-		int ret = snprintf(buffer, sizeof(buffer), "%g", d);
+        stringstream ss;
+        string out;
+        ss << d;
+        ss >> out;
+		int ret = snprintf(buffer, sizeof(buffer), "%s", out.c_str());
 #endif
 		RAPIDJSON_ASSERT(ret >= 1);
 		for (int i = 0; i < ret; i++)

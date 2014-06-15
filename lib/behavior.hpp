@@ -140,26 +140,30 @@ class r_ambush : public self_adaptive_r_ambush {
         virtual void get_plan(agent* a, vector<int>& path);
 };
 
-// Experimentos de Kelwin
-class partial_observability_ambush : public increment_a_star {
+class density_crowd : public behavior {
     
     protected:
-        
-    public:
-        partial_observability_ambush(world* w, heuristic* h = 0){}
-        
-        virtual void get_plan(agent* a, vector<int>& path);
-};
-
-// Tesis de Lezama
-class capacity_ambush : public increment_a_star {
+        heuristic* h;
+        float w_delay;
     
-    protected:
-        
     public:
-        capacity_ambush(world* w, heuristic* h = 0){}
+        density_crowd(world* w, heuristic* h = 0);
+        ~density_crowd();
         
         virtual void get_plan(agent* a, vector<int>& path);
+        
+    protected:
+        void save_initial_nodes(vector<int>& n);
+        void restore_initial_nodes(vector<int>& n);
+        void initialize_paths(vector< vector<int> >& paths);
+        void set_paths(vector< vector<int> >& paths);
+        int closest_agent_to_next_node();
+        bool update_path(int next_agent,
+                         vector< vector<int> >& accumulated_path_by_agent);
+        int num_remaining_agents();
+        
+        bool get_paths();
+        void get_density_path(agent* a, vector<int>& path);
 };
 
 #endif
