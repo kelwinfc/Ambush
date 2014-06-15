@@ -754,13 +754,16 @@ void density_crowd::get_density_path(agent* a, vector<int>& path)
              * the increment function of the node successor
              */
             float t_min = suc->at(i).cost;
-            /*
-            if ( abs(1.0 - density[w]) < 1e-6 ){
-                continue;
+            
+            float t_delay = 0.0;
+            
+            if ( abs(1.0 - density[w]) > 1e-6 ){
+                t_delay = suc->at(i).cost * density[w] / 
+                                (1.0 - density[w]);
+            } else {
+                t_delay = suc->at(i).cost * density[w] / 
+                                (1.0 - density[w] + 1e-6);
             }
-            */
-            float t_delay = suc->at(i).cost * density[w] / 
-                            (1.0 - density[w]);
             
             float nd = d + t_min + this->w_delay * t_delay;
             

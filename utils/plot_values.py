@@ -17,5 +17,18 @@ astar = [x[2 + 0 + shift] for x in lines]
 crow = [x[2 + 3 + shift] for x in lines]
 ambush = [x[2 + 6 + shift] for x in lines]
 
-plt.plot(xx, astar, 'r--', xx, crow, 'b-.', xx, ambush, 'g-')
+p1, = plt.plot(xx, astar, 'r--')
+p2, = plt.plot(xx, crow, 'b-*')
+p3, = plt.plot(xx, ambush, 'g-')
+
+plt.ylabel('Ambush degree')
+plt.xlabel('Number of agents (log)')
+
+plt.legend([p1, p2, p3], ["A*", "van Toll et al.", "A*mbush"], loc='upper center',
+           bbox_to_anchor=(0.5, 1.1), ncol=3
+          )
+
+#plt.legend(, ,
+          #, fancybox=True, shadow=True)
+
 plt.show()

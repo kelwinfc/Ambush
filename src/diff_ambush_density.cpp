@@ -35,9 +35,9 @@ int main(int argc, char* argv[])
     int initial_position = rand() % g.num_vertex();
     
     int num_algorithms = 3;
-    int num_pow_agents = 20;
+    int num_pow_agents = 12;
     
-    for ( int i=0; i<num_pow_agents; i++ ){
+    for ( int i=11; i<num_pow_agents; i++ ){
         int num_agents = 1 << i;
         
         vector< vector<float> > results;
@@ -49,9 +49,7 @@ int main(int argc, char* argv[])
             results.push_back(next);
         }
         
-        cout << num_agents << " " << i;
-        
-        for ( int i=0; i<num_tests; i++ ){
+        for ( int t=0; t<num_tests; t++ ){
             world w(&g);
             noop np(&w);
             a_star ast(&w);
@@ -72,15 +70,17 @@ int main(int argc, char* argv[])
             //eval_behavior(w, agents, target, &dfs, results[1]);
             eval_behavior(w, agents, target, &dc, results[1]);
             eval_behavior(w, agents, target, &amb, results[2]);
+            
+            cout << t+1 << " " << num_agents << " " << i;
+            for ( int k=0; k<results.size(); k++ ){
+                //cout << names[i];
+                for ( int j=0; j<3; j++ ){
+                    printf(" %3.2f", results[k][j]/(t+1));
+                }
+            }
+            printf("\n");
         }
         
-        for ( int i=0; i<results.size(); i++ ){
-            //cout << names[i];
-            for ( int j=0; j<3; j++ ){
-                printf(" %3.2f", results[i][j]/num_tests);
-            }
-        }
-        printf("\n");
     }
     
     return 0;
