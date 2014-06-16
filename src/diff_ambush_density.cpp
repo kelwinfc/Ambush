@@ -33,11 +33,16 @@ int main(int argc, char* argv[])
     
     int num_tests = 100;
     int initial_position = rand() % g.num_vertex();
+    bool same_initial_position = true;
+
+    if ( argc > 1 && argv[1][0] == '0' ){
+        same_initial_position = false;
+    }
     
     int num_algorithms = 3;
-    int num_pow_agents = 12;
+    int num_pow_agents = 20;
     
-    for ( int i=11; i<num_pow_agents; i++ ){
+    for ( int i=1; i<num_pow_agents; i++ ){
         int num_agents = 1 << i;
         
         vector< vector<float> > results;
@@ -48,8 +53,9 @@ int main(int argc, char* argv[])
             }
             results.push_back(next);
         }
-        
-        for ( int t=0; t<num_tests; t++ ){
+
+        int t = 0;
+        for ( ; t<num_tests; t++ ){
             world w(&g);
             noop np(&w);
             a_star ast(&w);
@@ -60,6 +66,9 @@ int main(int argc, char* argv[])
             
             vector<agent*> agents;
             for ( int i=0; i<num_agents; i++ ){
+                if ( !same_initial_position ){
+                    initial_position = rand() % g.num_vertex();
+                }
                 agent* a = new agent(i, &g, &w, &np, initial_position);
                 agents.push_back(a);
                 agents[i]->set_target(&target);
@@ -71,16 +80,16 @@ int main(int argc, char* argv[])
             eval_behavior(w, agents, target, &dc, results[1]);
             eval_behavior(w, agents, target, &amb, results[2]);
             
-            cout << t+1 << " " << num_agents << " " << i;
-            for ( int k=0; k<results.size(); k++ ){
-                //cout << names[i];
-                for ( int j=0; j<3; j++ ){
-                    printf(" %3.2f", results[k][j]/(t+1));
-                }
-            }
-            printf("\n");
         }
-        
+        cout << num_agents << " " << i;
+        for ( int k=0; k<results.size(); k++ ){
+            //cout << names[i];
+            for ( int j=0; j<3; j++ ){
+                printf(" %3.2f", results[k][j]/t);
+            }
+        }
+        printf("\n");
+
     }
     
     return 0;

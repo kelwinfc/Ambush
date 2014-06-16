@@ -649,6 +649,34 @@ int density_crowd::closest_agent_to_next_node()
     int num_agents = agents->size();
     float min_time = -1;
     int ret = -1;
+
+
+    vector<float> density;
+    int num_vertex = this->w->get_graph()->num_vertex();
+    density.resize(num_vertex);
+
+    for ( int i = 0; i < num_vertex; i++ ){
+        density[i] = 0.0;
+    }
+
+    for ( int i = 0; i < num_agents ; i++ ){
+        agent* a = agents->at(i);
+        density[a->get_current_vertex()] += a->get_capacity();
+    }
+
+    for ( int i = 0; i < num_vertex; i++ ){
+        node* v = this->w->get_graph()->get_node(i);
+        float area = v->args.get_float_arg("area");
+
+        if ( abs(area) < 1e-6 ){
+            density[i] = 1.0;
+        } else if ( density[i] > area ){
+            density[i] = 1.0;
+        } else{
+            density[i] /= area;
+        }
+    }
+
     
     for ( int i = 0; i < num_agents; i++ ){
         agent* a = agents->at(i);
@@ -656,6 +684,7 @@ int density_crowd::closest_agent_to_next_node()
         if ( next_path->size() > 1 ){
             graph* g = a->get_graph();
             float cost = g->edge_cost(next_path->at(0), next_path->at(1));
+            cost /= density[next_path->at(0)] + 1e-6;
             
             if ( min_time < 0 || cost < min_time ){
                 min_time = cost;
@@ -761,8 +790,8 @@ void density_crowd::get_density_path(agent* a, vector<int>& path)
                 t_delay = suc->at(i).cost * density[w] / 
                                 (1.0 - density[w]);
             } else {
-                t_delay = suc->at(i).cost * density[w] / 
-                                (1.0 - density[w] + 1e-6);
+                t_delay = suc->at(i).cost * 20.0 /*density[w] /
+                                (1.0 - density[w] + 1e-6)*/;
             }
             
             float nd = d + t_min + this->w_delay * t_delay;

@@ -25,7 +25,9 @@ plt.ylabel('Ambush degree')
 plt.xlabel('Number of agents (log)')
 
 plt.xlim(min(xx), max(xx))
-plt.ylim(0.0, 1.0)
+
+if shift == 0:
+    plt.ylim(0.0, 1.0)
 
 plt.legend([p1, p2, p3], ["A*", "van Toll et al.", "A*mbush"], loc='upper center',
            bbox_to_anchor=(0.5, 1.1), ncol=3
