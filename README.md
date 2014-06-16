@@ -7,6 +7,7 @@ Requirements
 ============
 
 - C++
-- python
+- python 2.7
 - python-networkx
 - python-matplotlib
+- scikit-image

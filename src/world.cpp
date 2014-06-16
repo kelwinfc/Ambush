@@ -73,6 +73,7 @@ float world::ambush_rate_relaxed(agent* target)
         this->g->get_predecessors(target->get_current_vertex());
     
     int den = min(pred->size(), this->agents.size());
+    
     if ( den == 0 ){
         return 1.0;
     }
@@ -163,16 +164,26 @@ int world::num_activated_predecessors(agent* target)
 {
     set<int> activated_pred;
     vector< agent* >::iterator it;
+    int ret = 0;
     
     for ( it = this->agents.begin(); it != this->agents.end(); ++it ){
         agent* a = *it;
         vector<int>* path = a->get_path();
+        
+        if ( path->size() > 1 && 
+             path->at( path->size() -1 ) != target->get_current_vertex()
+           )
+        {
+            continue;
+        }
+        
         if ( path->size() > 1 && path->at(0) != path->at(1) ){
-            activated_pred.insert( path->at( path->size() - 2 ) );
+            if ( activated_pred.insert( path->at( path->size() - 2 ) ).second )
+                ret++;
         }
     }
     
-    return (int)activated_pred.size();
+    return ret;
 }
 
 float world::ambush_rate(agent* target)
@@ -185,11 +196,11 @@ float world::ambush_rate(agent* target)
         src_mapping, dst_mapping);
 
     float res = bip_graph->maximum_bipartite_matching(mm);
-
+    
     float den = (float)mm.size();
     
     delete bip_graph;
-
+    
     if ( mm.size() == 0 ){
         return 1.0;
     }

@@ -29,7 +29,7 @@ float h_zero::h(int v, int t)
 h_euclidean::h_euclidean(world* w)
 {
     this->w = w;
-    this->g = g;
+    this->g = this->w->get_graph();
 }
 
 float h_euclidean::h(int v, int t)

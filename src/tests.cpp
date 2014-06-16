@@ -10,9 +10,9 @@ void eval_behavior(world& w, vector<agent*>& agents, agent& target,
     }
     w.clear_paths();
     
-    const clock_t begin_time = clock();
+    //const clock_t begin_time = clock();
     w.compute_paths(&target);
-    const clock_t end_time = clock();
+    //const clock_t end_time = clock();
 
     results[0] += w.ambush_rate_relaxed(&target);
     results[1] += w.ambush_rate(&target);
@@ -38,8 +38,8 @@ int main(int argc, char* argv[])
     }
     graph g(graph_name);
 
-    int num_agents[] = {2,/*3,*/5,10,20,/*50,100*/};
-    int cases = 4;
+    int num_agents[] = {2,/*3,*/5,10,20,50,100};
+    int cases = 6;
     
     string names[]  = {
         "         A*",
@@ -54,10 +54,16 @@ int main(int argc, char* argv[])
     
     int num_tests = 100;
     int initial_position = rand() % g.num_vertex();
+    /*
+    num_tests = 1;
+    cout << "\n\nnum tests " << num_tests << endl;
+    */
+    int num_algorithms = 4;
+    //num_tests = 1;
     
     for ( int c=0; c<cases; c++){
         vector< vector<float> > results;
-        for ( int i=0; i<4; i++){
+        for ( int i=0; i<num_algorithms; i++){
             vector<float> next;
             for (int i=0; i<4; i++){
                 next.push_back(0.0);
@@ -70,11 +76,12 @@ int main(int argc, char* argv[])
         for ( int i=0; i<num_tests; i++ ){
             world w(&g);
             noop np(&w);
-            randomized_dfs dfs(&w);
+            //randomized_dfs dfs(&w);
             a_star ast(&w);
             ambush amb(&w);
             priority_ambush pamb(&w);
             self_adaptive_r_ambush sar(&w);
+            density_crowd dc(&w);
             
             agent target(num_agents[c]+1, &g, &w, &np, rand() % g.num_vertex());
             
@@ -95,6 +102,7 @@ int main(int argc, char* argv[])
             eval_behavior(w, agents, target, &amb, results[1]);
             eval_behavior(w, agents, target, &pamb, results[2]);
             eval_behavior(w, agents, target, &sar, results[3]);
+            //eval_behavior(w, agents, target, &dc, results[2]);
         }
         
         for ( int i=0; i<results.size(); i++ ){

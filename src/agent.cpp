@@ -8,16 +8,23 @@ agent::agent(int index, graph* g, world* w, behavior* b, int current_v)
     this->b          = b;
     this->v          = current_v;
     this->b_has_path = false;
+    this->area       = 72; //zelda
+    //this->area       = 9.28; //blocks
+    this->max_speed  = 1.4;
+    this->simulation_vertex = current_v;
 }
 
 agent::agent(const agent& a)
 {
-    this->index      = a.index;
-    this->g          = a.g;
-    this->w          = a.w;
-    this->b          = a.b;
-    this->v          = a.v;
-    this->b_has_path = a.b_has_path;
+    this->index             = a.index;
+    this->g                 = a.g;
+    this->w                 = a.w;
+    this->b                 = a.b;
+    this->v                 = a.v;
+    this->b_has_path        = a.b_has_path;
+    this->area              = a.area;
+    this->max_speed         = a.max_speed;
+    this->simulation_vertex = a.simulation_vertex;
 }
 
 agent::agent(const rapidjson::Value& description)
@@ -58,6 +65,11 @@ void agent::set_current_vertex(int v)
     this->v = v;
 }
 
+void agent::set_current_simulation_vertex(int v)
+{
+    this->simulation_vertex = v;
+}
+
 void agent::set_path(vector<int>& path)
 {
     this->path       = path;
@@ -77,6 +89,11 @@ void agent::set_behavior(behavior* b)
 int agent::get_current_vertex()
 {
     return this->v;
+}
+
+int agent::get_current_simulation_vertex()
+{
+    return this->simulation_vertex;
 }
 
 vector<int>* agent::get_path()
@@ -108,4 +125,14 @@ void agent::clear_path()
 bool agent::has_path()
 {
     return this->b_has_path;
+}
+
+float agent::get_max_speed()
+{
+    return this->max_speed;
+}
+
+float agent::get_capacity()
+{
+     return this->area;
 }
