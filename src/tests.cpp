@@ -60,6 +60,15 @@ int main(int argc, char* argv[])
     */
     int num_algorithms = 4;
     //num_tests = 1;
+
+    for ( int i = 0; i < num_tests; i++ ){
+        
+        for (int c = 0; c < cases; c++ ){
+            // Add the additional agents
+
+            // Eval
+        }
+    }
     
     for ( int c=0; c<cases; c++){
         vector< vector<float> > results;
