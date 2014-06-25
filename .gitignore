@@ -2,3 +2,4 @@
 *.o
 .svm
 tests
+diff_ambush_density

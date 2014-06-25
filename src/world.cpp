@@ -7,7 +7,7 @@ world::world(graph* g)
     this->name = "";
     this->num_experiments = 0;
     this->random_positions = true;
-    this->target = 0;    
+    this->target = 0;
 }
 
 world::world(char* filename)
@@ -171,7 +171,7 @@ int world::num_activated_predecessors(agent* target)
         vector<int>* path = a->get_path();
         
         if ( path->size() > 1 && 
-             path->at( path->size() -1 ) != target->get_current_vertex()
+             path->at( path->size() - 1 ) != target->get_current_vertex()
            )
         {
             continue;
@@ -183,7 +183,7 @@ int world::num_activated_predecessors(agent* target)
         }
     }
     
-    return ret;
+    return activated_pred.size();
 }
 
 float world::ambush_rate(agent* target)

@@ -185,7 +185,7 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
         float d = next.g;
         int v = next.v;
         /* If the current expansion is worse than the best found */
-        if ( min_dist[v] != -1 && min_dist[v] < d ){
+        if ( min_dist[v] < 0.0 && min_dist[v] < d ){
             continue;
         }
         
@@ -207,8 +207,8 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
              * current vertex (v), the cost from v to its neighbor (w) and
              * the increment function of the node successor
              */
-            float nd = d + suc->at(i).cost * increment[v] * increment[v];
-            if ( min_dist[w] == -1 || nd < min_dist[w] ){
+            float nd = d + suc->at(i).cost * increment[w] * increment[w];
+            if ( min_dist[w] < 0.0 || nd < min_dist[w] ){
                 astar_node neighbor_node;
                 neighbor_node.v = w;
                 neighbor_node.p = v;
@@ -760,7 +760,7 @@ void density_crowd::get_density_path(agent* a, vector<int>& path)
         float d = next.g;
         int v = next.v;
         /* If the current expansion is worse than the best found */
-        if ( min_dist[v] != -1 && min_dist[v] < d ){
+        if ( min_dist[v] < 0.0 && min_dist[v] < d ){
             continue;
         }
         
@@ -796,7 +796,7 @@ void density_crowd::get_density_path(agent* a, vector<int>& path)
             
             float nd = d + t_min + this->w_delay * t_delay;
             
-            if ( min_dist[w] == -1 || nd < min_dist[w] ){
+            if ( min_dist[w] < 0.0 || nd < min_dist[w] ){
                 astar_node neighbor_node;
                 neighbor_node.v = w;
                 neighbor_node.p = v;
@@ -925,7 +925,7 @@ void density_crowd::get_plan(agent* a, vector<int>& path)
     this->set_paths(accumulated_path_by_agent);
     this->restore_initial_nodes(initial_nodes);
     
-    for ( int i = 0; i < agents->size(); i++ ){
+    for ( size_t i = 0; i < agents->size(); i++ ){
         a->set_path(accumulated_path_by_agent[i]);
     }
     
