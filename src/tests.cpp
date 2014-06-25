@@ -72,17 +72,11 @@ int main(int argc, char* argv[])
         "SAR-A*mbush"
     };
     
-    //printf("Algorithm: Ambush-Rate Path-Increment(%%) Graph-Coverage(%%) Time(ms)\n");
-    
     int num_tests = 100;
     int initial_position = 0;
-    /*
-    num_tests = 1;
-    cout << "\n\nnum tests " << num_tests << endl;
-    */
+    
     int num_algorithms = 4;
     int num_metrics = 4;
-    //num_tests = 1;
     
     vector< vector< vector<float> > > results;
 
@@ -105,7 +99,6 @@ int main(int argc, char* argv[])
     }
     
     for ( int i = 0; i < num_tests; i++ ){
-        //sleep(1.0);
         world w(&g);
         noop np(&w);
         a_star ast(&w);
@@ -164,65 +157,6 @@ int main(int argc, char* argv[])
             }
             printf("\\\\\n");
         }
-    }
-    cout << endl << endl
-         << "-----------------------------------------------------------------"
-         << endl << endl;
-    exit(0);
-    
-    for ( int c=0; c<cases; c++){
-        vector< vector<float> > results;
-        for ( int i=0; i<num_algorithms; i++){
-            vector<float> next;
-            for (int i=0; i<4; i++){
-                next.push_back(0.0);
-            }
-            results.push_back(next);
-        }
-        
-        cout << /*"Num agents " <<  */ " & " << num_agents[c];
-        
-        for ( int i=0; i<num_tests; i++ ){
-            world w(&g);
-            noop np(&w);
-            //randomized_dfs dfs(&w);
-            a_star ast(&w);
-            ambush amb(&w);
-            priority_ambush pamb(&w);
-            self_adaptive_r_ambush sar(&w);
-            density_crowd dc(&w);
-            
-            agent target(num_agents[c]+1, &g, &w, &np, rand() % g.num_vertex());
-
-            initial_position = rand() % g.num_vertex();
-            
-            vector<agent*> agents;
-            for ( int i=0; i<num_agents[c]; i++ ){
-                if ( !use_same_position ){
-                    initial_position = rand() % g.num_vertex();
-                }
-                
-                agent* a = new agent(i, &g, &w, &np, initial_position);
-                agents.push_back(a);
-                agents[i]->set_target(&target);
-                w.add_agent(agents[i]);
-            }
-            
-            eval_behavior(w, agents, target, &ast, results[0]);
-            //eval_behavior(w, agents, target, &dfs, results[1]);
-            eval_behavior(w, agents, target, &amb, results[1]);
-            eval_behavior(w, agents, target, &pamb, results[2]);
-            eval_behavior(w, agents, target, &sar, results[3]);
-            //eval_behavior(w, agents, target, &dc, results[2]);
-        }
-        
-        for ( size_t i=0; i<results.size(); i++ ){
-            //cout << names[i];
-            for ( int j=0; j<2; j++ ){
-                printf(" & %3.2f", results[i][j]/num_tests);
-            }
-        }
-        printf("\\\\\n");
     }
     
     return 0;
