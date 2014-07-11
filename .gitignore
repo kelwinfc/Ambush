@@ -3,3 +3,5 @@
 .svm
 tests
 diff_ambush_density
+get_navigation_mesh
+
