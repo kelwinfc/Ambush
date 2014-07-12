@@ -13,6 +13,7 @@
 #include "world.hpp"
 #include "node_selector.hpp"
 #include "heuristic.hpp"
+#include "communication_function.hpp"
 
 using namespace std;
 
@@ -151,7 +152,7 @@ class density_crowd : public behavior {
         ~density_crowd();
         
         virtual void get_plan(agent* a, vector<int>& path);
-        
+    
     protected:
         void save_initial_nodes(vector<int>& n);
         void restore_initial_nodes(vector<int>& n);
@@ -164,6 +165,20 @@ class density_crowd : public behavior {
         
         bool get_paths();
         void get_density_path(agent* a, vector<int>& path);
+};
+
+class partial_communication : public behavior {
+    
+    protected:
+        heuristic* h;
+        communication_function* communication;
+    
+    public:
+        partial_communication(world* w, communication_function* cf = 0,
+                              heuristic* h = 0);
+        ~partial_communication();
+        
+        virtual void get_plan(agent* a, vector<int>& path);
 };
 
 #endif

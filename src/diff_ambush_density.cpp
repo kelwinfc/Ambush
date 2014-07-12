@@ -46,14 +46,14 @@ int main(int argc, char* argv[])
         int num_agents = 1 << i;
         
         vector< vector<float> > results;
-        for ( int i=0; i<num_algorithms; i++){
+        for ( int k = 0; k < num_algorithms; k++){
             vector<float> next;
-            for (int i=0; i<3; i++){
+            for (int k = 0; k < 3; k++){
                 next.push_back(0.0);
             }
             results.push_back(next);
         }
-
+        
         int t = 0;
         for ( ; t<num_tests; t++ ){
             world w(&g);
@@ -65,14 +65,14 @@ int main(int argc, char* argv[])
             agent target(num_agents, &g, &w, &np, rand() % g.num_vertex());
             
             vector<agent*> agents;
-            for ( int i=0; i<num_agents; i++ ){
+            for ( int k=0; k<num_agents; k++ ){
                 if ( !same_initial_position ){
                     initial_position = rand() % g.num_vertex();
                 }
-                agent* a = new agent(i, &g, &w, &np, initial_position);
+                agent* a = new agent(k, &g, &w, &np, initial_position);
                 agents.push_back(a);
-                agents[i]->set_target(&target);
-                w.add_agent(agents[i]);
+                agents[k]->set_target(&target);
+                w.add_agent(agents[k]);
             }
             
             eval_behavior(w, agents, target, &ast, results[0]);
@@ -82,8 +82,7 @@ int main(int argc, char* argv[])
             
         }
         cout << num_agents << " " << i;
-        for ( int k=0; k<results.size(); k++ ){
-            //cout << names[i];
+        for ( size_t k=0; k<results.size(); k++ ){
             for ( int j=0; j<3; j++ ){
                 printf(" %3.2f", results[k][j]/t);
             }
