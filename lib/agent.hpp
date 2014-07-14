@@ -7,6 +7,7 @@
 #include "utils.hpp"
 #include "world.hpp"
 #include "args_manager.hpp"
+#include "path_knowledge.hpp"
 
 #include "rapidjson/rapidjson.h"
 #include "rapidjson/document.h"
@@ -35,6 +36,8 @@ class agent {
         float area;
         
         bool b_has_path;
+    
+        path_knowledge* knowledge;
     
     public:
         agent(int index, graph* g, world* w, behavior* b,

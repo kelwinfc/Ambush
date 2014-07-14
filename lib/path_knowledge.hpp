@@ -14,6 +14,7 @@ class path_knowledge {
         path_knowledge();
         
         bool known(int i);
+        vector<int>* get_path(int i);
         void merge(path_knowledge& a);
         void forget(int i);
         void learn(int i, float time, vector<int>& path);

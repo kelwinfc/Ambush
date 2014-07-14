@@ -1,6 +1,10 @@
 #include "behavior.hpp"
 #include <iostream>
 
+/*****************************************************************************
+ *                                 Behavior                                  *
+ *****************************************************************************/
+
 int behavior::next_step(agent* a)
 {
     vector<int>* p_path;
@@ -19,6 +23,10 @@ int behavior::next_step(agent* a)
     return p_path->at(0);
 }
 
+/*****************************************************************************
+ *                                   Noop                                    *
+ *****************************************************************************/
+
 noop::noop(world* w)
 {
     this->w = w;
@@ -28,6 +36,10 @@ void noop::get_plan(agent* a, vector<int>& path)
 {
     path.clear();
 }
+
+/*****************************************************************************
+ *                            Depth-First Search                             *
+ *****************************************************************************/
 
 randomized_dfs::randomized_dfs(world* w)
 {
@@ -104,6 +116,10 @@ void randomized_dfs::get_plan(agent* a, vector<int>& path)
         reverse( path.begin(), path.end() );
     }
 }
+
+/*****************************************************************************
+ *                                 Increment A*                              *
+ *****************************************************************************/
 
 increment_a_star::increment_a_star(){
     this->h = 0;
@@ -237,6 +253,10 @@ void increment_a_star::get_plan(agent* a, vector<int>& path)
     }
 }
 
+/*****************************************************************************
+ *                                    A*                                     *
+ *****************************************************************************/
+
 a_star::a_star(world* w, heuristic* h)
 {
     this->w = w;
@@ -253,6 +273,10 @@ void a_star::get_plan(agent* a, vector<int>& path)
     this->I = 0;
     increment_a_star::get_plan(a, path);
 }
+
+/*****************************************************************************
+ *                                  A*mbush                                  *
+ *****************************************************************************/
 
 ambush::ambush(world* w, heuristic* h)
 {
@@ -293,6 +317,10 @@ void ambush::get_plan(agent* a, vector<int>& path)
     this->I = &ambush_increment_function;
     increment_a_star::get_plan(a, path);
 }
+
+/*****************************************************************************
+ *                                 P-A*mbush                                 *
+ *****************************************************************************/
 
 bool index_priority(agent* a, agent* b){
     return a->get_index() < b->get_index();
@@ -336,6 +364,10 @@ void priority_ambush::get_plan(agent* a, vector<int>& path)
     }
     path = *a->get_path();
 }
+
+/*****************************************************************************
+ *                                SAR-A*mbush                                *
+ *****************************************************************************/
 
 self_adaptive_r_ambush::self_adaptive_r_ambush()
 {
@@ -537,6 +569,10 @@ float self_adaptive_r_ambush::uniformity_metric(int target)
     return 1.0 - ret / ( n - (int)floor((float)n / num_pred_t ) + 1e-6 );
 }
 
+/*****************************************************************************
+ *                                 R-A*mbush                                 *
+ *****************************************************************************/
+
 /* Despite R-A*mbush was designed before Self Adaptive R-A*mbush, the last one
  * is a generalization of R-A*mbush. Then, the implementation of R-A*mbush is
  * done using the most general model.
@@ -560,6 +596,10 @@ void r_ambush::get_plan(agent* a, vector<int>& path)
 {
     self_adaptive_r_ambush::get_plan(a, path);
 }
+
+/*****************************************************************************
+ *                            Density-Based Crowd                            *
+ *****************************************************************************/
 
 density_crowd::density_crowd(world* w, heuristic* h)
 {
@@ -930,4 +970,48 @@ void density_crowd::get_plan(agent* a, vector<int>& path)
     }
     
     path = accumulated_path_by_agent[a->get_index()];
+}
+
+/*****************************************************************************
+ *                    A*mbush with Partial Communication                     *
+ *****************************************************************************/
+
+partial_communication::partial_communication(world* w,
+                                             communication_function* cf,
+                                             heuristic* h)
+{
+    this->w = w;
+    this->communication = cf;
+    this->h = h;
+    this->delete_h = false;
+    this->delete_communication = false;
+    
+    if ( !this->h ){
+        this->h = new h_zero(w);
+        this->delete_h = true;
+    }
+    
+    if ( !this->communication ){
+        this->communication = new true_communication_function(w);
+        this->delete_communication = true;
+    }
+}
+
+partial_communication::~partial_communication()
+{
+    if ( this->delete_h && this->h != 0 ){
+        delete this->h;
+        this->h = 0;
+    }
+    
+    if ( this->delete_communication && this->communication != 0 ){
+        delete this->communication;
+        this->communication = 0;
+    }
+}
+
+void partial_communication::get_plan(agent* a, vector<int>& path)
+{
+    //TODO
+    path.clear();
 }

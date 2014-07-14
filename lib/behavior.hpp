@@ -21,6 +21,7 @@ class agent;
 class world;
 class heuristic;
 class node_selector;
+class communication_function;
 
 class behavior {
     protected:
@@ -167,11 +168,11 @@ class density_crowd : public behavior {
         void get_density_path(agent* a, vector<int>& path);
 };
 
-class partial_communication : public behavior {
+class partial_communication : public increment_a_star {
     
     protected:
-        heuristic* h;
         communication_function* communication;
+        bool delete_communication;
     
     public:
         partial_communication(world* w, communication_function* cf = 0,

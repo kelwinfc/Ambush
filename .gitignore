@@ -4,4 +4,7 @@
 tests
 diff_ambush_density
 get_navigation_mesh
+eval_partial_communication
+get_walkable_regions
+graph_from_walkable
 

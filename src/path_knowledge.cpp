@@ -10,6 +10,11 @@ bool path_knowledge::known(int i)
     return this->knowledge.find(i) != this->knowledge.end();
 }
 
+vector<int>* path_knowledge::get_path(int i)
+{
+    return &this->knowledge[i].second;
+}
+
 void path_knowledge::merge(path_knowledge& a)
 {
     this->merge_back(a, true);
