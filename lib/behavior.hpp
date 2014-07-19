@@ -34,6 +34,10 @@ class behavior {
         int next_step(agent* a);
         
         virtual void get_plan(agent* a, vector<int>& path){}
+    
+    protected:
+        int num_remaining_agents();
+        virtual int closest_agent_to_next_node();
 };
 
 class noop : public behavior {
@@ -153,16 +157,16 @@ class density_crowd : public behavior {
         ~density_crowd();
         
         virtual void get_plan(agent* a, vector<int>& path);
-    
+        
     protected:
         void save_initial_nodes(vector<int>& n);
         void restore_initial_nodes(vector<int>& n);
         void initialize_paths(vector< vector<int> >& paths);
         void set_paths(vector< vector<int> >& paths);
-        int closest_agent_to_next_node();
+        virtual int closest_agent_to_next_node();
+        
         bool update_path(int next_agent,
                          vector< vector<int> >& accumulated_path_by_agent);
-        int num_remaining_agents();
         
         bool get_paths();
         void get_density_path(agent* a, vector<int>& path);
@@ -180,6 +184,10 @@ class partial_communication : public increment_a_star {
         ~partial_communication();
         
         virtual void get_plan(agent* a, vector<int>& path);
+        
+    protected:
+        void communicate(agent* a, vector<bool>& invalidated_paths);
+        void update_paths(vector<bool>& invalidated_paths);
 };
 
 #endif

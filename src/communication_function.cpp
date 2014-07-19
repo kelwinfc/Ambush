@@ -15,6 +15,11 @@ bool communication_function::can_communicate(agent* a, agent* b)
     return true;
 }
 
+void communication_function::communicate(agent* a, agent* b)
+{
+    //TODO
+}
+
 true_communication_function::true_communication_function()
 {
     this->w = 0;

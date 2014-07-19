@@ -195,7 +195,7 @@ float world::ambush_rate(agent* target)
     graph* bip_graph = this->build_bipartite_reachability_graph(target,
         src_mapping, dst_mapping);
 
-    float res = bip_graph->maximum_bipartite_matching(mm);
+    bip_graph->maximum_bipartite_matching(mm);
     
     float den = (float)mm.size();
     

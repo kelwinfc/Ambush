@@ -23,6 +23,45 @@ int behavior::next_step(agent* a)
     return p_path->at(0);
 }
 
+int behavior::num_remaining_agents()
+{
+    int ret = 0;
+    vector<agent*>* agents = this->w->get_agents();
+    int num_agents = this->w->num_agents();
+    
+    for ( int i = 0; i < num_agents; i++ ){
+        agent* a = agents->at(i);
+        if ( a->get_current_vertex() != a->get_target()->get_current_vertex() )
+            ret++;
+    }
+    
+    return ret;
+}
+
+int behavior::closest_agent_to_next_node()
+{
+    vector<agent*>* agents = this->w->get_agents();
+    int num_agents = agents->size();
+    float min_cost = -1;
+    int ret = -1;
+    
+    for ( int i = 0; i < num_agents; i++ ){
+        agent* a = agents->at(i);
+        vector<int>* next_path = a->get_path();
+        if ( next_path->size() > 1 ){
+            graph* g = a->get_graph();
+            float cost = g->edge_cost(next_path->at(0), next_path->at(1));
+            
+            if ( min_cost < 0 || cost < min_cost ){
+                min_cost = cost;
+                ret = i;
+            }
+        }
+    }
+    
+    return ret;
+}
+
 /*****************************************************************************
  *                                   Noop                                    *
  *****************************************************************************/
@@ -917,21 +956,6 @@ bool density_crowd::update_path(int next_agent, vector< vector<int> >& paths)
     return false;
 }
 
-int density_crowd::num_remaining_agents()
-{
-    int ret = 0;
-    vector<agent*>* agents = this->w->get_agents();
-    int num_agents = this->w->num_agents();
-    
-    for ( int i = 0; i < num_agents; i++ ){
-        agent* a = agents->at(i);
-        if ( a->get_current_vertex() != a->get_target()->get_current_vertex() )
-            ret++;
-    }
-    
-    return ret;
-}
-
 void density_crowd::get_plan(agent* a, vector<int>& path)
 {
     if ( a->get_path()->size() != 0 || 
@@ -1010,8 +1034,67 @@ partial_communication::~partial_communication()
     }
 }
 
-void partial_communication::get_plan(agent* a, vector<int>& path)
+void partial_communication::communicate(agent* a,
+                                        vector<bool>& invalidated_paths)
+{
+    vector<agent*>* agents = this->w->get_agents();
+    vector<agent*>::iterator it=agents->begin(), end=agents->end();
+    int index = 0;
+    int a_index = a->get_index();
+    
+    invalidated_paths.resize(agents->size());
+    fill(invalidated_paths.begin(), invalidated_paths.end(), false);
+    
+    for ( ; it != end; ++it ){
+        
+        agent* b = *it;
+        
+        int target = b->get_target()->get_current_vertex();
+    
+        if ( a_index != index && 
+             this->communication->can_communicate(a, b) &&
+             this->communication->can_communicate(b, a) )
+        {
+            if ( b->get_current_vertex() != target ){
+                invalidated_paths[index] = true;
+                invalidated_paths[a_index] = true;
+            }
+            
+            this->communication->communicate(a, b);
+        }
+        
+        index++;
+    }
+}
+
+void partial_communication::update_paths(vector<bool>& invalidated_paths)
 {
     //TODO
-    path.clear();
+}
+
+void partial_communication::get_plan(agent* a, vector<int>& path)
+{
+    if ( a->get_path()->size() != 0 || 
+         a->get_current_vertex() == a->get_target()->get_current_vertex() )
+    {
+        path = *a->get_path();
+        return;
+    }
+    
+    vector<int> initial_nodes;
+    vector< vector<int> > accumulated_path_by_agent;
+    vector<agent*>* agents = this->w->get_agents();
+    int remaining_agents = this->num_remaining_agents();
+    
+    while ( (remaining_agents = this->num_remaining_agents()) > 0 ){
+        int next_agent = closest_agent_to_next_node();
+        
+        if ( next_agent == -1 ){
+            break;
+        }
+        
+        vector<bool> invalidated_paths;
+        communicate(agents->at(next_agent), invalidated_paths);
+        update_paths(invalidated_paths);
+    }
 }

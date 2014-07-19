@@ -20,6 +20,7 @@ class communication_function {
         communication_function(world* w);
         
         virtual bool can_communicate(agent* a, agent* b);
+        void communicate(agent* a, agent* b);
 };
 
 class true_communication_function : public communication_function {

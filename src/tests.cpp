@@ -64,17 +64,7 @@ int main(int argc, char* argv[])
     int num_agents[] = {2, 4, 8, 16};
     int cases = 4;
     
-    string names[]  = {
-        "         A*",
-        /*"        DFS",*/
-        "    A*mbush",
-        "  P-A*mbush",
-        "SAR-A*mbush"
-    };
-    
     int num_tests = 100;
-    int initial_position = 0;
-    
     int num_algorithms = 4;
     int num_metrics = 4;
     
